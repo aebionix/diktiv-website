@@ -1,18 +1,18 @@
-# CLAUDE.md - voxly-website
+# CLAUDE.md - diktiv-website
 
-## Voxly Projekt-Struktur (WICHTIG!)
+## Diktiv Projekt-Struktur (WICHTIG!)
 
-**Voxly besteht aus drei separaten Repositories/Verzeichnissen:**
+**Diktiv besteht aus drei separaten Repositories/Verzeichnissen:**
 
 | Verzeichnis | Zweck | GitHub Repo | Zugriff |
 |-------------|-------|-------------|---------|
 | **X:\Wisper** | Source Code, Development | github.com/aebionix/Wisper | Privat |
-| **X:\voxly-releases** | Releases, update-info.json | github.com/aebionix/voxly-releases | Öffentlich |
-| **X:\voxly-website** | Website (index.html) | github.com/aebionix/voxly-website | Öffentlich |
+| **X:\diktiv-releases** | Releases, update-info.json | github.com/aebionix/diktiv-releases | Öffentlich |
+| **X:\diktiv-website** | Website (index.html) | github.com/aebionix/diktiv-website | Öffentlich |
 
-## Dieses Repo (voxly-website)
+## Dieses Repo (diktiv-website)
 
-**Zweck:** Öffentliche Website für Voxly (voxly.ch)
+**Zweck:** Öffentliche Website für Diktiv (diktiv.ch)
 
 **Inhalt:**
 - `index.html` - Hauptseite (Single-Page)
@@ -34,9 +34,9 @@ Wenn neue Premium-Features hinzugefügt werden, die Premium Edition Liste in `in
 
 Website wird via GitHub Pages gehostet:
 - Push zu `main` Branch → Automatisches Deployment
-- URL: https://voxly.ch (oder GitHub Pages URL)
+- URL: https://diktiv.ch (oder GitHub Pages URL)
 
 ## Andere Repos
 
 - **Source Code:** `X:\Wisper`
-- **Releases:** `X:\voxly-releases`
+- **Releases:** `X:\diktiv-releases`

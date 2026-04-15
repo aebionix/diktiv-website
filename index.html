@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Voxly — Sprache zu Text, komplett lokal</title>
-    <meta name="description" content="Voxly verwandelt deine Stimme in Text. 100% lokal, keine Cloud, keine Daten die dein Gerät verlassen.">
+    <title>Diktiv — Sprache zu Text, komplett lokal</title>
+    <meta name="description" content="Diktiv verwandelt deine Stimme in Text. 100% lokal, keine Cloud, keine Daten die dein Gerät verlassen.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -955,12 +955,12 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="/" class="logo">Voxly <span class="logo-sub">by Aebionix</span></a>
+                <a href="/" class="logo">Diktiv <span class="logo-sub">by Aebionix</span></a>
                 <nav>
                     <a href="#features">Features</a>
                     <a href="#editions">Editionen</a>
                     <a href="#how-it-works">Anleitung</a>
-                    <a href="https://github.com/aebionix/voxly-releases" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://github.com/aebionix/diktiv-releases" target="_blank" rel="noopener">GitHub</a>
                 </nav>
             </div>
         </div>
@@ -973,7 +973,7 @@
                     <div class="hero-badge">Funktioniert komplett ohne Internet</div>
                     <h1>Deine Stimme, <span class="highlight">dein Text</span>.<br>Lokal auf deinem Rechner.</h1>
                     <p class="hero-description">
-                        Sprich einfach — Voxly transkribiert sofort.
+                        Sprich einfach — Diktiv transkribiert sofort.
                         Keine Cloud, keine Server, keine Sorgen.
                         Alles bleibt auf deinem Computer.
                     </p>
@@ -1014,7 +1014,7 @@
         <section class="features" id="features">
             <div class="container">
                 <div class="section-header">
-                    <p class="section-label">Warum Voxly</p>
+                    <p class="section-label">Warum Diktiv</p>
                     <h2>Spracherkennung, neu gedacht</h2>
                 </div>
                 <div class="features-grid">
@@ -1097,7 +1097,7 @@
                     <div class="step">
                         <div class="step-number">2</div>
                         <h3>Sprechen</h3>
-                        <p>Sag einfach, was du schreiben möchtest. Voxly hört zu.</p>
+                        <p>Sag einfach, was du schreiben möchtest. Diktiv hört zu.</p>
                     </div>
                     <div class="step">
                         <div class="step-number">3</div>
@@ -1205,7 +1205,7 @@
                         <p class="section-label" style="color: rgba(250,247,242,0.5);">Datenschutz</p>
                         <h2>Deine Daten gehören dir.</h2>
                         <p class="privacy-description">
-                            Voxly nutzt Whisper.net (basierend auf OpenAIs Whisper) — vollständig lokal auf deinem Computer.
+                            Diktiv nutzt Whisper.net (basierend auf OpenAIs Whisper) — vollständig lokal auf deinem Computer.
                             Keine Internetverbindung erforderlich, keine Daten werden übertragen.
                         </p>
                         <ul class="privacy-list">
@@ -1248,11 +1248,11 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <span class="footer-logo">Voxly</span>
+                <span class="footer-logo">Diktiv</span>
                 <div class="footer-links">
-                    <a href="https://github.com/aebionix/voxly-releases">GitHub</a>
-                    <a href="https://github.com/aebionix/voxly-releases/releases">Downloads</a>
-                    <a href="https://github.com/aebionix/voxly-releases/issues">Support</a>
+                    <a href="https://github.com/aebionix/diktiv-releases">GitHub</a>
+                    <a href="https://github.com/aebionix/diktiv-releases/releases">Downloads</a>
+                    <a href="https://github.com/aebionix/diktiv-releases/issues">Support</a>
                 </div>
                 <span class="footer-copy">&copy; 2026 Aebionix</span>
             </div>
@@ -1283,8 +1283,8 @@
             try {
                 // Parallel: update-info.json + GitHub Release API
                 const [infoRes, releaseRes] = await Promise.all([
-                    fetch('https://raw.githubusercontent.com/aebionix/voxly-releases/main/update-info.json'),
-                    fetch('https://api.github.com/repos/aebionix/voxly-releases/releases/latest')
+                    fetch('https://raw.githubusercontent.com/aebionix/diktiv-releases/main/update-info.json'),
+                    fetch('https://api.github.com/repos/aebionix/diktiv-releases/releases/latest')
                 ]);
 
                 const data = await infoRes.json();
@@ -1298,11 +1298,11 @@
 
                 // Full installer URL
                 const installerUrl = data.installer_url ||
-                    `https://github.com/aebionix/voxly-releases/releases/download/v${data.version}/Voxly-v${data.version}-Setup.exe`;
+                    `https://github.com/aebionix/diktiv-releases/releases/download/v${data.version}/Diktiv-v${data.version}-Setup.exe`;
 
                 // Compact installer URL (without model)
                 const compactUrl = data.download_url_nomodel ||
-                    `https://github.com/aebionix/voxly-releases/releases/download/v${data.version}/Voxly-v${data.version}-Setup-NoModel.exe`;
+                    `https://github.com/aebionix/diktiv-releases/releases/download/v${data.version}/Diktiv-v${data.version}-Setup-NoModel.exe`;
 
                 // Set download links
                 const links = {
@@ -1330,7 +1330,7 @@
             } catch (error) {
                 console.error('Could not fetch version info:', error);
                 // Fallback to releases page
-                const fallbackUrl = 'https://github.com/aebionix/voxly-releases/releases/latest';
+                const fallbackUrl = 'https://github.com/aebionix/diktiv-releases/releases/latest';
                 ['download-btn', 'download-btn-compact', 'download-btn-free', 'download-btn-free-compact'].forEach(id => {
                     const el = document.getElementById(id);
                     if (el) el.href = fallbackUrl;
