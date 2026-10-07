@@ -43,12 +43,46 @@ kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;col
 /* Pille in der Aufnahme wie in der App (diktiv-next FloatingWidget.axaml): 120 × 40, Radius 9, Rand innen 9,
    Mikrofon 18 in 22 breitem Feld, Zeit Consolas 12, Kreuz 14 rot, Rahmen 2 px weiss 80 %, Füllung 0.18. */
 .pille{--s:22;--c:#FFB74D;position:relative;display:flex;align-items:center;flex:none;width:120px;height:40px;padding:0 9px;border-radius:9px;background:#1E1E1E;box-shadow:inset 0 0 0 2px rgba(255,255,255,.8);overflow:hidden}
-.pille[data-state=normal]{--c:#66BB6A}.pille[data-state=knapp]{--c:#FFB74D}.pille[data-state=ende]{--c:#FF5050}
-.p-fill{position:absolute;top:2px;bottom:2px;left:2px;width:calc((100% - 4px) * var(--s) / 30);background:var(--c);opacity:.18}
-.p-mic,.p-time,.p-x{position:relative;display:flex}
-.p-mic{width:22px;justify-content:center}
+.pille[data-state=normal]{--c:var(--rec,#66BB6A)}.pille[data-state=knapp]{--c:var(--warn,#FFB74D)}.pille[data-state=ende]{--c:var(--danger,#FF5050)}
+.p-fill{position:absolute;top:var(--bw,2px);bottom:var(--bw,2px);left:var(--bw,2px);width:calc((100% - 2 * var(--bw,2px)) * var(--s) / 30);background:var(--c);opacity:.18}
+.p-mic,.p-time,.p-x,.p-lang,.p-btn{position:relative;display:flex;align-items:center;flex:none}
+.p-mic{width:22px;justify-content:center;color:var(--mic,#66BB6A)}
 .p-time{margin:2px 4px 0 auto;color:var(--c);font:12px/1 Consolas,"Cascadia Mono",ui-monospace,monospace}
 .p-x{margin-left:4px;padding:0 4px}
+/* Weitere Zustände der Pille für die Regler (FloatingWidget.axaml, Teil C im HANDOFF) */
+.p-lang{gap:2px;margin-right:4px;color:var(--fg,#FFFFFF);font:600 10px/1 "Segoe UI",system-ui,sans-serif}
+.p-lang b{font-weight:600;color:var(--muted,#9A9A9A)}
+.p-btn{padding:0 4px;color:var(--muted,#9A9A9A)}
+.p-hist{margin-left:auto}
+.p-trans{position:relative;flex:1;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+.p-trans span{grid-column:1/-1;margin-bottom:3px;color:#CFCFCF;font:600 11px/1.3 "Segoe UI",system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p-bar{height:6px;margin-right:8px;border-radius:3px;background:rgba(255,255,255,.2);overflow:hidden}
+.p-bar i{display:block;height:100%;width:64%;background:var(--trans,#64B5F6)}
+.p-trans b{min-width:32px;text-align:right;color:var(--muted,#9A9A9A);font:400 13px/1.3 "Segoe UI",system-ui,sans-serif}
+.live{transition:width .13s ease-out}
+.live>.p-fill,.live>.p-time,.live>.p-x,.live>.p-lang,.live>.p-btn,.live>.p-trans{display:none}
+.live[data-view=hover]>.p-lang,.live[data-view=hover]>.p-btn,.live[data-view=aufnahme]>.p-time,.live[data-view=aufnahme]>.p-x{display:flex}
+.live[data-view=aufnahme]>.p-fill{display:block}
+.live[data-view=trans]>.p-trans{display:grid}
+@media (prefers-reduced-motion:reduce){.live{transition:none}}
+.anzeige{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 32px}
+.stage{display:flex;align-items:center;justify-content:center;min-height:140px;margin-top:20px;border-radius:14px;background:var(--screen);overflow:hidden}
+.zustand{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:0;border:0}
+.zustand label{cursor:pointer}
+.zustand input{position:absolute;opacity:0}
+.zustand span{display:block;border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:14px;color:var(--muted)}
+.zustand input:checked+span{border-color:var(--accent);color:var(--ink)}
+.zustand input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.regler{display:grid;gap:14px;align-content:start;font-size:15px}
+.regler label{display:grid;gap:4px}
+.regler .zeile{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+.regler input[type=range]{flex:1;min-width:0;accent-color:var(--accent)}
+.regler input[type=color]{width:56px;height:30px;padding:0 2px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+.regler .farben{display:flex;flex-wrap:wrap;gap:14px 24px}
+.regler .schalter{display:flex;align-items:flex-start;gap:10px}
+.regler .schalter input{margin-top:5px;accent-color:var(--accent)}
+.regler output{color:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .cd figcaption{margin-top:8px;color:var(--muted);font-size:15px}
 .stats{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
 .stats li{display:flex;align-items:baseline;gap:12px;border-top:1px solid var(--line);padding-top:10px}
@@ -68,7 +102,7 @@ footer a{color:var(--muted)}
 @media (max-width:980px){
 .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
 .s2{grid-column:span 1}.s3,.s4{grid-column:span 2}.r2{grid-row:auto}
-.ziel{grid-template-columns:minmax(0,1fr)}
+.ziel,.anzeige{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:640px){
 .bento{grid-template-columns:minmax(0,1fr)}
@@ -84,8 +118,12 @@ nav a{margin-left:12px}
 }
 </style></head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true">
-<symbol id="i-mic" viewBox="0 0 256 256"><path fill="#66BB6A" d="M128 176a48.05 48.05 0 0 0 48-48V64a48 48 0 0 0-96 0v64A48.05 48.05 0 0 0 128 176ZM96 64a32 32 0 0 1 64 0v64a32 32 0 0 1-64 0Zm40 143.6V240a8 8 0 0 1-16 0V207.6A80.11 80.11 0 0 1 48 128a8 8 0 0 1 16 0 64 64 0 0 0 128 0 8 8 0 0 1 16 0A80.11 80.11 0 0 1 136 207.6Z"/></symbol>
+<symbol id="i-mic" viewBox="0 0 256 256"><path fill="currentColor" d="M128 176a48.05 48.05 0 0 0 48-48V64a48 48 0 0 0-96 0v64A48.05 48.05 0 0 0 128 176ZM96 64a32 32 0 0 1 64 0v64a32 32 0 0 1-64 0Zm40 143.6V240a8 8 0 0 1-16 0V207.6A80.11 80.11 0 0 1 48 128a8 8 0 0 1 16 0 64 64 0 0 0 128 0 8 8 0 0 1 16 0A80.11 80.11 0 0 1 136 207.6Z"/></symbol>
 <symbol id="i-x" viewBox="0 0 256 256"><path d="M56 56 L200 200 M200 56 L56 200" stroke="#FF4444" stroke-width="24" stroke-linecap="round"/></symbol>
+<symbol id="i-globe" viewBox="0 0 256 256"><path fill="currentColor" d="M128 20A108 108 0 1 0 236 128 108.12 108.12 0 0 0 128 20Zm0 187a113.4 113.4 0 0 1-20.39-35h40.82a116.94 116.94 0 0 1-10 20.77A108.61 108.61 0 0 1 128 207Zm-26.49-59a135.42 135.42 0 0 1 0-40h53a135.42 135.42 0 0 1 0 40ZM44 128a83.49 83.49 0 0 1 2.43-20H77.25a160.63 160.63 0 0 0 0 40H46.43A83.49 83.49 0 0 1 44 128Zm84-79a113.4 113.4 0 0 1 20.39 35H107.59a116.94 116.94 0 0 1 10-20.77A108.61 108.61 0 0 1 128 49Zm50.73 59h30.82a83.52 83.52 0 0 1 0 40H178.75a160.63 160.63 0 0 0 0-40Zm20.77-24H173.71a140.82 140.82 0 0 0-15.5-34.36A84.51 84.51 0 0 1 199.52 84ZM97.79 49.64A140.82 140.82 0 0 0 82.29 84H56.48A84.51 84.51 0 0 1 97.79 49.64ZM56.48 172H82.29a140.82 140.82 0 0 0 15.5 34.36A84.51 84.51 0 0 1 56.48 172Zm101.73 34.36A140.82 140.82 0 0 0 173.71 172h25.81A84.51 84.51 0 0 1 158.21 206.36Z"/></symbol>
+<symbol id="i-hist" viewBox="0 0 256 256"><path fill="currentColor" d="M136 80v43.47l36.12 21.67a8 8 0 0 1-8.24 13.72l-40-24A8 8 0 0 1 120 128V80a8 8 0 0 1 16 0Zm-8-48A95.44 95.44 0 0 0 60.08 60.15C52.81 67.51 46.35 74.59 40 82V64a8 8 0 0 0-16 0v40a8 8 0 0 0 8 8H72a8 8 0 0 0 0-16H49c7.15-8.42 14.27-16.35 22.39-24.57a80 80 0 1 1 1.66 114.75 8 8 0 1 0-11 11.64A96 96 0 1 0 128 32Z"/></symbol>
+<symbol id="i-set" viewBox="0 0 256 256"><path fill="currentColor" d="M128 80a48 48 0 1 0 48 48A48.05 48.05 0 0 0 128 80Zm0 80a32 32 0 1 1 32-32A32 32 0 0 1 128 160Zm88-29.84q.06-2.16 0-4.32l14.92-18.64a8 8 0 0 0 1.48-7.06 107.21 107.21 0 0 0-10.88-26.25 8 8 0 0 0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186 40.54a8 8 0 0 0-3.94-6 107.71 107.71 0 0 0-26.25-10.87 8 8 0 0 0-7.06 1.49L130.16 40Q128 40 125.84 40L107.2 25.11a8 8 0 0 0-7.06-1.48A107.6 107.6 0 0 0 73.89 34.51a8 8 0 0 0-3.93 6L67.32 64.27q-1.56 1.49-3 3L40.54 70a8 8 0 0 0-6 3.94 107.71 107.71 0 0 0-10.87 26.25 8 8 0 0 0 1.49 7.06L40 125.84Q40 128 40 130.16L25.11 148.8a8 8 0 0 0-1.48 7.06 107.21 107.21 0 0 0 10.88 26.25 8 8 0 0 0 6 3.93l23.72 2.64q1.49 1.56 3 3L70 215.46a8 8 0 0 0 3.94 6 107.71 107.71 0 0 0 26.25 10.87 8 8 0 0 0 7.06-1.49L125.84 216q2.16.06 4.32 0l18.64 14.92a8 8 0 0 0 7.06 1.48 107.21 107.21 0 0 0 26.25-10.88 8 8 0 0 0 3.93-6l2.64-23.72q1.56-1.48 3-3L215.46 186a8 8 0 0 0 6-3.94 107.71 107.71 0 0 0 10.87-26.25 8 8 0 0 0-1.49-7.06Zm-16.1-6.5a73.93 73.93 0 0 1 0 8.68 8 8 0 0 0 1.74 5.48l14.19 17.73a91.57 91.57 0 0 1-6.23 15L187 173.11a8 8 0 0 0-5.1 2.64 74.11 74.11 0 0 1-6.14 6.14 8 8 0 0 0-2.64 5.1l-2.51 22.58a91.32 91.32 0 0 1-15 6.23l-17.74-14.19a8 8 0 0 0-5-1.75h-.48a73.93 73.93 0 0 1-8.68 0 8 8 0 0 0-5.48 1.74L100.45 215.8a91.57 91.57 0 0 1-15-6.23L82.89 187a8 8 0 0 0-2.64-5.1 74.11 74.11 0 0 1-6.14-6.14 8 8 0 0 0-5.1-2.64L46.43 170.6a91.32 91.32 0 0 1-6.23-15l14.19-17.74a8 8 0 0 0 1.74-5.48 73.93 73.93 0 0 1 0-8.68 8 8 0 0 0-1.74-5.48L40.2 100.45a91.57 91.57 0 0 1 6.23-15L69 82.89a8 8 0 0 0 5.1-2.64 74.11 74.11 0 0 1 6.14-6.14A8 8 0 0 0 82.89 69L85.4 46.43a91.32 91.32 0 0 1 15-6.23l17.74 14.19a8 8 0 0 0 5.48 1.74 73.93 73.93 0 0 1 8.68 0 8 8 0 0 0 5.48-1.74L155.55 40.2a91.57 91.57 0 0 1 15 6.23L173.11 69a8 8 0 0 0 2.64 5.1 74.11 74.11 0 0 1 6.14 6.14 8 8 0 0 0 5.1 2.64l22.58 2.51a91.32 91.32 0 0 1 6.23 15l-14.19 17.74A8 8 0 0 0 199.87 123.66Z"/></symbol>
+<symbol id="i-more" viewBox="0 0 256 256"><path fill="currentColor" d="M140 128a12 12 0 1 1-12-12A12 12 0 0 1 140 128Zm56-12a12 12 0 1 0 12 12A12 12 0 0 0 196 116ZM60 116a12 12 0 1 0 12 12A12 12 0 0 0 60 116Z"/></symbol>
 </svg>
 <header><a class="brand" href="index.html"><img src="favicon.svg" alt="">Diktiv</a><nav><a href="funktionen.html" aria-current="page">Funktionen</a><a href="datenschutz.html">Datenschutz</a></nav></header>
 <main>
@@ -171,25 +209,45 @@ nav a{margin-left:12px}
 <div class="shot"><img src="bilder/modellwahl.webp" width="684" height="753" style="--w:600px" loading="lazy" decoding="async" alt="Auswahl der Spracherkennungsmodelle mit Grösse und kurzer Beschreibung"></div>
 </article>
 
-<article class="tile s3">
+<article class="tile wide anzeige">
+<div>
 <h3>Die Anzeige am Bildschirmrand</h3>
-<p>Eine kleine Anzeige zeigt, ob Diktiv zuhört. Sie nimmt dem Programm, in dem du schreibst, den Fokus nicht weg. Farben, Rahmen und Deckkraft wählst du selbst.</p>
-<div class="shot"><img src="bilder/anzeige.webp" width="844" height="753" style="--w:640px" loading="lazy" decoding="async" alt="Einstellungen für das Aussehen der Anzeige mit Reglern für Deckkraft und Breite"></div>
+<p>Eine kleine Anzeige zeigt, ob Diktiv zuhört. Sie nimmt dem Programm, in dem du schreibst, den Fokus nicht weg. Probier die Regler aus. Sie heissen gleich wie in der App, im Reiter «Anzeige» der Einstellungen.</p>
+<div class="stage"><div class="pille live" data-view="ruhe" data-state="knapp" aria-hidden="true"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-lang"><svg width="16" height="16"><use href="#i-globe"/></svg><b>DE</b></span><span class="p-trans"><span>Transkribiere …</span><span class="p-bar"><i></i></span><b>64%</b></span><span class="p-time">00:22</span><span class="p-btn p-hist"><svg width="14" height="14"><use href="#i-hist"/></svg></span><span class="p-btn"><svg width="14" height="14"><use href="#i-set"/></svg></span><span class="p-btn"><svg width="16" height="16"><use href="#i-more"/></svg></span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div></div>
+<fieldset class="zustand"><legend class="sr">Zustand der Anzeige</legend>
+<label><input type="radio" name="zustand" value="ruhe" checked><span>Ruhe</span></label>
+<label><input type="radio" name="zustand" value="hover"><span>Darüberfahren</span></label>
+<label><input type="radio" name="zustand" value="aufnahme"><span>Aufnahme</span></label>
+<label><input type="radio" name="zustand" value="trans"><span>Transkription</span></label>
+</fieldset>
+</div>
+<form class="regler" aria-label="Einstellungen der Anzeige">
+<label>Deckkraft <span class="zeile"><input type="range" name="deckkraft" min="30" max="100" step="5" value="100"><output>100 %</output></span></label>
+<label>Breite <span class="zeile">schmal<input type="range" name="breite" min="200" max="1000" step="10" value="320">breit</span></label>
+<div class="farben">
+<label>Hintergrund <input type="color" name="hintergrund" value="#1e1e1e"></label>
+<label>Vordergrund <input type="color" name="vordergrund" value="#ffffff"></label>
+<label>Rahmenfarbe <input type="color" name="rahmenfarbe" value="#ffffff"></label>
+</div>
+<label class="schalter"><input type="checkbox" name="rahmen" checked>Rahmen immer anzeigen, auch im Ruhezustand</label>
+<label>Dicke <span class="zeile">fein<input type="range" name="dicke" min="1" max="4" step="1" value="2">kräftig</span></label>
+<label class="schalter"><input type="checkbox" name="einklappen" checked>Pille im Ruhezustand einklappen (klappt beim Darüberfahren auf)</label>
+</form>
 </article>
 
-<article class="tile s2">
+<article class="tile s3">
 <h3>Schneller mit Grafikkarte</h3>
 <p>Eine Grafikkarte macht die Erkennung schneller. Nötig ist sie nicht.</p>
 <div class="chips"><span>NVIDIA</span><span>AMD</span><span>Intel</span></div>
 </article>
 
-<article class="tile s2">
+<article class="tile s3">
 <h3>Oberfläche auf Deutsch und Englisch</h3>
 <p>Menüs und Einstellungen gibt es auf Deutsch und Englisch.</p>
 <p class="big" aria-hidden="true">DE EN</p>
 </article>
 
-<article class="tile s2">
+<article class="tile s3">
 <h3>Auch leise Stimmen kommen an</h3>
 <p>Die Empfindlichkeit des Mikrofons stellst du selbst ein.</p>
 <div class="shot"><img src="bilder/empfindlichkeit.webp" width="965" height="540" style="--w:400px" loading="lazy" decoding="async" alt="Einstellung Mikrofon-Empfindlichkeit mit der Auswahl Normal"></div>
@@ -223,6 +281,53 @@ nav a{margin-left:12px}
     if (++gehalten < HALTEN) return;
     s = 0; gehalten = 0; zeige(s);
   }, 1000);
+})();
+
+// Interaktive Pille mit den Gratis-Reglern aus dem Reiter «Anzeige» (WidgetColorHelper.cs, FloatingWidget.axaml.cs).
+(() => {
+  const pille = document.querySelector('.pille.live'), regler = document.querySelector('.regler');
+  if (!pille || !regler) return;
+  const feld = pille.parentElement, zustand = document.querySelectorAll('[name=zustand]');
+  const BREITE = { ruhe: 40, aufnahme: 120, trans: 224 };
+  const HELL = { rec: '#2E7D32', trans: '#1565C0', warn: '#E65100', danger: '#D32F2F' };
+  const DUNKEL = { rec: '#66BB6A', trans: '#64B5F6', warn: '#FFB74D', danger: '#FF5050' };
+  const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
+  const luminanz = farbe => {
+    const [r, g, b] = farbe.map(c => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const mische = (a, b, t) => `rgb(${a.map((x, i) => Math.round(x * (1 - t) + b[i] * t))})`;
+  let mausDrauf = false, zuklappen;
+
+  const zeige = () => {
+    const w = Object.fromEntries(new FormData(regler));
+    const modus = [...zustand].find(z => z.checked).value;
+    const einklappen = 'einklappen' in w, rahmen = 'rahmen' in w;
+    const ansicht = modus === 'ruhe' && (mausDrauf || !einklappen) ? 'hover' : modus;
+    const hg = rgb(w.hintergrund), vg = rgb(w.vordergrund), rf = rgb(w.rahmenfarbe), dicke = +w.dicke;
+    const status = luminanz(hg) > 0.5 ? HELL : DUNKEL;
+    for (const [name, farbe] of Object.entries(status)) pille.style.setProperty('--' + name, farbe);
+    pille.style.setProperty('--fg', w.vordergrund);
+    pille.style.setProperty('--muted', mische(vg, hg, 0.45));
+    pille.style.setProperty('--mic', ansicht === 'aufnahme' ? status.rec : ansicht === 'trans' ? status.trans : w.vordergrund);
+    pille.style.setProperty('--bw', dicke + 'px');
+    pille.style.background = `rgba(${hg},${w.deckkraft / 100})`;
+    // Rahmen in der Aufnahme immer mit 80 %, sonst nur wenn «immer anzeigen» an ist, mit 33 %
+    const alpha = ansicht === 'aufnahme' ? 0.8 : rahmen ? 0x55 / 255 : 0;
+    pille.style.boxShadow = alpha ? `inset 0 0 0 ${dicke}px rgba(${rf},${alpha})` : 'none';
+    const breite = BREITE[ansicht] ?? +w.breite;
+    pille.style.width = breite + 'px';
+    pille.style.transform = `scale(${Math.min(1, (feld.clientWidth - 24) / breite)})`;
+    pille.dataset.view = ansicht;
+    regler.querySelector('output').value = w.deckkraft + ' %';
+  };
+
+  regler.addEventListener('input', zeige);
+  zustand.forEach(z => z.addEventListener('change', zeige));
+  pille.addEventListener('mouseenter', () => { clearTimeout(zuklappen); mausDrauf = true; zeige(); });
+  pille.addEventListener('mouseleave', () => { zuklappen = setTimeout(() => { mausDrauf = false; zeige(); }, 350); });
+  addEventListener('resize', zeige);
+  zeige();
 })();
 </script>
 </body></html>
