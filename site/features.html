@@ -96,6 +96,10 @@ kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;col
 .btns li.weit{grid-column:1/-1}
 .btns svg{flex:none;margin-top:4px;color:var(--muted)}
 .tile .btns p{font-size:15px}
+.vliste{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.vliste li{display:flex;flex-direction:column;justify-content:space-between;gap:8px;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.tile .vliste p{font-size:15px}
+.vliste .combo{margin:0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .cd figcaption{margin-top:8px;color:var(--muted);font-size:15px}
 .stats{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
@@ -117,6 +121,7 @@ footer a{color:var(--muted)}
 .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
 .s2{grid-column:span 1}.s3,.s4{grid-column:span 2}.r2{grid-row:auto}
 .ziel,.anzeige,.tasten{grid-template-columns:minmax(0,1fr)}
+.vliste{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:640px){
 .bento{grid-template-columns:minmax(0,1fr)}
@@ -124,7 +129,7 @@ footer a{color:var(--muted)}
 .tile{padding:22px 20px 20px}
 .shot,.s2 .shot{margin:20px -21px -21px 0;flex-basis:230px}
 .tile .big{font-size:60px}
-.keys,.btns{grid-template-columns:minmax(0,1fr)}
+.keys,.btns,.vliste{grid-template-columns:minmax(0,1fr)}
 .screen{padding:20px 14px 22px}
 .field{font-size:14px}
 .notes{grid-template-columns:minmax(0,1fr)}
@@ -231,6 +236,29 @@ nav a{margin-left:12px}
 <p>Earlier dictations are in the history, and one click pastes the text again. There are four views to choose from, as tiles, as a list, split or as a table.</p>
 <p>You can edit and pin entries. You export the history as a CSV file or import it again. The free version keeps the last 10 entries, and pinned ones do not count.</p>
 <div class="shot"><img src="bilder/verlauf.webp" width="560" height="360" style="--w:560px" loading="lazy" decoding="async" alt="Diktiv history as a list with time, program and text"></div>
+</article>
+
+<article class="tile wide verlauf">
+<div>
+<h3>What the history can do</h3>
+<p>Everything here is part of the free version. The history brings back earlier dictations without speaking them again.</p>
+</div>
+<ul class="vliste">
+<li><p><b>Search</b> finds text in all entries, upper and lower case do not matter.</p><span class="combo"><kbd>Ctrl</kbd> + <kbd>F</kbd></span></li>
+<li><p><b>Double-click</b> uses the text. Depending on your setting, Diktiv copies it or types it into the window.</p></li>
+<li><p><b>Type into window</b> brings back the window you last worked in and types the text there.</p></li>
+<li><p><b>Copy</b> puts the text on the clipboard.</p><span class="combo"><kbd>Ctrl</kbd> + <kbd>C</kbd></span></li>
+<li><p><b>Pin</b> keeps an entry. It is not deleted and does not count towards the 10 entries.</p><span class="combo"><kbd>Ctrl</kbd> + <kbd>P</kbd></span></li>
+<li><p><b>Pinned only</b> hides everything else.</p><span class="combo"><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd></span></li>
+<li><p><b>Edit</b> opens the text in a small window so you can correct it.</p></li>
+<li><p><b>Delete</b> removes an entry. “Delete All Entries” asks first and keeps pinned ones.</p><span class="combo"><kbd>Del</kbd></span></li>
+<li><p><b>Add entry</b> creates a text by hand, for example a phrase you use often.</p></li>
+<li><p><b>Enlarge</b> shows the whole entry in tile view when you click its text.</p></li>
+<li><p><b>Export and import</b> saves the history as a CSV file and reads it back in. Diktiv skips duplicates.</p></li>
+<li><p><b>Listen</b> plays the original recording if you have turned on keeping recordings.</p></li>
+<li><p><b>For every entry</b> you see the time, the program and how long recording and transcription took.</p></li>
+<li><p><b>Right-click</b> opens a menu with Copy, Type into window, Edit, Pin and Delete.</p></li>
+</ul>
 </article>
 
 <article class="tile s2">

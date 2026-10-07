@@ -99,6 +99,10 @@ kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;col
 .tile p.weil{margin-top:12px;font-size:14px}
 .weil a{color:var(--muted);text-decoration-color:var(--line)}
 .weil a:hover{color:var(--accent)}
+.vliste{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.vliste li{display:flex;flex-direction:column;justify-content:space-between;gap:8px;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.tile .vliste p{font-size:15px}
+.vliste .combo{margin:0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .cd figcaption{margin-top:8px;color:var(--muted);font-size:15px}
 .stats{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
@@ -120,6 +124,7 @@ footer a{color:var(--muted)}
 .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
 .s2{grid-column:span 1}.s3,.s4{grid-column:span 2}.r2{grid-row:auto}
 .ziel,.anzeige,.tasten{grid-template-columns:minmax(0,1fr)}
+.vliste{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:640px){
 .bento{grid-template-columns:minmax(0,1fr)}
@@ -127,7 +132,7 @@ footer a{color:var(--muted)}
 .tile{padding:22px 20px 20px}
 .shot,.s2 .shot{margin:20px -21px -21px 0;flex-basis:230px}
 .tile .big{font-size:60px}
-.keys,.btns{grid-template-columns:minmax(0,1fr)}
+.keys,.btns,.vliste{grid-template-columns:minmax(0,1fr)}
 .screen{padding:20px 14px 22px}
 .field{font-size:14px}
 .notes{grid-template-columns:minmax(0,1fr)}
@@ -237,6 +242,29 @@ nav a{margin-left:12px}
 <p>Frühere Diktate findest du im Verlauf, ein Klick fügt den Text erneut ein. Vier Ansichten stehen zur Wahl, als Kacheln, als Liste, geteilt oder als Tabelle.</p>
 <p>Einträge kannst du bearbeiten und anheften. Als CSV-Datei exportierst du den Verlauf oder liest ihn wieder ein. Die Gratis-Version behält die letzten 10 Einträge, angeheftete zählen nicht mit.</p>
 <div class="shot"><img src="bilder/verlauf.webp" width="560" height="360" style="--w:560px" loading="lazy" decoding="async" alt="Verlauf von Diktiv als Liste mit Zeit, Programm und Text"></div>
+</article>
+
+<article class="tile wide verlauf">
+<div>
+<h3>Was im Verlauf alles geht</h3>
+<p>Alles hier gehört zur Gratis-Version. Mit dem Verlauf holst du frühere Diktate zurück, ohne sie neu zu sprechen.</p>
+</div>
+<ul class="vliste">
+<li><p><b>Suchen</b> findet Text in allen Einträgen, Gross und Klein spielen keine Rolle.</p><span class="combo"><kbd>Strg</kbd> + <kbd>F</kbd></span></li>
+<li><p><b>Doppelklick</b> verwendet den Text. Je nach Einstellung kopiert Diktiv ihn oder tippt ihn ins Fenster.</p></li>
+<li><p><b>In Fenster tippen</b> holt das Fenster zurück, in dem du zuletzt gearbeitet hast, und tippt den Text dort ein.</p></li>
+<li><p><b>Kopieren</b> legt den Text in die Zwischenablage.</p><span class="combo"><kbd>Strg</kbd> + <kbd>C</kbd></span></li>
+<li><p><b>Anheften</b> hält einen Eintrag fest. Er wird nicht gelöscht und zählt nicht zu den 10 Einträgen.</p><span class="combo"><kbd>Strg</kbd> + <kbd>P</kbd></span></li>
+<li><p><b>Nur angeheftete</b> blendet alles andere aus.</p><span class="combo"><kbd>Strg</kbd> + <kbd>Umschalt</kbd> + <kbd>P</kbd></span></li>
+<li><p><b>Bearbeiten</b> öffnet den Text in einem kleinen Fenster, damit du ihn korrigieren kannst.</p></li>
+<li><p><b>Löschen</b> entfernt einen Eintrag. «Alle Einträge löschen» fragt nach und lässt angeheftete stehen.</p><span class="combo"><kbd>Entf</kbd></span></li>
+<li><p><b>Eintrag hinzufügen</b> legt einen Text von Hand an, etwa eine Formulierung, die du oft brauchst.</p></li>
+<li><p><b>Vergrössern</b> zeigt in der Kachel-Ansicht den ganzen Eintrag, wenn du auf den Text klickst.</p></li>
+<li><p><b>Exportieren und Importieren</b> speichert den Verlauf als CSV-Datei und liest ihn wieder ein. Doppelte Einträge überspringt Diktiv.</p></li>
+<li><p><b>Anhören</b> spielt die Original-Aufnahme ab, wenn du das Aufbewahren eingeschaltet hast.</p></li>
+<li><p><b>Zu jedem Eintrag</b> siehst du Zeit, Programm und wie lange Aufnahme und Transkription gedauert haben.</p></li>
+<li><p><b>Rechtsklick</b> öffnet ein Menü mit Kopieren, In Fenster tippen, Bearbeiten, Anheften und Löschen.</p></li>
+</ul>
 </article>
 
 <article class="tile s2">
