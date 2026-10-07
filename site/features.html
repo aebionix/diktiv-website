@@ -50,8 +50,10 @@ kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;col
 .p-fill{position:absolute;top:var(--bw,2px);bottom:var(--bw,2px);left:var(--bw,2px);width:calc((100% - 2 * var(--bw,2px)) * var(--s) / 30);background:var(--c);opacity:.18}
 .p-mic,.p-time,.p-x,.p-lang,.p-btn{position:relative;display:flex;align-items:center;flex:none}
 .p-mic{width:22px;justify-content:center;color:var(--mic,#66BB6A)}
-.p-time{margin:2px 4px 0 auto;color:var(--c);font:12px/1 Consolas,"Cascadia Mono",ui-monospace,monospace}
+.p-time{margin:2px auto 0;color:var(--c);font:12px/1 Consolas,"Cascadia Mono",ui-monospace,monospace}
 .p-x{margin-left:4px;padding:0 4px}
+.xzeig{width:150px;margin:18px 0 0}
+.xzeig figcaption{margin-top:6px;text-align:right;color:var(--muted);font-size:13px;line-height:1.2}
 /* Weitere Zustände der Pille für die Regler (FloatingWidget.axaml, Teil C im HANDOFF) */
 .p-lang{gap:2px;margin-right:4px;color:var(--fg,#FFFFFF);font:600 10px/1 "Segoe UI",system-ui,sans-serif}
 .p-lang b{font-weight:600;color:var(--muted,#9A9A9A)}
@@ -59,7 +61,7 @@ kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;col
 .p-hist{margin-left:auto}
 /* Transkription wie die Aufnahme, nur blau: 2 s «Transkribiere …», danach läuft die Zeit ab 00:02.
    Blaue Füllung nach Fortschritt statt nach den 30 Sekunden (Michael 07.10.2026). */
-.p-ttext,.p-tzeit{position:relative;align-items:center;flex:none;margin:2px 4px 0 auto;color:var(--trans,#64B5F6)}
+.p-ttext,.p-tzeit{position:relative;align-items:center;flex:none;margin:2px auto 0;color:var(--trans,#64B5F6)}
 .p-ttext{font:600 11px/1 "Segoe UI",system-ui,sans-serif;white-space:nowrap}
 .p-tzeit{font:12px/1 Consolas,"Cascadia Mono",ui-monospace,monospace}
 .live{transition:width .13s ease-out}
@@ -184,8 +186,9 @@ nav a{margin-left:12px}
 </article>
 
 <article class="tile s2">
-<h3>Cancel with Esc</h3>
-<p>Esc cancels a recording or its processing. You decide whether Diktiv then asks, discards the dictation or processes it anyway.</p>
+<h3>Cancel with Esc or the cross</h3>
+<p>Press Esc or click the red cross on the pill to cancel a recording or its processing. Both do the same. You decide whether Diktiv then asks, discards the dictation or processes it anyway.</p>
+<figure class="xzeig"><div class="pille" data-state="normal" aria-hidden="true"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-time">00:05</span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div><figcaption>cross to cancel ↑</figcaption></figure>
 <div class="combo keyrow">press <kbd>Esc</kbd></div>
 </article>
 
@@ -377,17 +380,18 @@ nav a{margin-left:12px}
   };
   const mische = (a, b, t) => `rgb(${a.map((x, i) => Math.round(x * (1 - t) + b[i] * t))})`;
   let mausDrauf = false, zuklappen, vorher;
-  // Transkription: 2 s Text, dann Zeit ab 00:02. Für die Vorführung nach 8 s wieder von vorn.
-  const TEXT_BIS = 2, NEU_AB = 8, ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Transkription: 2 s Text, dann Zeit ab 00:02, ab 8 s der Haken. Für die Vorführung nach 10 s wieder von vorn.
+  const TEXT_BIS = 2, FERTIG_AB = 8, NEU_AB = 10, ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
   let tSek = ruhig ? 4 : 0;
   const transZeit = () => {
     pille.dataset.tphase = tSek < TEXT_BIS ? 'text' : 'zeit';
-    pille.style.setProperty('--fort', tSek / NEU_AB);
-    pille.querySelector('.p-tzeit').textContent = '00:' + String(tSek).padStart(2, '0');
+    // Füllung geschätzt bis höchstens 90 %, ganz erst mit dem Haken (wie die App)
+    pille.style.setProperty('--fort', tSek >= FERTIG_AB ? 1 : Math.min(0.9, tSek / FERTIG_AB));
+    pille.querySelector('.p-tzeit').textContent = tSek >= FERTIG_AB ? '✓' : '00:' + String(tSek).padStart(2, '0');
   };
   if (!ruhig) setInterval(() => {
     if (pille.dataset.view !== 'trans') return;
-    tSek = tSek >= NEU_AB ? 0 : tSek + 1;
+    tSek = tSek >= NEU_AB - 1 ? 0 : tSek + 1;
     transZeit();
   }, 1000);
 
