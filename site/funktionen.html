@@ -42,9 +42,10 @@ kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;col
 .keyrow{margin:auto 0 0;padding-top:18px}
 .tile p.say{margin:auto 0 0;padding-top:18px;color:var(--accent);font-size:22px;font-weight:650}
 .cd{margin:18px 0 0}
-/* Pille in der Aufnahme wie in der App (diktiv-next FloatingWidget.axaml): 120 × 40, Radius 9, Rand innen 9,
-   Mikrofon 18 in 22 breitem Feld, Zeit Consolas 12, Kreuz 14 rot, Rahmen 2 px weiss 80 %, Füllung 0.18. */
-.pille{--s:22;--c:#FFB74D;position:relative;display:flex;align-items:center;flex:none;width:120px;height:40px;padding:0 9px;border-radius:9px;background:#1E1E1E;box-shadow:inset 0 0 0 2px rgba(255,255,255,.8);overflow:hidden}
+/* Pille in der Aufnahme wie in der App (diktiv-next FloatingWidget.axaml): 40 hoch, Radius 9, Rand innen 9,
+   Mikrofon 18 in 22 breitem Feld, Zeit Consolas 12, Kreuz 14 rot, Rahmen 2 px weiss 80 %, Füllung 0.18.
+   Breite 150 statt 120 in der App, damit «Transkribiere …» neben Mikrofon und Kreuz passt (Michael 07.10.2026). */
+.pille{--s:22;--c:#FFB74D;position:relative;display:flex;align-items:center;flex:none;width:150px;height:40px;padding:0 9px;border-radius:9px;background:#1E1E1E;box-shadow:inset 0 0 0 2px rgba(255,255,255,.8);overflow:hidden}
 .pille[data-state=normal]{--c:var(--rec,#66BB6A)}.pille[data-state=knapp]{--c:var(--warn,#FFB74D)}.pille[data-state=ende]{--c:var(--danger,#FF5050)}
 .p-fill{position:absolute;top:var(--bw,2px);bottom:var(--bw,2px);left:var(--bw,2px);width:calc((100% - 2 * var(--bw,2px)) * var(--s) / 30);background:var(--c);opacity:.18}
 .p-mic,.p-time,.p-x,.p-lang,.p-btn{position:relative;display:flex;align-items:center;flex:none}
@@ -56,8 +57,8 @@ kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;col
 .p-lang b{font-weight:600;color:var(--muted,#9A9A9A)}
 .p-btn{padding:0 4px;color:var(--muted,#9A9A9A)}
 .p-hist{margin-left:auto}
-/* Transkription wie die Aufnahme, nur blau: 2 s «Transkribiere …», danach läuft die Zeit ab 00:02 (Michael 07.10.2026).
-   Der Text braucht 76 px, neben Mikrofon und Kreuz bleiben in 120 px nur 54, deshalb fehlt das Kreuz in diesen 2 s. */
+/* Transkription wie die Aufnahme, nur blau: 2 s «Transkribiere …», danach läuft die Zeit ab 00:02.
+   Blaue Füllung nach Fortschritt statt nach den 30 Sekunden (Michael 07.10.2026). */
 .p-ttext,.p-tzeit{position:relative;align-items:center;flex:none;margin:2px 4px 0 auto;color:var(--trans,#64B5F6)}
 .p-ttext{font:600 11px/1 "Segoe UI",system-ui,sans-serif;white-space:nowrap}
 .p-tzeit{font:12px/1 Consolas,"Cascadia Mono",ui-monospace,monospace}
@@ -65,7 +66,8 @@ kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;col
 .live>.p-fill,.live>.p-time,.live>.p-x,.live>.p-lang,.live>.p-btn,.live>.p-ttext,.live>.p-tzeit{display:none}
 .live[data-view=hover]>.p-lang,.live[data-view=hover]>.p-btn,.live[data-view=aufnahme]>.p-time,.live[data-view=aufnahme]>.p-x{display:flex}
 .live[data-view=aufnahme]>.p-fill{display:block}
-.live[data-view=trans][data-tphase=zeit]>.p-x,.live[data-view=trans][data-tphase=text]>.p-ttext,.live[data-view=trans][data-tphase=zeit]>.p-tzeit{display:flex}
+.live[data-view=trans]>.p-fill{display:block;background:var(--trans,#64B5F6);width:calc((100% - 2 * var(--bw,2px)) * var(--fort,0));transition:width .2s}
+.live[data-view=trans]>.p-x,.live[data-view=trans][data-tphase=text]>.p-ttext,.live[data-view=trans][data-tphase=zeit]>.p-tzeit{display:flex}
 @media (prefers-reduced-motion:reduce){.live{transition:none}}
 .anzeige{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 32px}
 .stage{display:flex;align-items:center;justify-content:center;min-height:140px;margin-top:20px;border-radius:14px;background:var(--screen);overflow:hidden}
@@ -365,7 +367,7 @@ nav a{margin-left:12px}
   const pille = document.querySelector('.pille.live'), regler = document.querySelector('.regler');
   if (!pille || !regler) return;
   const feld = pille.parentElement, zustand = document.querySelectorAll('[name=zustand]');
-  const BREITE = { ruhe: 40, aufnahme: 120, trans: 120 };
+  const BREITE = { ruhe: 40, aufnahme: 150, trans: 150 };
   const HELL = { rec: '#2E7D32', trans: '#1565C0', warn: '#E65100', danger: '#D32F2F' };
   const DUNKEL = { rec: '#66BB6A', trans: '#64B5F6', warn: '#FFB74D', danger: '#FF5050' };
   const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
@@ -380,6 +382,7 @@ nav a{margin-left:12px}
   let tSek = ruhig ? 4 : 0;
   const transZeit = () => {
     pille.dataset.tphase = tSek < TEXT_BIS ? 'text' : 'zeit';
+    pille.style.setProperty('--fort', tSek / NEU_AB);
     pille.querySelector('.p-tzeit').textContent = '00:' + String(tSek).padStart(2, '0');
   };
   if (!ruhig) setInterval(() => {
