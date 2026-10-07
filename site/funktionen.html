@@ -56,16 +56,16 @@ kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;col
 .p-lang b{font-weight:600;color:var(--muted,#9A9A9A)}
 .p-btn{padding:0 4px;color:var(--muted,#9A9A9A)}
 .p-hist{margin-left:auto}
-.p-trans{position:relative;flex:1;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}
-.p-trans span{grid-column:1/-1;margin-bottom:3px;color:#CFCFCF;font:600 11px/1.3 "Segoe UI",system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.p-bar{height:6px;margin-right:8px;border-radius:3px;background:rgba(255,255,255,.2);overflow:hidden}
-.p-bar i{display:block;height:100%;width:64%;background:var(--trans,#64B5F6)}
-.p-trans b{min-width:32px;text-align:right;color:var(--muted,#9A9A9A);font:400 13px/1.3 "Segoe UI",system-ui,sans-serif}
+/* Transkription wie die Aufnahme, nur blau: 2 s «Transkribiere …», danach läuft die Zeit ab 00:02 (Michael 07.10.2026).
+   Der Text braucht 76 px, neben Mikrofon und Kreuz bleiben in 120 px nur 54, deshalb fehlt das Kreuz in diesen 2 s. */
+.p-ttext,.p-tzeit{position:relative;align-items:center;flex:none;margin:2px 4px 0 auto;color:var(--trans,#64B5F6)}
+.p-ttext{font:600 11px/1 "Segoe UI",system-ui,sans-serif;white-space:nowrap}
+.p-tzeit{font:12px/1 Consolas,"Cascadia Mono",ui-monospace,monospace}
 .live{transition:width .13s ease-out}
-.live>.p-fill,.live>.p-time,.live>.p-x,.live>.p-lang,.live>.p-btn,.live>.p-trans{display:none}
+.live>.p-fill,.live>.p-time,.live>.p-x,.live>.p-lang,.live>.p-btn,.live>.p-ttext,.live>.p-tzeit{display:none}
 .live[data-view=hover]>.p-lang,.live[data-view=hover]>.p-btn,.live[data-view=aufnahme]>.p-time,.live[data-view=aufnahme]>.p-x{display:flex}
 .live[data-view=aufnahme]>.p-fill{display:block}
-.live[data-view=trans]>.p-trans{display:grid}
+.live[data-view=trans][data-tphase=zeit]>.p-x,.live[data-view=trans][data-tphase=text]>.p-ttext,.live[data-view=trans][data-tphase=zeit]>.p-tzeit{display:flex}
 @media (prefers-reduced-motion:reduce){.live{transition:none}}
 .anzeige{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 32px}
 .stage{display:flex;align-items:center;justify-content:center;min-height:140px;margin-top:20px;border-radius:14px;background:var(--screen);overflow:hidden}
@@ -273,7 +273,7 @@ nav a{margin-left:12px}
 <h3>Die Anzeige am Bildschirmrand</h3>
 <p>Eine kleine Anzeige zeigt, ob Diktiv zuhört. Sie nimmt dem Programm, in dem du schreibst, den Fokus nicht weg. Probier die Regler aus. Sie heissen gleich wie in der App, im Reiter «Anzeige» der Einstellungen.</p>
 <p>Du verschiebst sie per Ziehen und änderst die Breite am rechten Rand. Im Ruhezustand klappt sie auf 40 × 40 Pixel ein, nur mit dem Mikrofon, und geht auf, sobald du mit der Maus darüberfährst. Beim Diktieren springt sie unter den Mauszeiger und wechselst du den Bildschirm, wandert sie mit. Einklappen, Springen und Mitwandern schaltest du einzeln ab. Auf Wunsch verschwindet sie bei Vollbild und erscheint erst beim Diktieren wieder.</p>
-<div class="stage"><div class="pille live" data-view="ruhe" data-state="knapp" aria-hidden="true"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-lang"><svg width="16" height="16"><use href="#i-globe"/></svg><b>DE</b></span><span class="p-trans"><span>Transkribiere …</span><span class="p-bar"><i></i></span><b>64%</b></span><span class="p-time">00:22</span><span class="p-btn p-hist"><svg width="14" height="14"><use href="#i-hist"/></svg></span><span class="p-btn"><svg width="14" height="14"><use href="#i-set"/></svg></span><span class="p-btn"><svg width="16" height="16"><use href="#i-more"/></svg></span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div></div>
+<div class="stage"><div class="pille live" data-view="ruhe" data-state="knapp" aria-hidden="true"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-lang"><svg width="16" height="16"><use href="#i-globe"/></svg><b>DE</b></span><span class="p-ttext">Transkribiere …</span><span class="p-time">00:22</span><span class="p-tzeit">00:02</span><span class="p-btn p-hist"><svg width="14" height="14"><use href="#i-hist"/></svg></span><span class="p-btn"><svg width="14" height="14"><use href="#i-set"/></svg></span><span class="p-btn"><svg width="16" height="16"><use href="#i-more"/></svg></span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div></div>
 <fieldset class="zustand"><legend class="sr">Zustand der Anzeige</legend>
 <label><input type="radio" name="zustand" value="ruhe" checked><span>Ruhe</span></label>
 <label><input type="radio" name="zustand" value="hover"><span>Darüberfahren</span></label>
@@ -365,7 +365,7 @@ nav a{margin-left:12px}
   const pille = document.querySelector('.pille.live'), regler = document.querySelector('.regler');
   if (!pille || !regler) return;
   const feld = pille.parentElement, zustand = document.querySelectorAll('[name=zustand]');
-  const BREITE = { ruhe: 40, aufnahme: 120, trans: 224 };
+  const BREITE = { ruhe: 40, aufnahme: 120, trans: 120 };
   const HELL = { rec: '#2E7D32', trans: '#1565C0', warn: '#E65100', danger: '#D32F2F' };
   const DUNKEL = { rec: '#66BB6A', trans: '#64B5F6', warn: '#FFB74D', danger: '#FF5050' };
   const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
@@ -374,7 +374,19 @@ nav a{margin-left:12px}
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   };
   const mische = (a, b, t) => `rgb(${a.map((x, i) => Math.round(x * (1 - t) + b[i] * t))})`;
-  let mausDrauf = false, zuklappen;
+  let mausDrauf = false, zuklappen, vorher;
+  // Transkription: 2 s Text, dann Zeit ab 00:02. Für die Vorführung nach 8 s wieder von vorn.
+  const TEXT_BIS = 2, NEU_AB = 8, ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let tSek = ruhig ? 4 : 0;
+  const transZeit = () => {
+    pille.dataset.tphase = tSek < TEXT_BIS ? 'text' : 'zeit';
+    pille.querySelector('.p-tzeit').textContent = '00:' + String(tSek).padStart(2, '0');
+  };
+  if (!ruhig) setInterval(() => {
+    if (pille.dataset.view !== 'trans') return;
+    tSek = tSek >= NEU_AB ? 0 : tSek + 1;
+    transZeit();
+  }, 1000);
 
   const zeige = () => {
     const w = Object.fromEntries(new FormData(regler));
@@ -389,12 +401,15 @@ nav a{margin-left:12px}
     pille.style.setProperty('--mic', ansicht === 'aufnahme' ? status.rec : ansicht === 'trans' ? status.trans : w.vordergrund);
     pille.style.setProperty('--bw', dicke + 'px');
     pille.style.background = `rgba(${hg},${w.deckkraft / 100})`;
-    // Rahmen in der Aufnahme immer mit 80 %, sonst nur wenn «immer anzeigen» an ist, mit 33 %
-    const alpha = ansicht === 'aufnahme' ? 0.8 : rahmen ? 0x55 / 255 : 0;
+    // Rahmen in Aufnahme und Transkription immer mit 80 %, sonst nur wenn «immer anzeigen» an ist, mit 33 %
+    const alpha = ansicht === 'aufnahme' || ansicht === 'trans' ? 0.8 : rahmen ? 0x55 / 255 : 0;
     pille.style.boxShadow = alpha ? `inset 0 0 0 ${dicke}px rgba(${rf},${alpha})` : 'none';
     const breite = BREITE[ansicht] ?? +w.breite;
     pille.style.width = breite + 'px';
     pille.style.transform = `scale(${Math.min(1, (feld.clientWidth - 24) / breite)})`;
+    if (ansicht === 'trans' && vorher !== 'trans' && !ruhig) tSek = 0;
+    vorher = ansicht;
+    transZeit();
     pille.dataset.view = ansicht;
     regler.querySelector('output').value = w.deckkraft + ' %';
   };
