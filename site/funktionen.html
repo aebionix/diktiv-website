@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Funktionen · Diktiv</title>
+<meta name="description" content="Was Diktiv kann. Taste halten, sprechen, loslassen, der Text erscheint dort, wo dein Cursor steht. Spracherkennung auf deinem Rechner, ohne Konto und ohne Telemetrie.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><style>
+:root{--bg:#FAF7F2;--card:#FFFCF7;--ink:#1C1917;--muted:#57534E;--accent:#C2410C;--line:#E7E1D8;--screen:#1C1917;--field:#292420;--fieldink:#EDE7DE}
+@media (prefers-color-scheme:dark){:root{--bg:#1C1917;--card:#24201D;--ink:#F5F1EA;--muted:#B8B0A6;--accent:#F97316;--line:#3A342F;--screen:#141110;--field:#24201D}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif}
+header,main,footer{max-width:1120px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding-top:28px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:20px;color:var(--ink);text-decoration:none}
+.brand img{width:32px;height:32px}
+nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:15px}nav a:hover{color:var(--accent)}
+nav a[aria-current]{color:var(--ink)}
+main{padding-top:24px;padding-bottom:56px}
+a{color:var(--accent)}
+h1{font-size:clamp(32px,5vw,48px);line-height:1.12;letter-spacing:-.015em;margin:16px 0 12px}
+.lead{font-size:20px;color:var(--muted);margin:0 0 40px;max-width:40em}
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;grid-auto-flow:row dense}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 26px 24px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.tile h2,.tile h3{margin:0 0 6px;line-height:1.25;letter-spacing:-.005em}
+.tile h2{font-size:clamp(26px,3vw,34px)}
+.tile h3{font-size:19px}
+.tile p{margin:0;color:var(--muted);font-size:16px}
+.tile p+p{margin-top:8px}
+.s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}.r2{grid-row:span 2}
+.hero p{font-size:18px;max-width:30em}
+.demo{flex:1;display:flex;padding-top:28px}
+.screen{flex:1;background:var(--screen);border-radius:14px;padding:28px 24px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px}
+.field{align-self:stretch;background:var(--field);color:var(--fieldink);border:1px solid #3A342F;border-radius:10px;padding:14px 16px;font:15px/1.6 "Cascadia Mono",Consolas,ui-monospace,monospace}
+.caret{display:inline-block;width:2px;height:1.15em;background:var(--accent);vertical-align:-.2em;margin-left:2px}
+@media (prefers-reduced-motion:no-preference){.caret{animation:blink 1.1s steps(1) infinite}}
+@keyframes blink{50%{opacity:0}}
+.pill{width:232px;height:auto;border-radius:22px/22px}
+.tile .big{font-size:72px;font-weight:650;line-height:1;color:var(--accent);margin:auto 0 0;padding-top:22px;letter-spacing:-.03em}
+.cd{margin:18px 0 0}
+.countdown{--s:22;--c:#FFB74D;position:relative;display:flex;align-items:center;justify-content:space-between;max-width:320px;height:40px;padding:0 14px 0 12px;border-radius:9px;background:rgba(30,30,30,.88);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);overflow:hidden}
+.countdown[data-state=normal]{--c:#66BB6A}.countdown[data-state=knapp]{--c:#FFB74D}.countdown[data-state=ende]{--c:#FF5050}
+.cd-fill{position:absolute;top:0;bottom:0;left:0;width:calc(var(--s) / 30 * 100%);background:var(--c);opacity:.18}
+.countdown svg,.cd-time{position:relative}
+.cd-time{color:var(--c);font:600 15px/1 "Cascadia Mono",Consolas,ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.cd figcaption{margin-top:8px;color:var(--muted);font-size:15px}
+.stats{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+.stats li{display:flex;align-items:baseline;gap:12px;border-top:1px solid var(--line);padding-top:10px}
+.stats b{font-size:28px;font-weight:650;color:var(--accent);min-width:2.6em;line-height:1.1}
+.stats span{color:var(--muted);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:18px}
+.chips span{border:1px solid var(--line);border-radius:8px;padding:3px 10px;font-size:14px;color:var(--muted)}
+.shot{margin:22px -27px -25px 0;flex:1 0 300px;overflow:hidden;border-top-left-radius:12px;border:1px solid var(--line);border-right:0;border-bottom:0}
+.shot img{display:block;width:min(var(--w),170%);max-width:none;height:auto}
+.s2 .shot{flex-basis:210px}
+.notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.notes h2{font-size:17px;margin:0 0 4px}
+.notes p{margin:0;color:var(--muted);font-size:15px}
+.notes div{border-top:1px solid var(--line);padding-top:14px}
+footer{border-top:1px solid var(--line);padding-top:18px;padding-bottom:36px;color:var(--muted);font-size:14px}
+footer a{color:var(--muted)}
+@media (max-width:980px){
+.bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+.s2{grid-column:span 1}.s3,.s4{grid-column:span 2}.r2{grid-row:auto}
+}
+@media (max-width:640px){
+.bento{grid-template-columns:minmax(0,1fr)}
+.s2,.s3,.s4{grid-column:auto}
+.tile{padding:22px 20px 20px}
+.shot,.s2 .shot{margin:20px -21px -21px 0;flex-basis:230px}
+.tile .big{font-size:60px}
+.screen{padding:20px 14px 22px}
+.field{font-size:14px}
+.notes{grid-template-columns:minmax(0,1fr)}
+nav a{margin-left:12px}
+}
+</style></head>
+<body><header><a class="brand" href="index.html"><img src="favicon.svg" alt="">Diktiv</a><nav><a href="funktionen.html" aria-current="page">Funktionen</a><a href="datenschutz.html">Datenschutz</a></nav></header>
+<main>
+<h1>Sprechen statt tippen.<br>In jedem Programm.</h1>
+<p class="lead">Diktiv ist eine Diktier-App für Windows. Alles auf dieser Seite gehört zur Gratis-Version.</p>
+
+<div class="bento">
+
+<article class="tile s4 r2 hero">
+<h2>Taste halten, sprechen, loslassen.</h2>
+<p>Du hältst eine Taste gedrückt, sprichst und lässt los. Kurz darauf steht der Text dort, wo dein Cursor steht, im Mailentwurf, im Dokument oder im Chatfenster.</p>
+<div class="demo"><div class="screen">
+<div class="field">Guten Tag, Frau Meier, vielen Dank für Ihre Offerte. Wir bestätigen den Termin vom Dienstag, 14 Uhr und freuen uns auf die Zusammenarbeit.<span class="caret" aria-hidden="true"></span></div>
+<img class="pill" src="bilder/pille.webp" width="464" height="144" alt="Die Anzeige von Diktiv während einer Aufnahme, mit Mikrofon und der Zeit 00:15">
+</div></div>
+</article>
+
+<article class="tile s2">
+<h3>Bleibt auf deinem Rechner</h3>
+<p>Whisper ist ins Programm eingebaut. Deine Aufnahmen gehen an keinen Server. Es gibt kein Konto und keine Telemetrie.</p>
+</article>
+
+<article class="tile s2">
+<h3>Gratis</h3>
+<p>Die Gratis-Version kostet nichts. Diese Grenzen gelten.</p>
+<figure class="cd">
+<div class="countdown" data-state="knapp" aria-hidden="true"><span class="cd-fill"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#66BB6A" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="cd-time">00:22</span></div>
+<figcaption>Höchstens 30 Sekunden pro Aufnahme. Die Anzeige zählt mit.</figcaption>
+</figure>
+<ul class="stats">
+<li><b>60</b><span>Aufnahmen pro Stunde</span></li>
+<li><b>10</b><span>Einträge im Verlauf</span></li>
+</ul>
+</article>
+
+<article class="tile s3">
+<h3>Landet dort, wo der Cursor steht</h3>
+<p>Terminals wie Windows Terminal oder PuTTY erkennt Diktiv und fügt dort so ein, wie sie es erwarten. Das klappt auch in Electron-Anwendungen.</p>
+<p>Vier Einfügemethoden stehen zur Wahl, für jede Anwendung einzeln. Nimmt ein Programm die Zwischenablage nicht an, tippt Diktiv den Text Zeichen für Zeichen.</p>
+<div class="shot"><img src="bilder/zwischenablage.webp" width="844" height="753" style="--w:640px" loading="lazy" decoding="async" alt="Einstellungen von Diktiv, Bereich Einfügen, mit der Einfügemethode pro Programm"></div>
+</article>
+
+<article class="tile s3">
+<h3>Deine Namen, richtig geschrieben</h3>
+<p>Fachbegriffe und Namen trägst du ins Lexikon ein, damit Whisper sie richtig schreibt.</p>
+<div class="shot"><img src="bilder/lexikon.webp" width="1312" height="753" style="--w:860px" loading="lazy" decoding="async" alt="Lexikon in den Einstellungen mit Begriffen wie Niederurnen, Fabrikstrasse und Glarus Nord"></div>
+</article>
+
+<article class="tile s2">
+<h3>Schweizer Rechtschreibung</h3>
+<p>Für Schweizer Texte schreibt Diktiv ss statt ß.</p>
+<p class="big" aria-hidden="true">ss</p>
+</article>
+
+<article class="tile s2">
+<h3>Verlauf mit Suche</h3>
+<p>Kurz antippen fügt den letzten Text noch einmal ein. Doppelt antippen öffnet den Verlauf.</p>
+<div class="shot"><img src="bilder/verlauf.webp" width="560" height="360" style="--w:480px" loading="lazy" decoding="async" alt="Verlauf von Diktiv als Liste mit Zeit, Programm und Text"></div>
+</article>
+
+<article class="tile s2">
+<h3>Schnellnotiz</h3>
+<p>Mit einer zweiten Taste hältst du einen Gedanken fest. Diktiv speichert ihn als Markdown-Datei in einem Ordner deiner Wahl.</p>
+<p class="big" aria-hidden="true">.md</p>
+</article>
+
+<article class="tile s3">
+<h3>Deutsches Modell eingebaut</h3>
+<p>Eingebaut ist eine auf Deutsch trainierte Fassung von Whisper large-v3-turbo. Sechs weitere Modelle lädst du bei Bedarf dazu.</p>
+<div class="shot"><img src="bilder/modellwahl.webp" width="684" height="753" style="--w:600px" loading="lazy" decoding="async" alt="Auswahl der Spracherkennungsmodelle mit Grösse und kurzer Beschreibung"></div>
+</article>
+
+<article class="tile s3">
+<h3>Die Anzeige am Bildschirmrand</h3>
+<p>Eine kleine Anzeige zeigt, ob Diktiv zuhört. Sie nimmt dem Programm, in dem du schreibst, den Fokus nicht weg. Farben, Rahmen und Deckkraft wählst du selbst.</p>
+<div class="shot"><img src="bilder/anzeige.webp" width="844" height="753" style="--w:640px" loading="lazy" decoding="async" alt="Einstellungen für das Aussehen der Anzeige mit Reglern für Deckkraft und Breite"></div>
+</article>
+
+<article class="tile s2">
+<h3>Schneller mit Grafikkarte</h3>
+<p>Eine Grafikkarte macht die Erkennung schneller. Nötig ist sie nicht.</p>
+<div class="chips"><span>NVIDIA</span><span>AMD</span><span>Intel</span></div>
+</article>
+
+<article class="tile s2">
+<h3>Oberfläche in 20 Sprachen</h3>
+<p>Menüs und Einstellungen gibt es in 20 Sprachen.</p>
+<p class="big" aria-hidden="true">20</p>
+</article>
+
+<article class="tile s2">
+<h3>Auch leise Stimmen kommen an</h3>
+<p>Die Empfindlichkeit des Mikrofons stellst du selbst ein.</p>
+<div class="shot"><img src="bilder/empfindlichkeit.webp" width="965" height="540" style="--w:400px" loading="lazy" decoding="async" alt="Einstellung Mikrofon-Empfindlichkeit mit der Auswahl Normal"></div>
+</article>
+
+</div>
+
+<section class="notes">
+<div><h2>Bitte beachten</h2><p>Spracherkennung macht Fehler, Whisper auch. Lies den Text durch, bevor du ihn verwendest. Diktiv ist kein Medizinprodukt.</p></div>
+<div><h2>Was du brauchst</h2><p>Windows 10 ab Version 1809 oder Windows 11 und ein Mikrofon. Eine Grafikkarte ist nicht nötig.</p></div>
+<div><h2>Wo es Diktiv gibt</h2><p>Diktiv erscheint demnächst im Microsoft Store.</p></div>
+</section>
+</main>
+<footer>Diktiv · Michael Aebi, Niederurnen, Schweiz · <a href="mailto:support@diktiv.com">support@diktiv.com</a> · <a href="funktionen.html">Funktionen</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="privacy.html">Privacy</a></footer>
+<script>
+// Countdown der Gratis-Aufnahme wie in der App (FloatingWidget, #266): springt sekundenweise
+// von 00:00 bis 00:30, ab 20 s orange, ab 25 s rot. Ohne Bewegung bleibt das Standbild bei 00:22.
+(() => {
+  const LIMIT = 30, KNAPP_AB = 20, ENDE_AB = 25, HALTEN = 2;
+  const pille = document.querySelector('.countdown');
+  if (!pille || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const zeit = pille.querySelector('.cd-time');
+  const zeige = s => {
+    pille.style.setProperty('--s', s);
+    pille.dataset.state = s >= ENDE_AB ? 'ende' : s >= KNAPP_AB ? 'knapp' : 'normal';
+    zeit.textContent = '00:' + String(s).padStart(2, '0');
+  };
+  let s = 0, gehalten = 0;
+  zeige(s);
+  setInterval(() => {
+    if (s < LIMIT) { zeige(++s); return; }
+    if (++gehalten < HALTEN) return;
+    s = 0; gehalten = 0; zeige(s);
+  }, 1000);
+})();
+</script>
+</body></html>
