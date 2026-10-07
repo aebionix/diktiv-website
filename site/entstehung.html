@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wie Diktiv entstand · Diktiv</title>
+<meta name="description" content="Wie aus ein paar Stunden Bastelei eine Diktier-App für Windows wurde. Der Entwickler erzählt, welches Ärgernis zu welcher Funktion von Diktiv geführt hat.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><style>
+:root{--bg:#FAF7F2;--card:#FFFCF7;--ink:#1C1917;--muted:#57534E;--accent:#C2410C;--line:#E7E1D8}
+@media (prefers-color-scheme:dark){:root{--bg:#1C1917;--card:#24201D;--ink:#F5F1EA;--muted:#B8B0A6;--accent:#F97316;--line:#3A342F}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding-top:28px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:20px;color:var(--ink);text-decoration:none}
+.brand img{width:32px;height:32px}
+nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:15px}nav a:hover{color:var(--accent)}
+nav a[aria-current]{color:var(--ink)}
+main{padding-top:24px;padding-bottom:56px}
+a{color:var(--accent)}
+h1{font-size:clamp(32px,5vw,44px);line-height:1.15;letter-spacing:-.01em;margin:16px 0 12px}
+h2{font-size:22px;line-height:1.3;margin:40px 0 8px}
+p{margin:0 0 14px}
+.lead{font-size:20px;color:var(--muted);margin:0 0 8px}
+.funktion{color:var(--muted);font-size:15px;border-left:2px solid var(--line);padding-left:12px}
+blockquote{margin:22px 0;padding:0 0 0 18px;border-left:3px solid var(--accent);font-size:20px;line-height:1.45}
+blockquote p{margin:0}
+.schluss{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);font-size:22px;font-weight:600;line-height:1.4}
+footer{border-top:1px solid var(--line);padding-top:18px;padding-bottom:36px;color:var(--muted);font-size:14px}
+footer a{color:var(--muted)}
+@media (max-width:640px){nav a{margin-left:12px}.lead{font-size:18px}h2{margin-top:32px}blockquote,.schluss{font-size:19px}}
+@media (max-width:640px){header{flex-wrap:wrap;row-gap:6px}nav{display:flex;flex-wrap:wrap;gap:4px 14px}nav a{margin-left:0}}
+</style></head>
+<body><header><a class="brand" href="index.html"><img src="favicon.svg" alt="">Diktiv</a><nav><a href="funktionen.html">Funktionen</a><a href="entstehung.html" aria-current="page">Entstehung</a><a href="datenschutz.html">Datenschutz</a></nav></header>
+<main>
+<h1>Wie Diktiv entstand</h1>
+<p class="lead">Diktiv gibt es, weil mich im Alltag ein paar Dinge gestört haben. Hier erzähle ich, welches Ärgernis zu welcher Funktion geführt hat.</p>
+
+<h2 id="anfang">Einfach reinsprechen</h2>
+<p>Eigentlich wollte ich nur eine Diktiersoftware. Reinsprechen, und der Text steht da. Das Programm, das ich mir angeschaut hatte, kostete ein Monatsabo und konnte viel mehr, als ich brauchte. Das mag seinen Preis wert sein, nur wollte ich in dem Moment einfach diktieren.</p>
+<p>Ausserdem hat mich interessiert, wie man so etwas baut. Nach ein paar Stunden hatte ich eine erste Fassung, die aus meiner Sprache Text machte.</p>
+
+<h2 id="falscher-ort">Der Text landete am falschen Ort</h2>
+<p>Im Alltag zeigte sich schnell das erste Problem. Stand der Cursor beim Sprechen am falschen Ort, musste ich den Text von Hand herauskopieren und wieder einfügen. Dabei lief mir der Zwischenablageverlauf von Windows mit Diktaten voll, die ich gar nicht behalten wollte. Dort liegen Sachen, die ich immer wieder brauche.</p>
+<p class="funktion">Seither fügt ein kurzes Antippen der Aufnahmetaste den letzten Text dort ein, wo der Cursor gerade steht. Diktate bleiben aus dem Zwischenablageverlauf, und der Text geht in das Fenster, in dem die Aufnahme begann.</p>
+
+<h2 id="kollege">«Redest du mit mir?»</h2>
+<p>Im November 2025 kam mir die Idee, Diktiv auch anderen anzubieten. Bis es so weit war, dauerte es eine Weile, das sauber aufzuziehen war aufwendiger als gedacht.</p>
+<p>«Redest du mit mir?», fragte mich irgendwann ein Kollege, der mich die ganze Zeit reden hörte. «Nein», sagte ich, «ich spreche hier rein, und er schreibt mir den Text.» Er probierte es aus und fand es gut. Damit kamen die nächsten Probleme.</p>
+
+<h2 id="grafikkarte">Auf einem anderen Rechner zu langsam</h2>
+<p>Mein Rechner hat viele Prozessorkerne, da lief die Erkennung flott. Beim Kollegen dauerte die Transkription spürbar länger, weil nur der Prozessor rechnete. Dann habe ich herausgefunden, dass das auch über die Grafikkarte geht, und es eingebaut.</p>
+<p class="funktion">Diktiv nutzt heute Grafikkarten von NVIDIA, AMD und Intel. Ohne passende Grafikkarte rechnet der Prozessor.</p>
+
+<h2 id="warteschlange">Gleich weitersprechen</h2>
+<p>Danach kam die schwierigste Stelle. Oft hört man auf zu sprechen und merkt sofort, dass noch etwas fehlt. In einer frühen Fassung musste man warten, bis die Transkription fertig war, sonst stürzte das Programm ab.</p>
+<blockquote><p>Niemand weiss alles. Fehler passieren, zum Glück, denn daraus lernt man wirklich.</p></blockquote>
+<p>Heute stellt Diktiv jede Aufnahme in eine Warteschlange und fügt sie der Reihe nach ein. Man kann also mehrere Aufnahmen hintereinander machen, und die Anzeige zählt mit, welche gerade dran ist. Das hat mich fast den letzten Nerv gekostet. Es läuft seit Monaten tadellos.</p>
+
+<h2 id="schnellnotiz">Ideen festhalten</h2>
+<p>Mir kommen dauernd Ideen, und ich wollte sie festhalten, ohne zuerst ein Programm zu öffnen. So entstand die Schnellnotiz. Mit einer zweiten Taste, bei mir Strg und die Aufnahmetaste, landet das Diktat als Markdown-Datei in einem Ordner meiner Wahl. Irgendwann waren mir die Dateinamen zu nichtssagend. Seither kann ich auf Wunsch einen eigenen Titel angeben.</p>
+
+<h2 id="lexikon">Mein eigener Name</h2>
+<p>Ausgerechnet meinen Namen schrieb Whisper falsch, mal «Ebi», mal «Aebby», aber nie «Aebi». Deshalb gibt es das Lexikon. Dort trägt man Namen und Fachbegriffe ein, und Diktiv gibt sie Whisper als Hinweis mit.</p>
+
+<h2 id="lokal">Ohne Netz, in den Bergen und im Zug</h2>
+<p>Ich bin oft in den Bergen unterwegs und habe den Laptop manchmal dabei. Auch im Zug bricht die Verbindung immer wieder ab. Diktiv sollte deshalb ohne Internet funktionieren. Nur wer weitere Modelle dazuladen will, braucht kurz eine Verbindung.</p>
+<p>Das Wichtigste aber ist der Datenschutz. Ich entwickle seit Jahrzehnten Software, auch für Versicherungen und Grossbetriebe, und dort gelten oft strenge Vorgaben, wohin Daten gehen dürfen. Das prägt. Deshalb läuft die Spracherkennung auf deinem Rechner, und deine Aufnahmen bleiben dort. Bei allen meinen Produkten kommt zuerst eine Lösung aus der Schweiz zum Zug. Auch diese Website liegt bei einem Schweizer Anbieter.</p>
+
+<h2 id="zielgruppe">Für wen Diktiv gemacht ist</h2>
+<p>Für Leute, die oft und lange diktieren, so wie ich, den ganzen Tag. Dann zählt, ob man mehrere Aufnahmen hintereinander machen kann und ob ein kurzes Antippen den letzten Text erneut einfügt. Ich mag es, wenn man Dinge einstellen kann. Das sieht man an den vielen Einstellungen.</p>
+<p>Vor allem soll es sich installieren lassen und dann einfach funktionieren. Bei mir läuft es so, beim Kollegen auch. Alle Funktionen der Gratis-Version stehen auf der Seite <a href="funktionen.html">Funktionen</a>.</p>
+
+<p class="schluss">Sei ehrlich, bleib bodenständig, und gib lieber, als du nimmst.</p>
+</main>
+<footer>Diktiv · Michael Aebi, Niederurnen, Schweiz · <a href="mailto:support@diktiv.com">support@diktiv.com</a> · <a href="funktionen.html">Funktionen</a> · <a href="entstehung.html">Entstehung</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="index-en.html" lang="en">English</a></footer>
+</body></html>

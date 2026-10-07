@@ -96,6 +96,9 @@ kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;col
 .btns li.weit{grid-column:1/-1}
 .btns svg{flex:none;margin-top:4px;color:var(--muted)}
 .tile .btns p{font-size:15px}
+.tile p.weil{margin-top:12px;font-size:14px}
+.weil a{color:var(--muted);text-decoration-color:var(--line)}
+.weil a:hover{color:var(--accent)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .cd figcaption{margin-top:8px;color:var(--muted);font-size:15px}
 .stats{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
@@ -130,6 +133,7 @@ footer a{color:var(--muted)}
 .notes{grid-template-columns:minmax(0,1fr)}
 nav a{margin-left:12px}
 }
+@media (max-width:640px){header{flex-wrap:wrap;row-gap:6px}nav{display:flex;flex-wrap:wrap;gap:4px 14px}nav a{margin-left:0}}
 </style></head>
 <body><svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <symbol id="i-mic" viewBox="0 0 256 256"><path fill="currentColor" d="M128 176a48.05 48.05 0 0 0 48-48V64a48 48 0 0 0-96 0v64A48.05 48.05 0 0 0 128 176ZM96 64a32 32 0 0 1 64 0v64a32 32 0 0 1-64 0Zm40 143.6V240a8 8 0 0 1-16 0V207.6A80.11 80.11 0 0 1 48 128a8 8 0 0 1 16 0 64 64 0 0 0 128 0 8 8 0 0 1 16 0A80.11 80.11 0 0 1 136 207.6Z"/></symbol>
@@ -139,7 +143,7 @@ nav a{margin-left:12px}
 <symbol id="i-set" viewBox="0 0 256 256"><path fill="currentColor" d="M128 80a48 48 0 1 0 48 48A48.05 48.05 0 0 0 128 80Zm0 80a32 32 0 1 1 32-32A32 32 0 0 1 128 160Zm88-29.84q.06-2.16 0-4.32l14.92-18.64a8 8 0 0 0 1.48-7.06 107.21 107.21 0 0 0-10.88-26.25 8 8 0 0 0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186 40.54a8 8 0 0 0-3.94-6 107.71 107.71 0 0 0-26.25-10.87 8 8 0 0 0-7.06 1.49L130.16 40Q128 40 125.84 40L107.2 25.11a8 8 0 0 0-7.06-1.48A107.6 107.6 0 0 0 73.89 34.51a8 8 0 0 0-3.93 6L67.32 64.27q-1.56 1.49-3 3L40.54 70a8 8 0 0 0-6 3.94 107.71 107.71 0 0 0-10.87 26.25 8 8 0 0 0 1.49 7.06L40 125.84Q40 128 40 130.16L25.11 148.8a8 8 0 0 0-1.48 7.06 107.21 107.21 0 0 0 10.88 26.25 8 8 0 0 0 6 3.93l23.72 2.64q1.49 1.56 3 3L70 215.46a8 8 0 0 0 3.94 6 107.71 107.71 0 0 0 26.25 10.87 8 8 0 0 0 7.06-1.49L125.84 216q2.16.06 4.32 0l18.64 14.92a8 8 0 0 0 7.06 1.48 107.21 107.21 0 0 0 26.25-10.88 8 8 0 0 0 3.93-6l2.64-23.72q1.56-1.48 3-3L215.46 186a8 8 0 0 0 6-3.94 107.71 107.71 0 0 0 10.87-26.25 8 8 0 0 0-1.49-7.06Zm-16.1-6.5a73.93 73.93 0 0 1 0 8.68 8 8 0 0 0 1.74 5.48l14.19 17.73a91.57 91.57 0 0 1-6.23 15L187 173.11a8 8 0 0 0-5.1 2.64 74.11 74.11 0 0 1-6.14 6.14 8 8 0 0 0-2.64 5.1l-2.51 22.58a91.32 91.32 0 0 1-15 6.23l-17.74-14.19a8 8 0 0 0-5-1.75h-.48a73.93 73.93 0 0 1-8.68 0 8 8 0 0 0-5.48 1.74L100.45 215.8a91.57 91.57 0 0 1-15-6.23L82.89 187a8 8 0 0 0-2.64-5.1 74.11 74.11 0 0 1-6.14-6.14 8 8 0 0 0-5.1-2.64L46.43 170.6a91.32 91.32 0 0 1-6.23-15l14.19-17.74a8 8 0 0 0 1.74-5.48 73.93 73.93 0 0 1 0-8.68 8 8 0 0 0-1.74-5.48L40.2 100.45a91.57 91.57 0 0 1 6.23-15L69 82.89a8 8 0 0 0 5.1-2.64 74.11 74.11 0 0 1 6.14-6.14A8 8 0 0 0 82.89 69L85.4 46.43a91.32 91.32 0 0 1 15-6.23l17.74 14.19a8 8 0 0 0 5.48 1.74 73.93 73.93 0 0 1 8.68 0 8 8 0 0 0 5.48-1.74L155.55 40.2a91.57 91.57 0 0 1 15 6.23L173.11 69a8 8 0 0 0 2.64 5.1 74.11 74.11 0 0 1 6.14 6.14 8 8 0 0 0 5.1 2.64l22.58 2.51a91.32 91.32 0 0 1 6.23 15l-14.19 17.74A8 8 0 0 0 199.87 123.66Z"/></symbol>
 <symbol id="i-more" viewBox="0 0 256 256"><path fill="currentColor" d="M140 128a12 12 0 1 1-12-12A12 12 0 0 1 140 128Zm56-12a12 12 0 1 0 12 12A12 12 0 0 0 196 116ZM60 116a12 12 0 1 0 12 12A12 12 0 0 0 60 116Z"/></symbol>
 </svg>
-<header><a class="brand" href="index.html"><img src="favicon.svg" alt="">Diktiv</a><nav><a href="funktionen.html" aria-current="page">Funktionen</a><a href="datenschutz.html">Datenschutz</a><a href="features.html" lang="en">English</a></nav></header>
+<header><a class="brand" href="index.html"><img src="favicon.svg" alt="">Diktiv</a><nav><a href="funktionen.html" aria-current="page">Funktionen</a><a href="entstehung.html">Entstehung</a><a href="datenschutz.html">Datenschutz</a><a href="features.html" lang="en">English</a></nav></header>
 <main>
 <h1>Sprechen statt tippen.<br>In jedem Programm.</h1>
 <p class="lead">Diktiv ist eine Diktier-App für Windows. Alles auf dieser Seite gehört zur Gratis-Version.</p>
@@ -158,6 +162,7 @@ nav a{margin-left:12px}
 <article class="tile s2">
 <h3>Bleibt auf deinem Rechner</h3>
 <p>Whisper ist ins Programm eingebaut. Deine Aufnahmen gehen an keinen Server. Es gibt kein Konto und keine Telemetrie.</p>
+<p class="weil"><a href="entstehung.html#lokal">Entstanden, weil ich auch in den Bergen und im Zug ohne Netz diktieren will.</a></p>
 </article>
 
 <article class="tile s2">
@@ -177,6 +182,7 @@ nav a{margin-left:12px}
 <div>
 <h3>Landet dort, wo du angefangen hast</h3>
 <p>Der Text geht in das Fenster und das Eingabefeld, in dem du die Aufnahme gestartet hast. Klickst du währenddessen woanders hin, holt Diktiv dieses Fenster vor dem Einfügen zurück.</p>
+<p class="weil"><a href="entstehung.html#falscher-ort">Entstanden, weil ich Texte vom falschen Ort von Hand umkopieren musste.</a></p>
 </div>
 <ul class="keys">
 <li><div class="combo"><kbd>Aufnahmetaste</kbd> halten</div><p>Sprechen und loslassen. Der Text landet dort, wo du angefangen hast.</p></li>
@@ -216,6 +222,7 @@ nav a{margin-left:12px}
 <article class="tile s3">
 <h3>Deine Namen, richtig geschrieben</h3>
 <p>Fachbegriffe und Namen trägst du ins Lexikon ein, damit Whisper sie richtig schreibt.</p>
+<p class="weil"><a href="entstehung.html#lexikon">Entstanden, weil Whisper den Namen des Entwicklers falsch schrieb.</a></p>
 <div class="shot"><img src="bilder/lexikon.webp" width="1312" height="753" style="--w:860px" loading="lazy" decoding="async" alt="Lexikon in den Einstellungen mit Begriffen wie Niederurnen, Fabrikstrasse und Glarus Nord"></div>
 </article>
 
@@ -235,6 +242,7 @@ nav a{margin-left:12px}
 <article class="tile s2">
 <h3>Schnellnotiz</h3>
 <p>Mit einer zweiten Taste hältst du einen Gedanken fest. Diktiv speichert ihn als Markdown-Datei in einem Ordner deiner Wahl.</p>
+<p class="weil"><a href="entstehung.html#schnellnotiz">Entstanden, weil dem Entwickler dauernd Ideen kommen, die er festhalten will.</a></p>
 <p class="big" aria-hidden="true">.md</p>
 </article>
 
@@ -247,6 +255,7 @@ nav a{margin-left:12px}
 <article class="tile s2">
 <h3>Mehrere Diktate nacheinander</h3>
 <p>Diktierst du schon weiter, während Diktiv noch am vorherigen Text arbeitet, reiht es die Aufnahmen ein und fügt sie der Reihe nach ein. Die Anzeige zeigt, wo du stehst.</p>
+<p class="weil"><a href="entstehung.html#warteschlange">Entstanden, weil einem nach dem Loslassen oft noch etwas einfällt.</a></p>
 <p class="big" aria-hidden="true">1/2</p>
 </article>
 
@@ -259,6 +268,7 @@ nav a{margin-left:12px}
 <article class="tile s3">
 <h3>Schneller mit Grafikkarte</h3>
 <p>Eine Grafikkarte macht die Erkennung schneller. Nötig ist sie nicht.</p>
+<p class="weil"><a href="entstehung.html#grafikkarte">Entstanden, weil die Erkennung auf dem Rechner eines Kollegen zu langsam war.</a></p>
 <div class="chips"><span>NVIDIA</span><span>AMD</span><span>Intel</span></div>
 </article>
 
@@ -331,6 +341,7 @@ nav a{margin-left:12px}
 <article class="tile s2">
 <h3>Nicht im Zwischenablageverlauf</h3>
 <p>Diktierter Text erscheint standardmässig weder im Zwischenablageverlauf von Windows noch in der Cloud-Zwischenablage. So landet er nicht auf anderen Geräten. Du kannst das abschalten.</p>
+<p class="weil"><a href="entstehung.html#falscher-ort">Entstanden, weil Diktate den Zwischenablageverlauf von Windows vollgestopft haben.</a></p>
 <div class="combo keyrow"><kbd>Windows</kbd> + <kbd>V</kbd> zeigt keine Diktate</div>
 </article>
 
@@ -365,7 +376,7 @@ nav a{margin-left:12px}
 <div><h2>Wo es Diktiv gibt</h2><p>Diktiv erscheint demnächst im Microsoft Store.</p></div>
 </section>
 </main>
-<footer>Diktiv · Michael Aebi, Niederurnen, Schweiz · <a href="mailto:support@diktiv.com">support@diktiv.com</a> · <a href="funktionen.html">Funktionen</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="features.html" lang="en">English</a></footer>
+<footer>Diktiv · Michael Aebi, Niederurnen, Schweiz · <a href="mailto:support@diktiv.com">support@diktiv.com</a> · <a href="funktionen.html">Funktionen</a> · <a href="entstehung.html">Entstehung</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="features.html" lang="en">English</a></footer>
 <script>
 // Countdown der Gratis-Aufnahme wie in der App (FloatingWidget, #266): springt sekundenweise
 // von 00:00 bis 00:30, ab 20 s orange, ab 25 s rot. Ohne Bewegung bleibt das Standbild bei 00:22.
