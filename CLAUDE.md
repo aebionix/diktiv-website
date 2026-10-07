@@ -1,42 +1,22 @@
 # CLAUDE.md - diktiv-website
 
-## Diktiv Projekt-Struktur (WICHTIG!)
+Öffentliche Website der Windows-Diktier-App Diktiv: **https://diktiv.com**.
 
-**Diktiv besteht aus drei separaten Repositories/Verzeichnissen:**
+**Zuerst lesen:** `docs/ai-handover.md` (Stand, Entscheide, Veröffentlichen, Fallstricke).
 
-| Verzeichnis | Zweck | GitHub Repo | Zugriff |
-|-------------|-------|-------------|---------|
-| **X:\Wisper** | Source Code, Development | github.com/aebionix/Wisper | Privat |
-| **X:\diktiv-releases** | Releases, update-info.json | github.com/aebionix/diktiv-releases | Öffentlich |
-| **X:\diktiv-website** | Website (index.html) | github.com/aebionix/diktiv-website | Öffentlich |
+## Kurz
 
-## Dieses Repo (diktiv-website)
-
-**Zweck:** Öffentliche Website für Diktiv (diktiv.ch)
-
-**Inhalt:**
-- `index.html` - Hauptseite (Single-Page)
-- `favicon.svg` - Logo
-
-**Premium-Features aktualisieren:**
-
-Wenn neue Premium-Features hinzugefügt werden, die Premium Edition Liste in `index.html` aktualisieren:
-
-```html
-<!-- Zeile ~1168: Premium Edition Features -->
-<li>
-    <svg class="check" ...></svg>
-    <strong>Feature-Name</strong>
-</li>
-```
-
-**Deployment:**
-
-Website wird via GitHub Pages gehostet:
-- Push zu `main` Branch → Automatisches Deployment
-- URL: https://diktiv.ch (oder GitHub Pages URL)
+- Die Website ist der Ordner `site/`: statisches HTML, kein Build, kein Framework.
+- Hosting bei Hostpoint (Schweiz), Upload über den Hostpoint-Dateimanager nach `www/diktiv.com`
+  (Skill `my-hostpoint`). Ein Push auf `main` veröffentlicht nichts.
+- Veröffentlichen nur nach Michaels «veröffentlichen». Danach jede hochgeladene Datei mit `curl`
+  gegen die lokale Fassung vergleichen.
+- Beschrieben wird nur die **Gratis-Version**. Jede Aussage am Code der App prüfen.
+- Jede Seite gibt es auf Deutsch und Englisch. Änderungen immer an beiden Fassungen.
 
 ## Andere Repos
 
-- **Source Code:** `X:\Wisper`
-- **Releases:** `X:\diktiv-releases`
+| Repo | Zweck | Ort |
+|---|---|---|
+| diktiv-next | Quellcode der App | `C:/Users/mike/source/repos/diktiv-next` (Forgejo `xonex/Diktiv`) |
+| diktiv-website | diese Website | GitHub `aebionix/diktiv-website` |

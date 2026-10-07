@@ -73,8 +73,8 @@ Keine offenen GitHub-Aufgaben in `aebionix/diktiv-website`.
 
 ## 7. Fallstricke
 
-- **`index.html`, `favicon.svg` und `CLAUDE.md` im Repo-Wurzelordner sind veraltet** (alte
-  Single-Page aus der Voxly-Zeit, Angaben zu GitHub Pages und `X:\`-Pfaden). Live ist nur `site/`.
+- **Live ist nur `site/`.** Die alte Single-Page aus der Voxly-Zeit im Wurzelordner (`index.html`,
+  `favicon.svg`) wurde am 08.10.2026 gelöscht und steht nur noch in der Git-History.
 - Chrome-Upload liest nur aus erlaubten Ordnern. Dateien vorher in den Scratchpad der Session kopieren.
 - Aus einer Worktree-Session lässt ein Hook nicht in `.claude/HANDOFF.md` des Haupt-Repos schreiben.
 - Text nach aussen: keine Gedankenstriche, keine Doppelpunkte oder Semikolons im Fliesstext,
