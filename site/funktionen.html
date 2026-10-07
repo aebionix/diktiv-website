@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Funktionen · Diktiv</title>
+<meta name="description" content="Was Diktiv kann. Taste halten, sprechen, loslassen, der Text erscheint dort, wo dein Cursor steht. Spracherkennung auf deinem Rechner, ohne Konto und ohne Telemetrie.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><style>
+:root{--bg:#FAF7F2;--card:#FFFCF7;--ink:#1C1917;--muted:#57534E;--accent:#C2410C;--line:#E7E1D8;--screen:#1C1917;--field:#292420;--fieldink:#EDE7DE}
+@media (prefers-color-scheme:dark){:root{--bg:#1C1917;--card:#24201D;--ink:#F5F1EA;--muted:#B8B0A6;--accent:#F97316;--line:#3A342F;--screen:#141110;--field:#24201D}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif}
+header,main,footer{max-width:1120px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding-top:28px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:20px;color:var(--ink);text-decoration:none}
+.brand img{width:32px;height:32px}
+nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:15px}nav a:hover{color:var(--accent)}
+nav a[aria-current]{color:var(--ink)}
+main{padding-top:24px;padding-bottom:56px}
+a{color:var(--accent)}
+h1{font-size:clamp(32px,5vw,48px);line-height:1.12;letter-spacing:-.015em;margin:16px 0 12px}
+.lead{font-size:20px;color:var(--muted);margin:0 0 40px;max-width:40em}
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;grid-auto-flow:row dense}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 26px 24px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.tile h2,.tile h3{margin:0 0 6px;line-height:1.25;letter-spacing:-.005em}
+.tile h2{font-size:clamp(26px,3vw,34px)}
+.tile h3{font-size:19px}
+.tile p{margin:0;color:var(--muted);font-size:16px}
+.tile p+p{margin-top:8px}
+.s2{grid-column:span 2}.s3{grid-column:span 3}.s4{grid-column:span 4}.r2{grid-row:span 2}.wide{grid-column:1/-1}
+.hero p{font-size:18px;max-width:30em}
+.demo{flex:1;display:flex;padding-top:28px}
+.screen{flex:1;background:var(--screen);border-radius:14px;padding:28px 24px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px}
+.field{align-self:stretch;background:var(--field);color:var(--fieldink);border:1px solid #3A342F;border-radius:10px;padding:14px 16px;font:15px/1.6 "Cascadia Mono",Consolas,ui-monospace,monospace}
+.caret{display:inline-block;width:2px;height:1.15em;background:var(--accent);vertical-align:-.2em;margin-left:2px}
+@media (prefers-reduced-motion:no-preference){.caret{animation:blink 1.1s steps(1) infinite}}
+@keyframes blink{50%{opacity:0}}
+.tile .big{font-size:72px;font-weight:650;line-height:1;color:var(--accent);margin:auto 0 0;padding-top:22px;letter-spacing:-.03em}
+.ziel{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:20px 32px;align-items:start}
+.keys{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.keys li{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.combo{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:8px;font-size:14px;color:var(--muted)}
+kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:5px 8px}
+.tile .keys p{font-size:15px}
+.keyrow{margin:auto 0 0;padding-top:18px}
+.tile p.say{margin:auto 0 0;padding-top:18px;color:var(--accent);font-size:22px;font-weight:650}
+.cd{margin:18px 0 0}
+/* Pille in der Aufnahme wie in der App (diktiv-next FloatingWidget.axaml): 40 hoch, Radius 9, Rand innen 9,
+   Mikrofon 18 in 22 breitem Feld, Zeit Consolas 12, Kreuz 14 rot, Rahmen 2 px weiss 80 %, Füllung 0.18.
+   Breite 150 statt 120 in der App, damit «Transkribiere …» neben Mikrofon und Kreuz passt (Michael 07.10.2026). */
+.pille{--s:22;--c:#FFB74D;position:relative;display:flex;align-items:center;flex:none;width:150px;height:40px;padding:0 9px;border-radius:9px;background:#1E1E1E;box-shadow:inset 0 0 0 2px rgba(255,255,255,.8);overflow:hidden}
+.pille[data-state=normal]{--c:var(--rec,#66BB6A)}.pille[data-state=knapp]{--c:var(--warn,#FFB74D)}.pille[data-state=ende]{--c:var(--danger,#FF5050)}
+.p-fill{position:absolute;top:var(--bw,2px);bottom:var(--bw,2px);left:var(--bw,2px);width:calc((100% - 2 * var(--bw,2px)) * var(--s) / 30);background:var(--c);opacity:.18}
+.p-mic,.p-time,.p-x,.p-lang,.p-btn{position:relative;display:flex;align-items:center;flex:none}
+.p-mic{width:22px;justify-content:center;color:var(--mic,#66BB6A)}
+.p-time{margin:2px 4px 0 auto;color:var(--c);font:12px/1 Consolas,"Cascadia Mono",ui-monospace,monospace}
+.p-x{margin-left:4px;padding:0 4px}
+/* Weitere Zustände der Pille für die Regler (FloatingWidget.axaml, Teil C im HANDOFF) */
+.p-lang{gap:2px;margin-right:4px;color:var(--fg,#FFFFFF);font:600 10px/1 "Segoe UI",system-ui,sans-serif}
+.p-lang b{font-weight:600;color:var(--muted,#9A9A9A)}
+.p-btn{padding:0 4px;color:var(--muted,#9A9A9A)}
+.p-hist{margin-left:auto}
+/* Transkription wie die Aufnahme, nur blau: 2 s «Transkribiere …», danach läuft die Zeit ab 00:02.
+   Blaue Füllung nach Fortschritt statt nach den 30 Sekunden (Michael 07.10.2026). */
+.p-ttext,.p-tzeit{position:relative;align-items:center;flex:none;margin:2px 4px 0 auto;color:var(--trans,#64B5F6)}
+.p-ttext{font:600 11px/1 "Segoe UI",system-ui,sans-serif;white-space:nowrap}
+.p-tzeit{font:12px/1 Consolas,"Cascadia Mono",ui-monospace,monospace}
+.live{transition:width .13s ease-out}
+.live>.p-fill,.live>.p-time,.live>.p-x,.live>.p-lang,.live>.p-btn,.live>.p-ttext,.live>.p-tzeit{display:none}
+.live[data-view=hover]>.p-lang,.live[data-view=hover]>.p-btn,.live[data-view=aufnahme]>.p-time,.live[data-view=aufnahme]>.p-x{display:flex}
+.live[data-view=aufnahme]>.p-fill{display:block}
+.live[data-view=trans]>.p-fill{display:block;background:var(--trans,#64B5F6);width:calc((100% - 2 * var(--bw,2px)) * var(--fort,0));transition:width .2s}
+.live[data-view=trans]>.p-x,.live[data-view=trans][data-tphase=text]>.p-ttext,.live[data-view=trans][data-tphase=zeit]>.p-tzeit{display:flex}
+@media (prefers-reduced-motion:reduce){.live{transition:none}}
+.anzeige{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 32px}
+.stage{display:flex;align-items:center;justify-content:center;min-height:140px;margin-top:20px;border-radius:14px;background:var(--screen);overflow:hidden}
+.zustand{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:0;border:0}
+.zustand label{cursor:pointer}
+.zustand input{position:absolute;opacity:0}
+.zustand span{display:block;border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:14px;color:var(--muted)}
+.zustand input:checked+span{border-color:var(--accent);color:var(--ink)}
+.zustand input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.regler{display:grid;gap:14px;align-content:start;font-size:15px}
+.regler label{display:grid;gap:4px}
+.regler .zeile{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+.regler input[type=range]{flex:1;min-width:0;accent-color:var(--accent)}
+.regler input[type=color]{width:56px;height:30px;padding:0 2px;border:1px solid var(--line);border-radius:6px;background:var(--bg)}
+.regler .farben{display:flex;flex-wrap:wrap;gap:14px 24px}
+.regler .schalter{display:flex;align-items:flex-start;gap:10px}
+.regler .schalter input{margin-top:5px;accent-color:var(--accent)}
+.regler output{color:var(--muted)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.cd figcaption{margin-top:8px;color:var(--muted);font-size:15px}
+.stats{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+.stats li{display:flex;align-items:baseline;gap:12px;border-top:1px solid var(--line);padding-top:10px}
+.stats b{font-size:28px;font-weight:650;color:var(--accent);min-width:2.6em;line-height:1.1}
+.stats span{color:var(--muted);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:18px}
+.chips span{border:1px solid var(--line);border-radius:8px;padding:3px 10px;font-size:14px;color:var(--muted)}
+.shot{margin:22px -27px -25px 0;flex:1 0 300px;overflow:hidden;border-top-left-radius:12px;border:1px solid var(--line);border-right:0;border-bottom:0}
+.shot img{display:block;width:min(var(--w),170%);max-width:none;height:auto}
+.s2 .shot{flex-basis:210px}
+.notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.notes h2{font-size:17px;margin:0 0 4px}
+.notes p{margin:0;color:var(--muted);font-size:15px}
+.notes div{border-top:1px solid var(--line);padding-top:14px}
+footer{border-top:1px solid var(--line);padding-top:18px;padding-bottom:36px;color:var(--muted);font-size:14px}
+footer a{color:var(--muted)}
+@media (max-width:980px){
+.bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+.s2{grid-column:span 1}.s3,.s4{grid-column:span 2}.r2{grid-row:auto}
+.ziel,.anzeige{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+.bento{grid-template-columns:minmax(0,1fr)}
+.s2,.s3,.s4{grid-column:auto}
+.tile{padding:22px 20px 20px}
+.shot,.s2 .shot{margin:20px -21px -21px 0;flex-basis:230px}
+.tile .big{font-size:60px}
+.keys{grid-template-columns:minmax(0,1fr)}
+.screen{padding:20px 14px 22px}
+.field{font-size:14px}
+.notes{grid-template-columns:minmax(0,1fr)}
+nav a{margin-left:12px}
+}
+</style></head>
+<body><svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-mic" viewBox="0 0 256 256"><path fill="currentColor" d="M128 176a48.05 48.05 0 0 0 48-48V64a48 48 0 0 0-96 0v64A48.05 48.05 0 0 0 128 176ZM96 64a32 32 0 0 1 64 0v64a32 32 0 0 1-64 0Zm40 143.6V240a8 8 0 0 1-16 0V207.6A80.11 80.11 0 0 1 48 128a8 8 0 0 1 16 0 64 64 0 0 0 128 0 8 8 0 0 1 16 0A80.11 80.11 0 0 1 136 207.6Z"/></symbol>
+<symbol id="i-x" viewBox="0 0 256 256"><path d="M56 56 L200 200 M200 56 L56 200" stroke="#FF4444" stroke-width="24" stroke-linecap="round"/></symbol>
+<symbol id="i-globe" viewBox="0 0 256 256"><path fill="currentColor" d="M128 20A108 108 0 1 0 236 128 108.12 108.12 0 0 0 128 20Zm0 187a113.4 113.4 0 0 1-20.39-35h40.82a116.94 116.94 0 0 1-10 20.77A108.61 108.61 0 0 1 128 207Zm-26.49-59a135.42 135.42 0 0 1 0-40h53a135.42 135.42 0 0 1 0 40ZM44 128a83.49 83.49 0 0 1 2.43-20H77.25a160.63 160.63 0 0 0 0 40H46.43A83.49 83.49 0 0 1 44 128Zm84-79a113.4 113.4 0 0 1 20.39 35H107.59a116.94 116.94 0 0 1 10-20.77A108.61 108.61 0 0 1 128 49Zm50.73 59h30.82a83.52 83.52 0 0 1 0 40H178.75a160.63 160.63 0 0 0 0-40Zm20.77-24H173.71a140.82 140.82 0 0 0-15.5-34.36A84.51 84.51 0 0 1 199.52 84ZM97.79 49.64A140.82 140.82 0 0 0 82.29 84H56.48A84.51 84.51 0 0 1 97.79 49.64ZM56.48 172H82.29a140.82 140.82 0 0 0 15.5 34.36A84.51 84.51 0 0 1 56.48 172Zm101.73 34.36A140.82 140.82 0 0 0 173.71 172h25.81A84.51 84.51 0 0 1 158.21 206.36Z"/></symbol>
+<symbol id="i-hist" viewBox="0 0 256 256"><path fill="currentColor" d="M136 80v43.47l36.12 21.67a8 8 0 0 1-8.24 13.72l-40-24A8 8 0 0 1 120 128V80a8 8 0 0 1 16 0Zm-8-48A95.44 95.44 0 0 0 60.08 60.15C52.81 67.51 46.35 74.59 40 82V64a8 8 0 0 0-16 0v40a8 8 0 0 0 8 8H72a8 8 0 0 0 0-16H49c7.15-8.42 14.27-16.35 22.39-24.57a80 80 0 1 1 1.66 114.75 8 8 0 1 0-11 11.64A96 96 0 1 0 128 32Z"/></symbol>
+<symbol id="i-set" viewBox="0 0 256 256"><path fill="currentColor" d="M128 80a48 48 0 1 0 48 48A48.05 48.05 0 0 0 128 80Zm0 80a32 32 0 1 1 32-32A32 32 0 0 1 128 160Zm88-29.84q.06-2.16 0-4.32l14.92-18.64a8 8 0 0 0 1.48-7.06 107.21 107.21 0 0 0-10.88-26.25 8 8 0 0 0-6-3.93l-23.72-2.64q-1.48-1.56-3-3L186 40.54a8 8 0 0 0-3.94-6 107.71 107.71 0 0 0-26.25-10.87 8 8 0 0 0-7.06 1.49L130.16 40Q128 40 125.84 40L107.2 25.11a8 8 0 0 0-7.06-1.48A107.6 107.6 0 0 0 73.89 34.51a8 8 0 0 0-3.93 6L67.32 64.27q-1.56 1.49-3 3L40.54 70a8 8 0 0 0-6 3.94 107.71 107.71 0 0 0-10.87 26.25 8 8 0 0 0 1.49 7.06L40 125.84Q40 128 40 130.16L25.11 148.8a8 8 0 0 0-1.48 7.06 107.21 107.21 0 0 0 10.88 26.25 8 8 0 0 0 6 3.93l23.72 2.64q1.49 1.56 3 3L70 215.46a8 8 0 0 0 3.94 6 107.71 107.71 0 0 0 26.25 10.87 8 8 0 0 0 7.06-1.49L125.84 216q2.16.06 4.32 0l18.64 14.92a8 8 0 0 0 7.06 1.48 107.21 107.21 0 0 0 26.25-10.88 8 8 0 0 0 3.93-6l2.64-23.72q1.56-1.48 3-3L215.46 186a8 8 0 0 0 6-3.94 107.71 107.71 0 0 0 10.87-26.25 8 8 0 0 0-1.49-7.06Zm-16.1-6.5a73.93 73.93 0 0 1 0 8.68 8 8 0 0 0 1.74 5.48l14.19 17.73a91.57 91.57 0 0 1-6.23 15L187 173.11a8 8 0 0 0-5.1 2.64 74.11 74.11 0 0 1-6.14 6.14 8 8 0 0 0-2.64 5.1l-2.51 22.58a91.32 91.32 0 0 1-15 6.23l-17.74-14.19a8 8 0 0 0-5-1.75h-.48a73.93 73.93 0 0 1-8.68 0 8 8 0 0 0-5.48 1.74L100.45 215.8a91.57 91.57 0 0 1-15-6.23L82.89 187a8 8 0 0 0-2.64-5.1 74.11 74.11 0 0 1-6.14-6.14 8 8 0 0 0-5.1-2.64L46.43 170.6a91.32 91.32 0 0 1-6.23-15l14.19-17.74a8 8 0 0 0 1.74-5.48 73.93 73.93 0 0 1 0-8.68 8 8 0 0 0-1.74-5.48L40.2 100.45a91.57 91.57 0 0 1 6.23-15L69 82.89a8 8 0 0 0 5.1-2.64 74.11 74.11 0 0 1 6.14-6.14A8 8 0 0 0 82.89 69L85.4 46.43a91.32 91.32 0 0 1 15-6.23l17.74 14.19a8 8 0 0 0 5.48 1.74 73.93 73.93 0 0 1 8.68 0 8 8 0 0 0 5.48-1.74L155.55 40.2a91.57 91.57 0 0 1 15 6.23L173.11 69a8 8 0 0 0 2.64 5.1 74.11 74.11 0 0 1 6.14 6.14 8 8 0 0 0 5.1 2.64l22.58 2.51a91.32 91.32 0 0 1 6.23 15l-14.19 17.74A8 8 0 0 0 199.87 123.66Z"/></symbol>
+<symbol id="i-more" viewBox="0 0 256 256"><path fill="currentColor" d="M140 128a12 12 0 1 1-12-12A12 12 0 0 1 140 128Zm56-12a12 12 0 1 0 12 12A12 12 0 0 0 196 116ZM60 116a12 12 0 1 0 12 12A12 12 0 0 0 60 116Z"/></symbol>
+</svg>
+<header><a class="brand" href="index.html"><img src="favicon.svg" alt="">Diktiv</a><nav><a href="funktionen.html" aria-current="page">Funktionen</a><a href="datenschutz.html">Datenschutz</a></nav></header>
+<main>
+<h1>Sprechen statt tippen.<br>In jedem Programm.</h1>
+<p class="lead">Diktiv ist eine Diktier-App für Windows. Alles auf dieser Seite gehört zur Gratis-Version.</p>
+
+<div class="bento">
+
+<article class="tile s4 r2 hero">
+<h2>Taste halten, sprechen, loslassen.</h2>
+<p>Du hältst eine Taste gedrückt, sprichst und lässt los. Kurz darauf steht der Text dort, wo dein Cursor steht, im Mailentwurf, im Dokument oder im Chatfenster.</p>
+<div class="demo"><div class="screen">
+<div class="field">Guten Tag, Frau Meier, vielen Dank für Ihre Offerte. Wir bestätigen den Termin vom Dienstag, 14 Uhr und freuen uns auf die Zusammenarbeit.<span class="caret" aria-hidden="true"></span></div>
+<div class="pille" data-state="knapp" role="img" aria-label="Die Anzeige von Diktiv während einer Aufnahme, mit Mikrofon, laufender Zeit und Kreuz zum Abbrechen"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-time">00:22</span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div>
+</div></div>
+</article>
+
+<article class="tile s2">
+<h3>Bleibt auf deinem Rechner</h3>
+<p>Whisper ist ins Programm eingebaut. Deine Aufnahmen gehen an keinen Server. Es gibt kein Konto und keine Telemetrie.</p>
+</article>
+
+<article class="tile s2">
+<h3>Gratis</h3>
+<p>Die Gratis-Version kostet nichts. Diese Grenzen gelten.</p>
+<figure class="cd">
+<div class="pille" data-state="knapp" aria-hidden="true"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-time">00:22</span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div>
+<figcaption>Höchstens 30 Sekunden pro Aufnahme. Die Anzeige zählt mit.</figcaption>
+</figure>
+<ul class="stats">
+<li><b>60</b><span>Aufnahmen pro Stunde</span></li>
+<li><b>10</b><span>Einträge im Verlauf</span></li>
+</ul>
+</article>
+
+<article class="tile wide ziel">
+<div>
+<h3>Landet dort, wo du angefangen hast</h3>
+<p>Der Text geht in das Fenster und das Eingabefeld, in dem du die Aufnahme gestartet hast. Klickst du währenddessen woanders hin, holt Diktiv dieses Fenster vor dem Einfügen zurück.</p>
+</div>
+<ul class="keys">
+<li><div class="combo"><kbd>Aufnahmetaste</kbd> halten</div><p>Sprechen und loslassen. Der Text landet dort, wo du angefangen hast.</p></li>
+<li><div class="combo"><kbd>Umschalt</kbd> + <kbd>§</kbd> halten</div><p>Der Text geht ausnahmsweise in das Fenster, das beim Loslassen vorne ist. Diese zweite Taste ist frei einstellbar.</p></li>
+<li><div class="combo"><kbd>Aufnahmetaste</kbd> kurz antippen</div><p>Fügt den zuletzt diktierten Text nochmals ein, im gerade aktiven Fenster.</p></li>
+<li><div class="combo"><kbd>Aufnahmetaste</kbd> doppelt antippen</div><p>Öffnet den Verlauf mit Suche.</p></li>
+</ul>
+</article>
+
+<article class="tile s2">
+<h3>Sprechen, ohne die Taste zu halten</h3>
+<p>Im Tipp-Modus tippst du die Aufnahmetaste einmal an und sprichst. Nochmals antippen beendet die Aufnahme. Hältst du die Taste 2 Sekunden oder länger, endet sie beim Loslassen.</p>
+<p>Den Tipp-Modus wählst du in den Einstellungen.</p>
+<div class="combo keyrow"><kbd>Aufnahmetaste</kbd> antippen · sprechen · <kbd>Aufnahmetaste</kbd> antippen</div>
+</article>
+
+<article class="tile s2">
+<h3>Abbrechen mit Esc</h3>
+<p>Mit Esc brichst du eine Aufnahme oder die Verarbeitung ab. Ob Diktiv dann nachfragt, das Diktat verwirft oder trotzdem verarbeitet, legst du selbst fest.</p>
+<div class="combo keyrow"><kbd>Esc</kbd> drücken</div>
+</article>
+
+<article class="tile s2">
+<h3>Zuhören pausieren</h3>
+<p>Brauchst du die Aufnahmetaste kurz zum Tippen, klickst du auf das Mikrofon der Anzeige. Diktiv gibt die Taste frei, die Anzeige zählt die Sekunden herunter.</p>
+<p>Standardmässig hört Diktiv nach 5 Sekunden wieder zu. Du stellst bis 10 Sekunden ein oder schaltest das Zurückkehren ab.</p>
+<p class="big" aria-hidden="true">5.0s</p>
+</article>
+
+<article class="tile s3">
+<h3>Auch im Terminal</h3>
+<p>Terminals wie Windows Terminal oder PuTTY erkennt Diktiv und fügt dort so ein, wie sie es erwarten. Das klappt auch in Electron-Anwendungen.</p>
+<p>Vier Einfügemethoden stehen zur Wahl, für jede Anwendung einzeln. Nimmt ein Programm die Zwischenablage nicht an, tippt Diktiv den Text Zeichen für Zeichen.</p>
+<div class="shot"><img src="bilder/zwischenablage.webp" width="844" height="753" style="--w:640px" loading="lazy" decoding="async" alt="Einstellungen von Diktiv, Bereich Einfügen, mit der Einfügemethode pro Programm"></div>
+</article>
+
+<article class="tile s3">
+<h3>Deine Namen, richtig geschrieben</h3>
+<p>Fachbegriffe und Namen trägst du ins Lexikon ein, damit Whisper sie richtig schreibt.</p>
+<div class="shot"><img src="bilder/lexikon.webp" width="1312" height="753" style="--w:860px" loading="lazy" decoding="async" alt="Lexikon in den Einstellungen mit Begriffen wie Niederurnen, Fabrikstrasse und Glarus Nord"></div>
+</article>
+
+<article class="tile s2">
+<h3>Schweizer Rechtschreibung</h3>
+<p>Für Schweizer Texte schreibt Diktiv ss statt ß.</p>
+<p class="big" aria-hidden="true">ss</p>
+</article>
+
+<article class="tile s4">
+<h3>Verlauf mit Suche</h3>
+<p>Frühere Diktate findest du im Verlauf, ein Klick fügt den Text erneut ein. Vier Ansichten stehen zur Wahl, als Kacheln, als Liste, geteilt oder als Tabelle.</p>
+<p>Einträge kannst du bearbeiten und anheften. Als CSV-Datei exportierst du den Verlauf oder liest ihn wieder ein. Die Gratis-Version behält die letzten 10 Einträge, angeheftete zählen nicht mit.</p>
+<div class="shot"><img src="bilder/verlauf.webp" width="560" height="360" style="--w:560px" loading="lazy" decoding="async" alt="Verlauf von Diktiv als Liste mit Zeit, Programm und Text"></div>
+</article>
+
+<article class="tile s2">
+<h3>Schnellnotiz</h3>
+<p>Mit einer zweiten Taste hältst du einen Gedanken fest. Diktiv speichert ihn als Markdown-Datei in einem Ordner deiner Wahl.</p>
+<p class="big" aria-hidden="true">.md</p>
+</article>
+
+<article class="tile s2">
+<h3>Nichts geht verloren</h3>
+<p>Ist das Fenster beim Einfügen nicht mehr da, landet der Text in der Zwischenablage. Die Anzeige meldet dann «In Zwischenablage» und du fügst ihn selbst ein, wo du willst.</p>
+<div class="combo keyrow"><kbd>Strg</kbd> + <kbd>V</kbd></div>
+</article>
+
+<article class="tile s2">
+<h3>Mehrere Diktate nacheinander</h3>
+<p>Diktierst du schon weiter, während Diktiv noch am vorherigen Text arbeitet, reiht es die Aufnahmen ein und fügt sie der Reihe nach ein. Die Anzeige zeigt, wo du stehst.</p>
+<p class="big" aria-hidden="true">1/2</p>
+</article>
+
+<article class="tile s3">
+<h3>Deutsches Modell eingebaut</h3>
+<p>Eingebaut ist eine auf Deutsch trainierte Fassung von Whisper large-v3-turbo. Sechs weitere Modelle lädst du bei Bedarf dazu.</p>
+<div class="shot"><img src="bilder/modellwahl.webp" width="684" height="753" style="--w:600px" loading="lazy" decoding="async" alt="Auswahl der Spracherkennungsmodelle mit Grösse und kurzer Beschreibung"></div>
+</article>
+
+<article class="tile s3">
+<h3>Schneller mit Grafikkarte</h3>
+<p>Eine Grafikkarte macht die Erkennung schneller. Nötig ist sie nicht.</p>
+<div class="chips"><span>NVIDIA</span><span>AMD</span><span>Intel</span></div>
+</article>
+
+<article class="tile s2">
+<h3>Diktieren in 100 Sprachen</h3>
+<p>Diktiert wird in 100 Sprachen, auf Wunsch erkennt Whisper die Sprache selbst. Hast du mehrere Sprachen aktiv, schaltest du an der Anzeige um, ein Globus mit dem Kürzel zeigt die gewählte. Das hat mit der Sprache der Oberfläche nichts zu tun.</p>
+<p class="big" aria-hidden="true">100</p>
+</article>
+
+<article class="tile s2">
+<h3>Oberfläche auf Deutsch und Englisch</h3>
+<p>Menüs und Einstellungen gibt es auf Deutsch und Englisch.</p>
+<p class="big" aria-hidden="true">DE EN</p>
+</article>
+
+<article class="tile s2">
+<h3>Dein Mikrofon, auch für leise Stimmen</h3>
+<p>Du nimmst das Standard-Mikrofon von Windows oder wählst ein bestimmtes Gerät. Die Empfindlichkeit stellst du auf Normal, Hoch oder Sehr hoch, damit auch leise Stimmen ankommen.</p>
+<div class="shot"><img src="bilder/empfindlichkeit.webp" width="965" height="540" style="--w:400px" loading="lazy" decoding="async" alt="Einstellungen zum Mikrofon mit Geräteauswahl und Empfindlichkeit Normal"></div>
+</article>
+
+<article class="tile wide anzeige">
+<div>
+<h3>Die Anzeige am Bildschirmrand</h3>
+<p>Eine kleine Anzeige zeigt, ob Diktiv zuhört. Sie nimmt dem Programm, in dem du schreibst, den Fokus nicht weg. Probier die Regler aus. Sie heissen gleich wie in der App, im Reiter «Anzeige» der Einstellungen.</p>
+<p>Du verschiebst sie per Ziehen und änderst die Breite am rechten Rand. Im Ruhezustand klappt sie auf 40 × 40 Pixel ein, nur mit dem Mikrofon, und geht auf, sobald du mit der Maus darüberfährst. Beim Diktieren springt sie unter den Mauszeiger und wechselst du den Bildschirm, wandert sie mit. Einklappen, Springen und Mitwandern schaltest du einzeln ab. Auf Wunsch verschwindet sie bei Vollbild und erscheint erst beim Diktieren wieder.</p>
+<div class="stage"><div class="pille live" data-view="ruhe" data-state="knapp" aria-hidden="true"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-lang"><svg width="16" height="16"><use href="#i-globe"/></svg><b>DE</b></span><span class="p-ttext">Transkribiere …</span><span class="p-time">00:22</span><span class="p-tzeit">00:02</span><span class="p-btn p-hist"><svg width="14" height="14"><use href="#i-hist"/></svg></span><span class="p-btn"><svg width="14" height="14"><use href="#i-set"/></svg></span><span class="p-btn"><svg width="16" height="16"><use href="#i-more"/></svg></span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div></div>
+<fieldset class="zustand"><legend class="sr">Zustand der Anzeige</legend>
+<label><input type="radio" name="zustand" value="ruhe" checked><span>Ruhe</span></label>
+<label><input type="radio" name="zustand" value="hover"><span>Darüberfahren</span></label>
+<label><input type="radio" name="zustand" value="aufnahme"><span>Aufnahme</span></label>
+<label><input type="radio" name="zustand" value="trans"><span>Transkription</span></label>
+</fieldset>
+</div>
+<form class="regler" aria-label="Einstellungen der Anzeige">
+<label>Deckkraft <span class="zeile"><input type="range" name="deckkraft" min="30" max="100" step="5" value="100"><output>100 %</output></span></label>
+<label>Breite <span class="zeile">schmal<input type="range" name="breite" min="200" max="1000" step="10" value="320">breit</span></label>
+<div class="farben">
+<label>Hintergrund <input type="color" name="hintergrund" value="#1e1e1e"></label>
+<label>Vordergrund <input type="color" name="vordergrund" value="#ffffff"></label>
+<label>Rahmenfarbe <input type="color" name="rahmenfarbe" value="#ffffff"></label>
+</div>
+<label class="schalter"><input type="checkbox" name="rahmen" checked>Rahmen immer anzeigen, auch im Ruhezustand</label>
+<label>Dicke <span class="zeile">fein<input type="range" name="dicke" min="1" max="4" step="1" value="2">kräftig</span></label>
+<label class="schalter"><input type="checkbox" name="einklappen" checked>Pille im Ruhezustand einklappen (klappt beim Darüberfahren auf)</label>
+</form>
+</article>
+
+<article class="tile s2">
+<h3>Töne als Rückmeldung</h3>
+<p>Kurze Töne melden Start, Stopp, Erfolg und Fehler. Du hörst also, was passiert, ohne hinzuschauen. Jeden der sieben Töne schaltest du einzeln ein oder aus, die Lautstärke stellst du selbst ein.</p>
+<p class="big" aria-hidden="true">7</p>
+</article>
+
+<article class="tile s2">
+<h3>Nicht im Zwischenablageverlauf</h3>
+<p>Diktierter Text erscheint standardmässig weder im Zwischenablageverlauf von Windows noch in der Cloud-Zwischenablage. So landet er nicht auf anderen Geräten. Du kannst das abschalten.</p>
+<div class="combo keyrow"><kbd>Windows</kbd> + <kbd>V</kbd> zeigt keine Diktate</div>
+</article>
+
+<article class="tile s2">
+<h3>Du bestimmst, wie lange der Verlauf bleibt</h3>
+<p>Beim ersten Start wählst du, ob der Verlauf nur bis zum Beenden von Diktiv bleibt, 30 Tage oder 90 Tage. Er liegt lokal auf deinem Rechner und wandert nicht mit dem Roaming-Profil auf andere Rechner.</p>
+<div class="chips"><span>bis zum Beenden</span><span>30 Tage</span><span>90 Tage</span></div>
+</article>
+
+<article class="tile s2">
+<h3>Nochmals anhören</h3>
+<p>Auf Wunsch bewahrt Diktiv die Original-Aufnahmen auf. Dann hörst du jedes Diktat im Verlauf nochmals an, etwa wenn ein Wort falsch erkannt wurde. Die Aufnahmen bleiben lokal auf deinem Rechner. Standardmässig ist das ausgeschaltet.</p>
+</article>
+
+<article class="tile s2">
+<h3>Textbausteine per Signalwort</h3>
+<p>Häufige Texte hinterlegst du einmal als Baustein. Sagst du beim Diktieren das Signalwort und den Namen, setzt Diktiv den Baustein ein. Das klappt in jedem Diktat.</p>
+<p class="say">«Snippet Grussformel»</p>
+</article>
+
+<article class="tile s2">
+<h3>Fehler ohne Dialogfenster</h3>
+<p>Geht etwas schief, steht die Meldung direkt in der Anzeige und kein Fenster schiebt sich vor deine Arbeit. Mit einem Klick auf «Wiederholen» versuchst du es nochmals.</p>
+<div class="combo keyrow"><kbd>Wiederholen</kbd></div>
+</article>
+
+</div>
+
+<section class="notes">
+<div><h2>Bitte beachten</h2><p>Spracherkennung macht Fehler, Whisper auch. Lies den Text durch, bevor du ihn verwendest. Diktiv ist kein Medizinprodukt.</p></div>
+<div><h2>Was du brauchst</h2><p>Windows 10 ab Version 1809 oder Windows 11 und ein Mikrofon. Eine Grafikkarte ist nicht nötig.</p></div>
+<div><h2>Wo es Diktiv gibt</h2><p>Diktiv erscheint demnächst im Microsoft Store.</p></div>
+</section>
+</main>
+<footer>Diktiv · Michael Aebi, Niederurnen, Schweiz · <a href="mailto:support@diktiv.com">support@diktiv.com</a> · <a href="funktionen.html">Funktionen</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="privacy.html">Privacy</a></footer>
+<script>
+// Countdown der Gratis-Aufnahme wie in der App (FloatingWidget, #266): springt sekundenweise
+// von 00:00 bis 00:30, ab 20 s orange, ab 25 s rot. Ohne Bewegung bleibt das Standbild bei 00:22.
+(() => {
+  const LIMIT = 30, KNAPP_AB = 20, ENDE_AB = 25, HALTEN = 2;
+  const pillen = document.querySelectorAll('.pille');
+  if (!pillen.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const zeige = s => pillen.forEach(pille => {
+    pille.style.setProperty('--s', s);
+    pille.dataset.state = s >= ENDE_AB ? 'ende' : s >= KNAPP_AB ? 'knapp' : 'normal';
+    pille.querySelector('.p-time').textContent = '00:' + String(s).padStart(2, '0');
+  });
+  let s = 0, gehalten = 0;
+  zeige(s);
+  setInterval(() => {
+    if (s < LIMIT) { zeige(++s); return; }
+    if (++gehalten < HALTEN) return;
+    s = 0; gehalten = 0; zeige(s);
+  }, 1000);
+})();
+
+// Interaktive Pille mit den Gratis-Reglern aus dem Reiter «Anzeige» (WidgetColorHelper.cs, FloatingWidget.axaml.cs).
+(() => {
+  const pille = document.querySelector('.pille.live'), regler = document.querySelector('.regler');
+  if (!pille || !regler) return;
+  const feld = pille.parentElement, zustand = document.querySelectorAll('[name=zustand]');
+  const BREITE = { ruhe: 40, aufnahme: 150, trans: 150 };
+  const HELL = { rec: '#2E7D32', trans: '#1565C0', warn: '#E65100', danger: '#D32F2F' };
+  const DUNKEL = { rec: '#66BB6A', trans: '#64B5F6', warn: '#FFB74D', danger: '#FF5050' };
+  const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
+  const luminanz = farbe => {
+    const [r, g, b] = farbe.map(c => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  const mische = (a, b, t) => `rgb(${a.map((x, i) => Math.round(x * (1 - t) + b[i] * t))})`;
+  let mausDrauf = false, zuklappen, vorher;
+  // Transkription: 2 s Text, dann Zeit ab 00:02. Für die Vorführung nach 8 s wieder von vorn.
+  const TEXT_BIS = 2, NEU_AB = 8, ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let tSek = ruhig ? 4 : 0;
+  const transZeit = () => {
+    pille.dataset.tphase = tSek < TEXT_BIS ? 'text' : 'zeit';
+    pille.style.setProperty('--fort', tSek / NEU_AB);
+    pille.querySelector('.p-tzeit').textContent = '00:' + String(tSek).padStart(2, '0');
+  };
+  if (!ruhig) setInterval(() => {
+    if (pille.dataset.view !== 'trans') return;
+    tSek = tSek >= NEU_AB ? 0 : tSek + 1;
+    transZeit();
+  }, 1000);
+
+  const zeige = () => {
+    const w = Object.fromEntries(new FormData(regler));
+    const modus = [...zustand].find(z => z.checked).value;
+    const einklappen = 'einklappen' in w, rahmen = 'rahmen' in w;
+    const ansicht = modus === 'ruhe' && (mausDrauf || !einklappen) ? 'hover' : modus;
+    const hg = rgb(w.hintergrund), vg = rgb(w.vordergrund), rf = rgb(w.rahmenfarbe), dicke = +w.dicke;
+    const status = luminanz(hg) > 0.5 ? HELL : DUNKEL;
+    for (const [name, farbe] of Object.entries(status)) pille.style.setProperty('--' + name, farbe);
+    pille.style.setProperty('--fg', w.vordergrund);
+    pille.style.setProperty('--muted', mische(vg, hg, 0.45));
+    pille.style.setProperty('--mic', ansicht === 'aufnahme' ? status.rec : ansicht === 'trans' ? status.trans : w.vordergrund);
+    pille.style.setProperty('--bw', dicke + 'px');
+    pille.style.background = `rgba(${hg},${w.deckkraft / 100})`;
+    // Rahmen in Aufnahme und Transkription immer mit 80 %, sonst nur wenn «immer anzeigen» an ist, mit 33 %
+    const alpha = ansicht === 'aufnahme' || ansicht === 'trans' ? 0.8 : rahmen ? 0x55 / 255 : 0;
+    pille.style.boxShadow = alpha ? `inset 0 0 0 ${dicke}px rgba(${rf},${alpha})` : 'none';
+    const breite = BREITE[ansicht] ?? +w.breite;
+    pille.style.width = breite + 'px';
+    pille.style.transform = `scale(${Math.min(1, (feld.clientWidth - 24) / breite)})`;
+    if (ansicht === 'trans' && vorher !== 'trans' && !ruhig) tSek = 0;
+    vorher = ansicht;
+    transZeit();
+    pille.dataset.view = ansicht;
+    regler.querySelector('output').value = w.deckkraft + ' %';
+  };
+
+  regler.addEventListener('input', zeige);
+  zustand.forEach(z => z.addEventListener('change', zeige));
+  pille.addEventListener('mouseenter', () => { clearTimeout(zuklappen); mausDrauf = true; zeige(); });
+  pille.addEventListener('mouseleave', () => { zuklappen = setTimeout(() => { mausDrauf = false; zeige(); }, 350); });
+  addEventListener('resize', zeige);
+  zeige();
+})();
+</script>
+</body></html>
