@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="de-CH"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Datenschutzerklärung · Diktiv</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><style>
+:root{--bg:#FAF7F2;--card:#FFFCF7;--ink:#1C1917;--muted:#57534E;--accent:#C2410C;--line:#E7E1D8}
+@media (prefers-color-scheme:dark){:root{--bg:#1C1917;--card:#24201D;--ink:#F5F1EA;--muted:#B8B0A6;--accent:#F97316;--line:#3A342F}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding-top:28px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:20px;color:var(--ink);text-decoration:none}
+.brand img{width:32px;height:32px}
+nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:15px}nav a:hover{color:var(--accent)}
+main{padding-top:24px;padding-bottom:48px}
+h1{font-size:34px;line-height:1.2;margin:16px 0 8px}h2{font-size:22px;margin:36px 0 8px}h3{font-size:18px;margin:24px 0 6px}
+a{color:var(--accent)}code{font-size:.92em}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:12px 0;display:block;overflow-x:auto}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.lead{font-size:20px;color:var(--muted);margin:0 0 28px}
+footer{border-top:1px solid var(--line);padding-top:18px;padding-bottom:36px;color:var(--muted);font-size:14px}
+footer a{color:var(--muted)}
+</style></head>
+<body><header><a class="brand" href="index.html"><img src="favicon.svg" alt="">Diktiv</a><nav><a href="index.html">Start</a><a href="privacy.html" lang="en">English</a></nav></header>
+<main><h1>Datenschutzerklärung für Diktiv</h1>
+<p>Stand 29. September 2026</p>
+<h2>Kurzfassung</h2>
+<p>Diktiv wandelt deine Sprache auf deinem Gerät in Text um. Aufnahmen und Diktate verlassen
+dein Gerät nicht. Es gibt kein Tracking, keine Nutzungsstatistik und keine Absturzberichte,
+die an mich gesendet werden. Daten gehen nur dann an andere, wenn du selbst eine Funktion
+dafür einschaltest oder einrichtest. Welche das sind, steht in Abschnitt 3.</p>
+<h2>1. Verantwortlich</h2>
+<p>Michael Aebi, Privatperson
+c/o Aebi, Fabrikstrasse 4, 8867 Niederurnen, Schweiz
+E-Mail für Datenschutzanliegen: privacy@diktiv.com</p>
+<h2>2. Was auf deinem Gerät bleibt</h2>
+<p>Die Spracherkennung läuft vollständig auf deinem Gerät. Das Spracherkennungsmodell ist in
+Diktiv enthalten. Es gibt keine Cloud-Variante der Erkennung.</p>
+<p>Diese Daten legt Diktiv in deinem Windows-Benutzerprofil ab und überträgt sie nicht:</p>
+<table>
+<thead>
+<tr>
+<th>Daten</th>
+<th>Ort</th>
+<th>Hinweis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Einstellungen</td>
+<td><code>%APPDATA%\Diktiv</code></td>
+<td>Ein eingetragener Zugangsschlüssel für die KI-Nachbearbeitung wird mit Windows verschlüsselt gespeichert.</td>
+</tr>
+<tr>
+<td>Nutzungszähler</td>
+<td><code>%APPDATA%\Diktiv</code></td>
+<td>Zählt Aufnahmen für die Grenzen der Gratis-Version.</td>
+</tr>
+<tr>
+<td>Debug-Protokoll</td>
+<td><code>%APPDATA%\Diktiv</code></td>
+<td>Technische Angaben zur Fehlersuche, ohne den diktierten Text.</td>
+</tr>
+<tr>
+<td>Geräte-Kennung</td>
+<td><code>%APPDATA%\Diktiv</code></td>
+<td>Nur für die Lizenzprüfung, siehe Abschnitt 3.4.</td>
+</tr>
+<tr>
+<td>Verlauf</td>
+<td><code>%LOCALAPPDATA%\Diktiv</code></td>
+<td>Deine Texte und die Namen der Fenster, in die du diktiert hast. Beim ersten Start wählst du, ob er nur bis zum Beenden, 30 Tage oder 90 Tage bleibt.</td>
+</tr>
+<tr>
+<td>Original-Aufnahmen</td>
+<td><code>%LOCALAPPDATA%\Diktiv</code></td>
+<td>Nur wenn du das Aufbewahren in den Einstellungen einschaltest. Standardmässig aus.</td>
+</tr>
+</tbody>
+</table>
+<p>Liegt dein Windows-Profil auf einem Server (Roaming-Profil, etwa in einem Unternehmen),
+kann Windows den Ordner <code>%APPDATA%\Diktiv</code> auf andere Geräte kopieren. Verlauf und Aufnahmen
+liegen deshalb bewusst in <code>%LOCALAPPDATA%</code>, das nicht mitwandert.</p>
+<p>Zum Einfügen legt Diktiv den Text kurz in die Zwischenablage von Windows. Standardmässig
+markiert Diktiv ihn so, dass er nicht im Zwischenablage-Verlauf und nicht in der
+Cloud-Zwischenablage von Windows landet, und entfernt ihn danach wieder. Schaltest du das Einfügen über die Zwischenablage aus, tippt Diktiv den Text und
+benutzt die Zwischenablage nicht.</p>
+<h2>3. Wann Daten dein Gerät verlassen</h2>
+<h3>3.1 Microsoft Store</h3>
+<p>Beziehst du Diktiv über den Microsoft Store, laufen Download und Updates über Microsoft. Was
+Microsoft dabei verarbeitet, regelt die Datenschutzerklärung von Microsoft.</p>
+<h3>3.2 Anderes Spracherkennungsmodell</h3>
+<p>Wählst du in den Einstellungen ein anderes Modell als das mitgelieferte, lädt Diktiv es von
+Hugging Face (USA) herunter. Dabei wird nur die Modelldatei abgerufen. Aufnahmen oder Texte
+werden nicht übertragen. Wie bei jeder Verbindung sieht Hugging Face deine IP-Adresse.</p>
+<h3>3.3 KI-Nachbearbeitung, nur wenn du sie einrichtest</h3>
+<p>Diktiv kann den erkannten Text von einem Sprachmodell überarbeiten lassen. Dafür trägst du
+selbst die Adresse und den Zugangsschlüssel eines Anbieters deiner Wahl ein. Ohne diesen
+Eintrag findet keine Übertragung statt. Mit Eintrag schickt Diktiv den erkannten Text, nie
+die Aufnahme, an genau diesen Anbieter, sobald du eine Funktion nutzt, die ihn braucht. Das
+gilt auch für das Erkennen von Terminen aus einem Diktat.</p>
+<p>Mit dem Anbieter schliesst du einen eigenen Vertrag. Was er mit dem Text tut, regelt seine
+Datenschutzerklärung. Betreibst du das Sprachmodell selbst auf deinem Gerät oder in deinem
+Netz, verlässt der Text dein Gerät beziehungsweise dein Netz nicht.</p>
+<p>Diktate enthalten oft vertrauliche Angaben. Prüfe, ob du sie einem externen Anbieter geben
+darfst, bevor du die Funktion einschaltest.</p>
+<h3>3.4 Lizenzprüfung, nur mit Lizenzschlüssel</h3>
+<p>Die Gratis-Version braucht keinen Lizenzschlüssel und prüft nichts beim Lizenzdienst. Trägst
+du einen Lizenzschlüssel ein, sendet Diktiv beim Aktivieren, beim Deaktivieren und bei
+jedem Start den Schlüssel und eine Geräte-Kennung an <code>license.diktiv.com</code>. Damit wird
+geprüft, dass ein Schlüssel auf höchstens drei Geräten gleichzeitig läuft.</p>
+<p>Die Geräte-Kennung ist ein gekürzter SHA-256-Hashwert aus Kennungen von Prozessor und
+Hauptplatine. Aus ihm lassen sich die ursprünglichen Kennungen nicht zurückrechnen. Stehen
+keine zur Verfügung, erzeugt Diktiv eine zufällige Kennung ohne Bezug zur Hardware.</p>
+<p>Gespeichert werden Schlüssel, Geräte-Kennungen und der Lizenzstatus, solange die Lizenz
+besteht. Diktiv selbst protokolliert deine IP-Adresse nicht. Der Betreiber des Servers
+kann sie aus technischen Gründen kurzfristig in Verbindungsprotokollen sehen.</p>
+<h3>3.5 Google Kalender, nur wenn du ihn verbindest</h3>
+<p>Du kannst Diktiv mit deinem Google Kalender verbinden, damit aus einem Diktat ein Termin
+wird. Dafür richtest du selbst einen Zugang bei Google ein und meldest dich bei Google an.
+Erst dann schickt Diktiv Titel, Beschreibung, Beginn und Ende des Termins an Google (USA).
+Der Zugang zu deinem Google-Konto wird in <code>%APPDATA%\Diktiv</code> gespeichert. Was Google mit den
+Daten tut, regelt die Datenschutzerklärung von Google.</p>
+<h2>4. Was Diktiv nicht tut</h2>
+<p>Keine Telemetrie, keine Nutzungsstatistik, keine automatischen Absturzberichte, kein
+Tracking, keine Werbung, kein Verkauf von Daten. Diktiv enthält keine Programmteile dafür.</p>
+<h2>5. Empfänger im Überblick</h2>
+<table>
+<thead>
+<tr>
+<th>Empfänger</th>
+<th>Wann</th>
+<th>Was</th>
+<th>Sitz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microsoft</td>
+<td>Download und Updates über den Store</td>
+<td>nach den Bestimmungen von Microsoft</td>
+<td>USA</td>
+</tr>
+<tr>
+<td>Hugging Face</td>
+<td>Nur beim Wechsel des Modells</td>
+<td>Abruf der Modelldatei</td>
+<td>USA</td>
+</tr>
+<tr>
+<td>Von dir gewählter KI-Anbieter</td>
+<td>Nur wenn du ihn einträgst</td>
+<td>Erkannter Text</td>
+<td>von dir gewählt</td>
+</tr>
+<tr>
+<td>Lizenzdienst <code>license.diktiv.com</code></td>
+<td>Nur mit Lizenzschlüssel</td>
+<td>Schlüssel, Geräte-Kennung</td>
+<td>Schweiz</td>
+</tr>
+<tr>
+<td>Google</td>
+<td>Nur mit verbundenem Kalender</td>
+<td>Termindaten</td>
+<td>USA</td>
+</tr>
+</tbody>
+</table>
+<p>Bei Empfängern in den USA gilt nicht dasselbe Schutzniveau wie in der Schweiz. Diese
+Übertragungen finden nur statt, weil du die jeweilige Funktion selbst nutzt.</p>
+<h2>6. Deine Rechte</h2>
+<p>Nach dem Schweizer Datenschutzgesetz kannst du Auskunft über deine Daten verlangen, ihre
+Berichtigung oder Löschung. Fast alle Daten liegen auf deinem Gerät. Du kannst sie in den
+Ordnern aus Abschnitt 2 selbst einsehen und löschen. Den Verlauf löschst du auch direkt in
+Diktiv. Für Daten beim Lizenzdienst schreibst du an privacy@diktiv.com.</p>
+<p>Wohnst du in der EU oder im EWR, hast du zusätzlich die Rechte nach der
+Datenschutz-Grundverordnung (DSGVO). Dazu gehören Auskunft, Berichtigung, Löschung,
+Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Du kannst dich auch
+bei der Datenschutzbehörde deines Wohnsitzstaates beschweren. In der Schweiz ist das der
+Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte (EDÖB).</p>
+<h2>7. Änderungen</h2>
+<p>Ändert sich, wie Diktiv mit Daten umgeht, passe ich diese Erklärung an. Die aktuelle Fassung
+steht auf diktiv.com. Diese Erklärung gibt es auf Deutsch und Englisch. Massgebend ist die
+deutsche Fassung.</p></main>
+<footer>Diktiv · Michael Aebi, Niederurnen, Schweiz · <a href="mailto:support@diktiv.com">support@diktiv.com</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="privacy.html">Privacy</a></footer>
+</body></html>

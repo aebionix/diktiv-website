@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy · Diktiv</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><style>
+:root{--bg:#FAF7F2;--card:#FFFCF7;--ink:#1C1917;--muted:#57534E;--accent:#C2410C;--line:#E7E1D8}
+@media (prefers-color-scheme:dark){:root{--bg:#1C1917;--card:#24201D;--ink:#F5F1EA;--muted:#B8B0A6;--accent:#F97316;--line:#3A342F}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif}
+header,main,footer{max-width:760px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding-top:28px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:650;font-size:20px;color:var(--ink);text-decoration:none}
+.brand img{width:32px;height:32px}
+nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-size:15px}nav a:hover{color:var(--accent)}
+main{padding-top:24px;padding-bottom:48px}
+h1{font-size:34px;line-height:1.2;margin:16px 0 8px}h2{font-size:22px;margin:36px 0 8px}h3{font-size:18px;margin:24px 0 6px}
+a{color:var(--accent)}code{font-size:.92em}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:12px 0;display:block;overflow-x:auto}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.lead{font-size:20px;color:var(--muted);margin:0 0 28px}
+footer{border-top:1px solid var(--line);padding-top:18px;padding-bottom:36px;color:var(--muted);font-size:14px}
+footer a{color:var(--muted)}
+</style></head>
+<body><header><a class="brand" href="index.html"><img src="favicon.svg" alt="">Diktiv</a><nav><a href="index.html">Home</a><a href="datenschutz.html" lang="de">Deutsch</a></nav></header>
+<main><h1>Privacy Policy for Diktiv</h1>
+<p>Version of 29 September 2026</p>
+<p>Translation. Only the German version is binding.</p>
+<h2>Summary</h2>
+<p>Diktiv converts your speech into text on your device. Recordings and dictations do not leave
+your device. There is no tracking, no usage statistics and no crash reports sent to me. Data
+only goes to others if you switch on or set up a feature for it yourself. Section 3 lists
+these features.</p>
+<h2>1. Controller</h2>
+<p>Michael Aebi, private individual
+c/o Aebi, Fabrikstrasse 4, 8867 Niederurnen, Switzerland
+Email for privacy matters: privacy@diktiv.com</p>
+<h2>2. What stays on your device</h2>
+<p>Speech recognition runs entirely on your device. The speech recognition model is included in
+Diktiv. There is no cloud version of the recognition.</p>
+<p>Diktiv stores the following data in your Windows user profile and does not transmit it:</p>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Location</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Settings</td>
+<td><code>%APPDATA%\Diktiv</code></td>
+<td>An access key entered for AI post-processing is stored encrypted by Windows.</td>
+</tr>
+<tr>
+<td>Usage counter</td>
+<td><code>%APPDATA%\Diktiv</code></td>
+<td>Counts recordings for the limits of the free version.</td>
+</tr>
+<tr>
+<td>Debug log</td>
+<td><code>%APPDATA%\Diktiv</code></td>
+<td>Technical information for troubleshooting, without the dictated text.</td>
+</tr>
+<tr>
+<td>Device ID</td>
+<td><code>%APPDATA%\Diktiv</code></td>
+<td>Only for the licence check, see section 3.4.</td>
+</tr>
+<tr>
+<td>History</td>
+<td><code>%LOCALAPPDATA%\Diktiv</code></td>
+<td>Your texts and the names of the windows you dictated into. At the first start you choose whether it is kept only until Diktiv closes, for 30 days or for 90 days.</td>
+</tr>
+<tr>
+<td>Original recordings</td>
+<td><code>%LOCALAPPDATA%\Diktiv</code></td>
+<td>Only if you switch on keeping them in the settings. Off by default.</td>
+</tr>
+</tbody>
+</table>
+<p>If your Windows profile is stored on a server (roaming profile, for example in a company),
+Windows may copy the folder <code>%APPDATA%\Diktiv</code> to other devices. History and recordings are
+therefore deliberately kept in <code>%LOCALAPPDATA%</code>, which does not roam.</p>
+<p>To insert text, Diktiv briefly places it on the Windows clipboard. By default, Diktiv marks
+it so that it does not appear in the Windows clipboard history or the Windows cloud
+clipboard, and removes it again afterwards. If you switch off pasting via the clipboard,
+Diktiv types the text and does not use the clipboard.</p>
+<h2>3. When data leaves your device</h2>
+<h3>3.1 Microsoft Store</h3>
+<p>If you get Diktiv from the Microsoft Store, the download and updates are handled by
+Microsoft. What Microsoft processes is governed by Microsoft's privacy statement.</p>
+<h3>3.2 Another speech recognition model</h3>
+<p>If you choose a model other than the included one in the settings, Diktiv downloads it from
+Hugging Face (USA). Only the model file is retrieved. No recordings or texts are
+transmitted. As with any connection, Hugging Face sees your IP address.</p>
+<h3>3.3 AI post-processing, only if you set it up</h3>
+<p>Diktiv can have a language model revise the recognised text. To do this, you enter the
+address and access key of a provider of your choice yourself. Without this entry, nothing is
+transmitted. With it, Diktiv sends the recognised text, never the recording, to exactly this
+provider whenever you use a feature that needs it. This also applies to recognising
+appointments in a dictation.</p>
+<p>You enter into a separate contract with the provider. What it does with the text is governed
+by its privacy policy. If you run the language model yourself on your device or in your own
+network, the text does not leave your device or network.</p>
+<p>Dictations often contain confidential information. Check whether you may pass them to an
+external provider before you switch on this feature.</p>
+<h3>3.4 Licence check, only with a licence key</h3>
+<p>The free version does not need a licence key and does not contact the licence service. If
+you enter a licence key, Diktiv sends the key and a device ID to <code>license.diktiv.com</code> when
+activating, when deactivating and at every start. This checks that a key runs on no more
+than three devices at the same time.</p>
+<p>The device ID is a shortened SHA-256 hash of processor and mainboard identifiers. The
+original identifiers cannot be derived from it. If none are available, Diktiv creates a
+random ID without any link to the hardware.</p>
+<p>The key, device IDs and licence status are stored for as long as the licence exists. Diktiv
+itself does not log your IP address. The server operator may see it briefly in connection
+logs for technical reasons.</p>
+<h3>3.5 Google Calendar, only if you connect it</h3>
+<p>You can connect Diktiv to your Google Calendar so that a dictation becomes an appointment. To
+do this, you set up access with Google yourself and sign in to Google. Only then does Diktiv
+send the title, description, start and end of the appointment to Google (USA). The access to
+your Google account is stored in <code>%APPDATA%\Diktiv</code>. What Google does with the data is
+governed by Google's privacy policy.</p>
+<h2>4. What Diktiv does not do</h2>
+<p>No telemetry, no usage statistics, no automatic crash reports, no tracking, no advertising,
+no sale of data. Diktiv contains no components for any of this.</p>
+<h2>5. Recipients at a glance</h2>
+<table>
+<thead>
+<tr>
+<th>Recipient</th>
+<th>When</th>
+<th>What</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microsoft</td>
+<td>Download and updates via the Store</td>
+<td>under Microsoft's terms</td>
+<td>USA</td>
+</tr>
+<tr>
+<td>Hugging Face</td>
+<td>Only when changing the model</td>
+<td>Retrieval of the model file</td>
+<td>USA</td>
+</tr>
+<tr>
+<td>AI provider chosen by you</td>
+<td>Only if you enter one</td>
+<td>Recognised text</td>
+<td>chosen by you</td>
+</tr>
+<tr>
+<td>Licence service <code>license.diktiv.com</code></td>
+<td>Only with a licence key</td>
+<td>Key, device ID</td>
+<td>Switzerland</td>
+</tr>
+<tr>
+<td>Google</td>
+<td>Only with a connected calendar</td>
+<td>Appointment data</td>
+<td>USA</td>
+</tr>
+</tbody>
+</table>
+<p>Recipients in the USA are not subject to the same level of protection as in Switzerland.
+These transfers only take place because you use the respective feature yourself.</p>
+<h2>6. Your rights</h2>
+<p>Under the Swiss Data Protection Act, you can request information about your data, its
+correction or its deletion. Almost all data is on your device. You can view and delete it
+yourself in the folders from section 2. You can also delete the history directly in Diktiv.
+For data held by the licence service, write to privacy@diktiv.com.</p>
+<p>If you live in the EU or EEA, you also have the rights under the General Data Protection
+Regulation (GDPR). These include access, rectification, erasure, restriction of processing,
+data portability and objection. You can also lodge a complaint with the data protection
+authority of your country of residence. In Switzerland, this is the Federal Data Protection
+and Information Commissioner (FDPIC).</p>
+<h2>7. Changes</h2>
+<p>If the way Diktiv handles data changes, I will update this policy. The current version is
+available on diktiv.com. This policy exists in German and English. Only the German version
+is binding.</p></main>
+<footer>Diktiv · Michael Aebi, Niederurnen, Schweiz · <a href="mailto:support@diktiv.com">support@diktiv.com</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="privacy.html">Privacy</a></footer>
+</body></html>
