@@ -32,7 +32,6 @@ h1{font-size:clamp(32px,5vw,48px);line-height:1.12;letter-spacing:-.015em;margin
 .caret{display:inline-block;width:2px;height:1.15em;background:var(--accent);vertical-align:-.2em;margin-left:2px}
 @media (prefers-reduced-motion:no-preference){.caret{animation:blink 1.1s steps(1) infinite}}
 @keyframes blink{50%{opacity:0}}
-.pill{width:232px;height:auto;border-radius:22px/22px}
 .tile .big{font-size:72px;font-weight:650;line-height:1;color:var(--accent);margin:auto 0 0;padding-top:22px;letter-spacing:-.03em}
 .ziel{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:20px 32px;align-items:start}
 .keys{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
@@ -41,11 +40,15 @@ h1{font-size:clamp(32px,5vw,48px);line-height:1.12;letter-spacing:-.015em;margin
 kbd{font:600 13px/1 "Segoe UI Variable Text","Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:5px 8px}
 .tile .keys p{font-size:15px}
 .cd{margin:18px 0 0}
-.countdown{--s:22;--c:#FFB74D;position:relative;display:flex;align-items:center;justify-content:space-between;max-width:320px;height:40px;padding:0 14px 0 12px;border-radius:9px;background:rgba(30,30,30,.88);box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);overflow:hidden}
-.countdown[data-state=normal]{--c:#66BB6A}.countdown[data-state=knapp]{--c:#FFB74D}.countdown[data-state=ende]{--c:#FF5050}
-.cd-fill{position:absolute;top:0;bottom:0;left:0;width:calc(var(--s) / 30 * 100%);background:var(--c);opacity:.18}
-.countdown svg,.cd-time{position:relative}
-.cd-time{color:var(--c);font:600 15px/1 "Cascadia Mono",Consolas,ui-monospace,monospace;font-variant-numeric:tabular-nums}
+/* Pille in der Aufnahme wie in der App (diktiv-next FloatingWidget.axaml): 120 × 40, Radius 9, Rand innen 9,
+   Mikrofon 18 in 22 breitem Feld, Zeit Consolas 12, Kreuz 14 rot, Rahmen 2 px weiss 80 %, Füllung 0.18. */
+.pille{--s:22;--c:#FFB74D;position:relative;display:flex;align-items:center;flex:none;width:120px;height:40px;padding:0 9px;border-radius:9px;background:#1E1E1E;box-shadow:inset 0 0 0 2px rgba(255,255,255,.8);overflow:hidden}
+.pille[data-state=normal]{--c:#66BB6A}.pille[data-state=knapp]{--c:#FFB74D}.pille[data-state=ende]{--c:#FF5050}
+.p-fill{position:absolute;top:2px;bottom:2px;left:2px;width:calc((100% - 4px) * var(--s) / 30);background:var(--c);opacity:.18}
+.p-mic,.p-time,.p-x{position:relative;display:flex}
+.p-mic{width:22px;justify-content:center}
+.p-time{margin:2px 4px 0 auto;color:var(--c);font:12px/1 Consolas,"Cascadia Mono",ui-monospace,monospace}
+.p-x{margin-left:4px;padding:0 4px}
 .cd figcaption{margin-top:8px;color:var(--muted);font-size:15px}
 .stats{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
 .stats li{display:flex;align-items:baseline;gap:12px;border-top:1px solid var(--line);padding-top:10px}
@@ -80,7 +83,11 @@ footer a{color:var(--muted)}
 nav a{margin-left:12px}
 }
 </style></head>
-<body><header><a class="brand" href="index.html"><img src="favicon.svg" alt="">Diktiv</a><nav><a href="funktionen.html" aria-current="page">Funktionen</a><a href="datenschutz.html">Datenschutz</a></nav></header>
+<body><svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-mic" viewBox="0 0 256 256"><path fill="#66BB6A" d="M128 176a48.05 48.05 0 0 0 48-48V64a48 48 0 0 0-96 0v64A48.05 48.05 0 0 0 128 176ZM96 64a32 32 0 0 1 64 0v64a32 32 0 0 1-64 0Zm40 143.6V240a8 8 0 0 1-16 0V207.6A80.11 80.11 0 0 1 48 128a8 8 0 0 1 16 0 64 64 0 0 0 128 0 8 8 0 0 1 16 0A80.11 80.11 0 0 1 136 207.6Z"/></symbol>
+<symbol id="i-x" viewBox="0 0 256 256"><path d="M56 56 L200 200 M200 56 L56 200" stroke="#FF4444" stroke-width="24" stroke-linecap="round"/></symbol>
+</svg>
+<header><a class="brand" href="index.html"><img src="favicon.svg" alt="">Diktiv</a><nav><a href="funktionen.html" aria-current="page">Funktionen</a><a href="datenschutz.html">Datenschutz</a></nav></header>
 <main>
 <h1>Sprechen statt tippen.<br>In jedem Programm.</h1>
 <p class="lead">Diktiv ist eine Diktier-App für Windows. Alles auf dieser Seite gehört zur Gratis-Version.</p>
@@ -92,7 +99,7 @@ nav a{margin-left:12px}
 <p>Du hältst eine Taste gedrückt, sprichst und lässt los. Kurz darauf steht der Text dort, wo dein Cursor steht, im Mailentwurf, im Dokument oder im Chatfenster.</p>
 <div class="demo"><div class="screen">
 <div class="field">Guten Tag, Frau Meier, vielen Dank für Ihre Offerte. Wir bestätigen den Termin vom Dienstag, 14 Uhr und freuen uns auf die Zusammenarbeit.<span class="caret" aria-hidden="true"></span></div>
-<img class="pill" src="bilder/pille.webp" width="464" height="144" alt="Die Anzeige von Diktiv während einer Aufnahme, mit Mikrofon und der Zeit 00:15">
+<div class="pille" data-state="knapp" role="img" aria-label="Die Anzeige von Diktiv während einer Aufnahme, mit Mikrofon, laufender Zeit und Kreuz zum Abbrechen"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-time">00:22</span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div>
 </div></div>
 </article>
 
@@ -105,7 +112,7 @@ nav a{margin-left:12px}
 <h3>Gratis</h3>
 <p>Die Gratis-Version kostet nichts. Diese Grenzen gelten.</p>
 <figure class="cd">
-<div class="countdown" data-state="knapp" aria-hidden="true"><span class="cd-fill"></span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#66BB6A" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span class="cd-time">00:22</span></div>
+<div class="pille" data-state="knapp" aria-hidden="true"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-time">00:22</span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div>
 <figcaption>Höchstens 30 Sekunden pro Aufnahme. Die Anzeige zählt mit.</figcaption>
 </figure>
 <ul class="stats">
@@ -202,14 +209,13 @@ nav a{margin-left:12px}
 // von 00:00 bis 00:30, ab 20 s orange, ab 25 s rot. Ohne Bewegung bleibt das Standbild bei 00:22.
 (() => {
   const LIMIT = 30, KNAPP_AB = 20, ENDE_AB = 25, HALTEN = 2;
-  const pille = document.querySelector('.countdown');
-  if (!pille || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const zeit = pille.querySelector('.cd-time');
-  const zeige = s => {
+  const pillen = document.querySelectorAll('.pille');
+  if (!pillen.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const zeige = s => pillen.forEach(pille => {
     pille.style.setProperty('--s', s);
     pille.dataset.state = s >= ENDE_AB ? 'ende' : s >= KNAPP_AB ? 'knapp' : 'normal';
-    zeit.textContent = '00:' + String(s).padStart(2, '0');
-  };
+    pille.querySelector('.p-time').textContent = '00:' + String(s).padStart(2, '0');
+  });
   let s = 0, gehalten = 0;
   zeige(s);
   setInterval(() => {
