@@ -211,8 +211,15 @@ nav a{margin-left:12px}
 </article>
 
 <article class="tile s2">
+<h3>Click instead of holding a key</h3>
+<p>A click on the pill's microphone starts a recording without holding any key. Enter, another click on the pill or the recording key ends it, and Diktiv inserts the text. Esc or the cross cancels.</p>
+<p>The text goes to the window that was in front when you moved the mouse onto the pill, even if you click somewhere else during the recording. If you click somewhere else within the same app, for example into the history instead of the input field, the text lands there. A short tap on the recording key then inserts the last dictation again, into the field that is active right now.</p>
+<p>A single click waits at most 0.4 seconds to see whether a double-click follows. Only then does the recording start. You can turn Enter off in the settings under "Recording".</p>
+</article>
+
+<article class="tile s2">
 <h3>Pause listening</h3>
-<p>If you need the recording key for typing for a moment, click the microphone on the pill. Diktiv releases the key and the pill counts down the seconds.</p>
+<p>If you need the recording key for typing for a moment, double-click the microphone on the pill. Diktiv releases the key and the pill counts down the seconds. In the settings under "Recording" you can swap the two clicks.</p>
 <p>By default Diktiv listens again after 5 seconds. You can set up to 10 seconds or turn the return off.</p>
 <p class="big" aria-hidden="true">5.0s</p>
 </article>
@@ -314,7 +321,7 @@ nav a{margin-left:12px}
 
 <article class="tile s2">
 <h3>Your microphone, even for quiet voices</h3>
-<p>Use the Windows default microphone or choose a specific device. Set the sensitivity to Normal, High or Very high so that quiet voices come through too.</p>
+<p>Use the Windows default microphone or choose a specific device. Set the sensitivity to Low, Normal or High. If you speak quietly and a recording stays without text, choose High.</p>
 <div class="shot"><img src="bilder/empfindlichkeit.webp" width="965" height="540" style="--w:400px" loading="lazy" decoding="async" alt="Microphone settings with device selection and sensitivity Normal"></div>
 </article>
 
@@ -352,7 +359,7 @@ nav a{margin-left:12px}
 <div class="pille live" data-view="hover" aria-hidden="true" style="width:min(320px,100%);background:#1E1E1E;box-shadow:inset 0 0 0 2px rgba(255,255,255,.333);--fg:#FFFFFF;--muted:#9A9A9A;--mic:#FFFFFF"><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-lang"><svg width="16" height="16"><use href="#i-globe"/></svg><b>DE</b></span><span class="p-btn p-hist"><svg width="14" height="14"><use href="#i-hist"/></svg></span><span class="p-btn"><svg width="14" height="14"><use href="#i-set"/></svg></span><span class="p-btn"><svg width="16" height="16"><use href="#i-more"/></svg></span></div>
 </div>
 <ul class="btns">
-<li><svg width="18" height="18" aria-hidden="true"><use href="#i-mic"/></svg><p><b>Microphone</b> pauses listening, so you can briefly use the recording key for normal typing.</p></li>
+<li><svg width="18" height="18" aria-hidden="true"><use href="#i-mic"/></svg><p><b>Microphone</b> starts a recording on click, a double-click pauses listening, so you can briefly use the recording key for normal typing.</p></li>
 <li><svg width="16" height="16" aria-hidden="true"><use href="#i-globe"/></svg><p><b>Switch language</b> picks the dictation language. The globe appears as soon as more than one language is active.</p></li>
 <li><svg width="16" height="16" aria-hidden="true"><use href="#i-hist"/></svg><p><b>History</b> opens your earlier dictations.</p></li>
 <li><svg width="16" height="16" aria-hidden="true"><use href="#i-set"/></svg><p><b>Settings</b> opens all of the Diktiv settings.</p></li>
