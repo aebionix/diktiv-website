@@ -1,7 +1,7 @@
 # AI-Handover diktiv-website
 
-Einstieg für jede neue Session. Stand 08.10.2026, geprüft an `main` (Merge-Commit `3f136c1`) und
-am Live-Server.
+Einstieg für jede neue Session. Stand 27.10.2026, geprüft an `main` (Merge-Commit `bc86301`).
+Live-Abgleich zuletzt 19.10.2026.
 
 ## 1. Ziel und aktueller Stand
 
@@ -9,8 +9,8 @@ am Live-Server.
 HTML-Seiten ohne Build, ohne Framework, ohne externe Skripte. Beschrieben wird nur die
 **Gratis-Version** (Entscheid Michael 07.10.2026, Premium wird nicht beworben).
 
-Stand 08.10.2026: 8 Seiten live, jede Datei per `curl` und `cmp` byte-gleich mit `main` geprüft.
-Keine offenen GitHub-Aufgaben in `aebionix/diktiv-website`.
+Stand 27.10.2026: `main` entspricht dem Live-Stand vom 19.10.2026 (PR 53 Funktionsseite auf Diktiv 5.3.2,
+PR 54 Comic-Seiten). Diktiv 5.3.2 ist seit 20.10.2026 im Microsoft Store. Keine offenen PRs.
 
 | Seite | Deutsch | Englisch |
 |---|---|---|
@@ -64,7 +64,12 @@ Keine offenen GitHub-Aufgaben in `aebionix/diktiv-website`.
 
 ## 6. Offene Punkte
 
-- Keine offenen Aufgaben (08.10.2026).
+- Seite «Erste Schritte» DE/EN: fertig, aber nur lokal auf Michaels Rechner (Worktree
+  `diktiv-website-worktrees\erste-schritte`, Branch `feat/erste-schritte`, nicht auf GitHub).
+  Geht erst online, wenn die App mit der neuen Aufnahmetaste im Store ist (Michael 20.10.2026).
+  Ergänzung offen: Pille mit rechter Maustaste verschieben.
+- Offene Issues: 51 Store-Knopf auf Startseite (Diktiv ist seit 20.10. im Store, also fällig),
+  52 Comicbild 08 und 09 auf 5.3.2, 55 Erste Schritte einhängen, 56 Datenschutz-Tabelle am Handy.
 - In der App gemeldet: KI-Pfeil im Gratis-Verlauf (diktiv-next intern #272), fehlende englische
   Übersetzung des Tooltips der geteilten Verlaufsansicht (intern #289). Die Website beschreibt
   bereits das Zielverhalten.
