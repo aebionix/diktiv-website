@@ -2,6 +2,12 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Features · Diktiv</title>
 <meta name="description" content="What Diktiv does. Hold a key, speak, release, and the text appears where your cursor is. Speech recognition on your own computer, with no account and no telemetry.">
+<link rel="canonical" href="https://diktiv.com/features.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Diktiv">
+<meta property="og:title" content="Features · Diktiv"><meta property="og:description" content="What Diktiv does. Hold a key, speak, release, and the text appears where your cursor is. Speech recognition on your own computer, with no account and no telemetry.">
+<meta property="og:url" content="https://diktiv.com/features.html"><meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://diktiv.com/bilder/vorschau-en.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Diktiv, Just speak. Diktiv types. Email window with the recording pill.">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="alternate" hreflang="de" href="https://diktiv.com/funktionen.html"><link rel="alternate" hreflang="en" href="https://diktiv.com/features.html"><style>
 :root{--bg:#FAF7F2;--card:#FFFCF7;--ink:#1C1917;--muted:#57534E;--accent:#C2410C;--line:#E7E1D8;--screen:#1C1917;--field:#292420;--fieldink:#EDE7DE}
 @media (prefers-color-scheme:dark){:root{--bg:#1C1917;--card:#24201D;--ink:#F5F1EA;--muted:#B8B0A6;--accent:#F97316;--line:#3A342F;--screen:#141110;--field:#24201D}}
@@ -139,8 +145,18 @@ footer a{color:var(--muted)}
 nav a{margin-left:12px}
 }
 @media (max-width:640px){header{flex-wrap:wrap;row-gap:6px}nav{display:flex;flex-wrap:wrap;gap:4px 14px}nav a{margin-left:0}}
+
+/* Neugestaltung 2026-11 (#58): Farben wie Startseite, Piktogramme und Wann-Zeile */
+:root{--bg:#fbf8f3;--card:#fff;--ink:#1f1b17;--muted:#5b5249;--accent:#0f7a5c;--line:#e4dbcf;--soft:#dff3ea;--softink:#0b4f3c;--chip:#f3ede4}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1917;--card:#29231f;--ink:#f5f1ea;--muted:#c2b9ae;--accent:#7fd3b5;--line:#433b34;--soft:#1f3a31;--softink:#bce7d8;--chip:#24201c}}
+.pk{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--soft);color:var(--softink);margin-bottom:14px;flex:none}
+.pk svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tile p.wann{display:flex;gap:10px;font-size:15px;color:var(--ink);margin:2px 0 10px}
+.tile p.wann b{flex:none;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:6px;background:var(--soft);color:var(--softink);height:fit-content;margin-top:2px}
+.tile{border-radius:20px}
 </style></head>
-<body><svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<body><svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="pk-key" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M7 14h10"/></symbol><symbol id="pk-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></symbol><symbol id="pk-text" viewBox="0 0 24 24"><path d="M4 7h11M4 12h16M4 17h8"/><path d="M18 15v6"/></symbol><symbol id="pk-pc" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M9 20h6M12 16v4"/><rect x="9.5" y="9" width="5" height="4" rx="1"/><path d="M10.5 9V7.8a1.5 1.5 0 0 1 3 0V9"/></symbol><symbol id="pk-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol><symbol id="pk-free" viewBox="0 0 24 24"><path d="M3 12V5a2 2 0 0 1 2-2h7l9 9-9 9-9-9Z"/><circle cx="8" cy="8" r="1.5"/></symbol><symbol id="pk-book" viewBox="0 0 24 24"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2Z"/><path d="M5 18a2 2 0 0 1 2-2h11M9 8h5"/></symbol><symbol id="pk-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6L4 8.6"/><path d="M4 4v4.6h4.6M12 8v4.5l3 2"/></symbol><symbol id="pk-note" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol><symbol id="pk-term" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 10 3 2.5L7 15M12 15h5"/></symbol><symbol id="pk-click" viewBox="0 0 24 24"><path d="m9 9 11 4-4.5 1.5L14 19Z"/><path d="M9 3v2M4.5 4.5 6 6M3 9h2"/></symbol><symbol id="pk-chain" viewBox="0 0 24 24"><rect x="3" y="4" width="14" height="5" rx="2"/><rect x="7" y="15" width="14" height="5" rx="2"/><path d="M10 9v6"/></symbol><symbol id="pk-snip" viewBox="0 0 24 24"><path d="M4 6h10M4 10h7M4 14h5"/><path d="M14 13l6 0 0 7-6 0Z"/><path d="M17 13v-2.5a1.5 1.5 0 0 0-3 0"/></symbol><symbol id="pk-ss" viewBox="0 0 24 24"><path d="M10 7.5C9.3 6.6 8.3 6 7 6 5.3 6 4 7 4 8.3c0 3 6 2 6 5.2C10 15 8.6 16 7 16c-1.4 0-2.6-.7-3.2-1.8M20 7.5c-.7-.9-1.7-1.5-3-1.5-1.7 0-3 1-3 2.3 0 3 6 2 6 5.2 0 1.5-1.4 2.5-3 2.5-1.4 0-2.6-.7-3.2-1.8"/><path d="M4 20h16"/></symbol><symbol id="pk-user-off" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 13-6.2M3 3l18 18"/></symbol><symbol id="pk-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></symbol><symbol id="pk-stack" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M3 3l18 18"/></symbol><symbol id="pk-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9Z"/></symbol><symbol id="pk-cancel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></symbol><symbol id="pk-pause" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/></symbol><symbol id="pk-clip" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h4"/></symbol><symbol id="pk-box" viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></symbol><symbol id="pk-bolt" viewBox="0 0 24 24"><path d="M13 2 5 14h6l-1 8 8-12h-6Z"/></symbol><symbol id="pk-ui" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h4M7 16h7"/></symbol><symbol id="pk-pill" viewBox="0 0 24 24"><rect x="2.5" y="8" width="19" height="8" rx="4"/><circle cx="7" cy="12" r="1.6"/><path d="M11 12h7"/></symbol><symbol id="pk-dots" viewBox="0 0 24 24"><rect x="2.5" y="8" width="19" height="8" rx="4"/><circle cx="8" cy="12" r=".6"/><circle cx="12" cy="12" r=".6"/><circle cx="16" cy="12" r=".6"/></symbol><symbol id="pk-sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4Z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></symbol><symbol id="pk-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 14v3l2 1"/></symbol><symbol id="pk-play" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></symbol><symbol id="pk-alert" viewBox="0 0 24 24"><path d="M12 3 2.5 20h19Z"/><path d="M12 10v4M12 17h.01"/></symbol><symbol id="pk-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></symbol><symbol id="pk-redo" viewBox="0 0 24 24"><path d="M4 7h11a5 5 0 0 1 0 10H8"/><path d="m8 3-4 4 4 4"/></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <symbol id="i-mic" viewBox="0 0 256 256"><path fill="currentColor" d="M128 176a48.05 48.05 0 0 0 48-48V64a48 48 0 0 0-96 0v64A48.05 48.05 0 0 0 128 176ZM96 64a32 32 0 0 1 64 0v64a32 32 0 0 1-64 0Zm40 143.6V240a8 8 0 0 1-16 0V207.6A80.11 80.11 0 0 1 48 128a8 8 0 0 1 16 0 64 64 0 0 0 128 0 8 8 0 0 1 16 0A80.11 80.11 0 0 1 136 207.6Z"/></symbol>
 <symbol id="i-x" viewBox="0 0 256 256"><path d="M56 56 L200 200 M200 56 L56 200" stroke="#FF4444" stroke-width="24" stroke-linecap="round"/></symbol>
 <symbol id="i-globe" viewBox="0 0 256 256"><path fill="currentColor" d="M128 20A108 108 0 1 0 236 128 108.12 108.12 0 0 0 128 20Zm0 187a113.4 113.4 0 0 1-20.39-35h40.82a116.94 116.94 0 0 1-10 20.77A108.61 108.61 0 0 1 128 207Zm-26.49-59a135.42 135.42 0 0 1 0-40h53a135.42 135.42 0 0 1 0 40ZM44 128a83.49 83.49 0 0 1 2.43-20H77.25a160.63 160.63 0 0 0 0 40H46.43A83.49 83.49 0 0 1 44 128Zm84-79a113.4 113.4 0 0 1 20.39 35H107.59a116.94 116.94 0 0 1 10-20.77A108.61 108.61 0 0 1 128 49Zm50.73 59h30.82a83.52 83.52 0 0 1 0 40H178.75a160.63 160.63 0 0 0 0-40Zm20.77-24H173.71a140.82 140.82 0 0 0-15.5-34.36A84.51 84.51 0 0 1 199.52 84ZM97.79 49.64A140.82 140.82 0 0 0 82.29 84H56.48A84.51 84.51 0 0 1 97.79 49.64ZM56.48 172H82.29a140.82 140.82 0 0 0 15.5 34.36A84.51 84.51 0 0 1 56.48 172Zm101.73 34.36A140.82 140.82 0 0 0 173.71 172h25.81A84.51 84.51 0 0 1 158.21 206.36Z"/></symbol>
@@ -165,13 +181,14 @@ nav a{margin-left:12px}
 </article>
 
 <article class="tile s2">
-<h3>Stays on your computer</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-pc"/></svg></span><h3>Stays on your computer</h3>
+<p class="wann"><b>When</b>You dictate confidential things or are travelling without signal.</p>
 <p>Whisper is built into the program. Your recordings are not sent to any server. There is no account and no telemetry.</p>
 <p class="weil"><a href="story.html#local">Built because the developer wants to dictate without a connection in the mountains and on the train.</a></p>
 </article>
 
 <article class="tile s2">
-<h3>Free</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-free"/></svg></span><h3>Free</h3>
 <p>The free version costs nothing. These limits apply.</p>
 <figure class="cd">
 <div class="pille" data-state="knapp" aria-hidden="true"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-time">00:22</span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div>
@@ -185,7 +202,8 @@ nav a{margin-left:12px}
 
 <article class="tile wide ziel">
 <div>
-<h3>Lands where you started</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-target"/></svg></span><h3>Lands where you started</h3>
+<p class="wann"><b>When</b>You click into another window while dictating.</p>
 <p>The text goes into the window and input field where you started the recording. If you click somewhere else in the meantime, Diktiv brings that window back before pasting.</p>
 <p class="weil"><a href="story.html#wrong-place">Built because text in the wrong place had to be copied over by hand.</a></p>
 </div>
@@ -198,54 +216,62 @@ nav a{margin-left:12px}
 </article>
 
 <article class="tile s2">
-<h3>Speak without holding the key</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-key"/></svg></span><h3>Speak without holding the key</h3>
+<p class="wann"><b>When</b>You dictate longer and want your hands free.</p>
 <p>In tap mode you tap the recording key once and speak. Tapping again ends the recording. If you hold the key for 2 seconds or longer, it ends when you let go.</p>
 <p>You turn on tap mode in the settings.</p>
 <div class="combo keyrow">tap <kbd>Recording key</kbd> · speak · tap <kbd>Recording key</kbd></div>
 </article>
 
 <article class="tile s2">
-<h3>Cancel with Esc or the cross</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-cancel"/></svg></span><h3>Cancel with Esc or the cross</h3>
+<p class="wann"><b>When</b>You misspoke or want to start over.</p>
 <p>Press Esc or click the red cross on the pill to cancel a recording or its processing. Both do the same. You decide whether Diktiv then asks, discards the dictation or processes it anyway.</p>
 <div class="xzeig"><div class="pille" data-state="normal" aria-hidden="true"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-time">00:05</span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div><span class="leit" aria-hidden="true"></span><span class="combo">same as <kbd>Esc</kbd></span></div>
 </article>
 
 <article class="tile s2">
-<h3>Click instead of holding a key</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-click"/></svg></span><h3>Click instead of holding a key</h3>
+<p class="wann"><b>When</b>Your hand is on the mouse anyway.</p>
 <p>A click on the pill's microphone starts a recording without holding any key. Enter, another click on the pill or the recording key ends it, and Diktiv inserts the text. Esc or the cross cancels.</p>
 <p>The text goes to the window that was in front when you moved the mouse onto the pill, even if you click somewhere else during the recording. If you click somewhere else within the same app, for example into the history instead of the input field, the text lands there. A short tap on the recording key then inserts the last dictation again, into the field that is active right now.</p>
 <p>A single click waits at most 0.4 seconds to see whether a double-click follows. Only then does the recording start. You can turn Enter off in the settings under "Recording".</p>
 </article>
 
-<article class="tile s2">
-<h3>Pause listening</h3>
+<article class="tile s3">
+<span class="pk"><svg aria-hidden="true"><use href="#pk-pause"/></svg></span><h3>Pause listening</h3>
+<p class="wann"><b>When</b>You need the recording key for normal typing for a moment.</p>
 <p>If you need the recording key for typing for a moment, double-click the microphone on the pill. Diktiv releases the key and the pill counts down the seconds. In the settings under "Recording" you can swap the two clicks.</p>
 <p>By default Diktiv listens again after 5 seconds. You can set up to 10 seconds or turn the return off.</p>
 <p class="big" aria-hidden="true">5.0s</p>
 </article>
 
 <article class="tile s3">
-<h3>Works in terminals too</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-term"/></svg></span><h3>Works in terminals too</h3>
+<p class="wann"><b>When</b>You work in Windows Terminal, PuTTY or an Electron app.</p>
 <p>Diktiv recognises terminals such as Windows Terminal or PuTTY and pastes the way they expect. This also works in Electron apps.</p>
 <p>You can choose from four paste methods, separately for each app. If a program does not accept the clipboard, Diktiv types the text character by character.</p>
 <div class="shot"><img src="bilder/zwischenablage.webp" width="844" height="753" style="--w:640px" loading="lazy" decoding="async" alt="Diktiv settings, Paste section, with the paste method per program"></div>
 </article>
 
 <article class="tile s3">
-<h3>Your names, spelled right</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-book"/></svg></span><h3>Your names, spelled right</h3>
+<p class="wann"><b>When</b>You dictate names, products or technical terms.</p>
 <p>Add technical terms and names to the lexicon so Whisper spells them correctly.</p>
 <p class="weil"><a href="story.html#lexicon">Built because Whisper got the developer’s own name wrong.</a></p>
 <div class="shot"><img src="bilder/lexikon.webp" width="1312" height="753" style="--w:860px" loading="lazy" decoding="async" alt="Lexicon in the settings with terms such as Niederurnen, Fabrikstrasse and Glarus Nord"></div>
 </article>
 
-<article class="tile s2">
-<h3>Swiss spelling</h3>
+<article class="tile s3">
+<span class="pk"><svg aria-hidden="true"><use href="#pk-ss"/></svg></span><h3>Swiss spelling</h3>
+<p class="wann"><b>When</b>You write German for Switzerland.</p>
 <p>For Swiss German texts, Diktiv writes ss instead of ß.</p>
 <p class="big" aria-hidden="true">ss</p>
 </article>
 
 <article class="tile s4">
-<h3>History with search</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-history"/></svg></span><h3>History with search</h3>
+<p class="wann"><b>When</b>You need a text from earlier again.</p>
 <p>Earlier dictations are in the history, and one click pastes the text again. There are four views to choose from, as tiles, as a list, split or as a table.</p>
 <p>You can edit and pin entries. You export the history as a CSV file or import it again. The free version keeps the last 10 entries, and pinned ones do not count.</p>
 <div class="shot"><img src="bilder/verlauf.webp" width="560" height="360" style="--w:560px" loading="lazy" decoding="async" alt="Diktiv history as a list with time, program and text"></div>
@@ -253,7 +279,8 @@ nav a{margin-left:12px}
 
 <article class="tile wide verlauf">
 <div>
-<h3>What the history can do</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-list"/></svg></span><h3>What the history can do</h3>
+<p class="wann"><b>When</b>You want to find, organise or back up dictations.</p>
 <p>Everything here is part of the free version. The history brings back earlier dictations without speaking them again.</p>
 </div>
 <ul class="vliste">
@@ -275,59 +302,68 @@ nav a{margin-left:12px}
 </article>
 
 <article class="tile s2">
-<h3>Quick Capture</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-note"/></svg></span><h3>Quick Capture</h3>
+<p class="wann"><b>When</b>An idea comes to you in the middle of work.</p>
 <p>A second key captures a thought. Diktiv saves it as a Markdown file in a folder of your choice.</p>
 <p class="weil"><a href="story.html#quick-capture">Built because the developer constantly has ideas worth capturing.</a></p>
 <p class="big" aria-hidden="true">.md</p>
 </article>
 
 <article class="tile s2">
-<h3>Nothing gets lost</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-clip"/></svg></span><h3>Nothing gets lost</h3>
+<p class="wann"><b>When</b>The window is already closed when the text is ready.</p>
 <p>If the window is gone when Diktiv pastes, the text goes to the clipboard. The pill then shows “On clipboard” and you paste it wherever you like.</p>
 <div class="combo keyrow"><kbd>Ctrl</kbd> + <kbd>V</kbd></div>
 </article>
 
 <article class="tile s2">
-<h3>Several dictations in a row</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-chain"/></svg></span><h3>Several dictations in a row</h3>
+<p class="wann"><b>When</b>Something else comes to mind after you release the key.</p>
 <p>If you keep dictating while Diktiv is still working on the previous text, it queues the recordings and pastes them in order. The pill shows where you are.</p>
 <p class="weil"><a href="story.html#queue">Built because something often comes to mind right after you let go.</a></p>
 <p class="big" aria-hidden="true">1/2</p>
 </article>
 
 <article class="tile s3">
-<h3>German model built in</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-box"/></svg></span><h3>German model built in</h3>
+<p class="wann"><b>When</b>You want to start right away without downloading anything.</p>
 <p>Built in is a version of Whisper large-v3-turbo trained on German. You can download six more models when you need them.</p>
 <div class="shot"><img src="bilder/modellwahl.webp" width="684" height="753" style="--w:600px" loading="lazy" decoding="async" alt="Choice of speech recognition models with size and a short description"></div>
 </article>
 
 <article class="tile s3">
-<h3>Faster with a graphics card</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-bolt"/></svg></span><h3>Faster with a graphics card</h3>
+<p class="wann"><b>When</b>Your PC has a graphics card and you want your text sooner.</p>
 <p>A graphics card makes recognition faster. You do not need one.</p>
 <p class="weil"><a href="story.html#graphics-card">Built because recognition was too slow on a colleague’s computer.</a></p>
 <div class="chips"><span>NVIDIA</span><span>AMD</span><span>Intel</span></div>
 </article>
 
 <article class="tile s2">
-<h3>Dictate in 100 languages</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-globe"/></svg></span><h3>Dictate in 100 languages</h3>
+<p class="wann"><b>When</b>You also write in English, French or Italian.</p>
 <p>You can dictate in 100 languages, and Whisper can detect the language by itself. With several languages active, you switch on the pill, where a globe with the code shows the current one. This is separate from the language of the interface.</p>
 <p class="big" aria-hidden="true">100</p>
 </article>
 
 <article class="tile s2">
-<h3>Interface in German and English</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-ui"/></svg></span><h3>Interface in German and English</h3>
+<p class="wann"><b>When</b>You prefer German menus.</p>
 <p>Menus and settings are available in German and English.</p>
 <p class="big" aria-hidden="true">DE EN</p>
 </article>
 
 <article class="tile s2">
-<h3>Your microphone, even for quiet voices</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-mic"/></svg></span><h3>Your microphone, even for quiet voices</h3>
+<p class="wann"><b>When</b>You speak quietly or use a specific headset.</p>
 <p>Use the Windows default microphone or choose a specific device. Set the sensitivity to Low, Normal or High. If you speak quietly and a recording stays without text, choose High.</p>
 <div class="shot"><img src="bilder/empfindlichkeit.webp" width="965" height="540" style="--w:400px" loading="lazy" decoding="async" alt="Microphone settings with device selection and sensitivity Normal"></div>
 </article>
 
 <article class="tile wide anzeige">
 <div>
-<h3>The pill at the edge of your screen</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-pill"/></svg></span><h3>The pill at the edge of your screen</h3>
+<p class="wann"><b>When</b>You want to see whether Diktiv is listening without anything in your way.</p>
 <p>A small pill shows whether Diktiv is listening. It never takes the focus away from the program you are writing in. Try the controls. They have the same names as in the app, on the Display tab of the settings.</p>
 <p>You move it by dragging and change its width at the right edge. When idle it collapses to 40 × 40 pixels with just the microphone, and opens as soon as you hover over it. When you dictate it jumps below the mouse pointer, and if you switch screens it moves along. You can turn off collapsing, jumping and moving along one by one. If you like, it hides in full screen and only reappears when you dictate.</p>
 <div class="stage"><div class="pille live" data-view="ruhe" data-state="knapp" aria-hidden="true"><span class="p-fill"></span><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-lang"><svg width="16" height="16"><use href="#i-globe"/></svg><b>DE</b></span><span class="p-ttext">Transcribing…</span><span class="p-time">00:22</span><span class="p-tzeit">00:02</span><span class="p-btn p-hist"><svg width="14" height="14"><use href="#i-hist"/></svg></span><span class="p-btn"><svg width="14" height="14"><use href="#i-set"/></svg></span><span class="p-btn"><svg width="16" height="16"><use href="#i-more"/></svg></span><span class="p-x"><svg width="14" height="14"><use href="#i-x"/></svg></span></div></div>
@@ -354,7 +390,8 @@ nav a{margin-left:12px}
 
 <article class="tile wide tasten">
 <div>
-<h3>The buttons on the pill</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-dots"/></svg></span><h3>The buttons on the pill</h3>
+<p class="wann"><b>When</b>You want history, language or settings one click away.</p>
 <p>When you hover over the pill, it opens and shows these buttons.</p>
 <div class="pille live" data-view="hover" aria-hidden="true" style="width:min(320px,100%);background:#1E1E1E;box-shadow:inset 0 0 0 2px rgba(255,255,255,.333);--fg:#FFFFFF;--muted:#9A9A9A;--mic:#FFFFFF"><span class="p-mic"><svg width="18" height="18"><use href="#i-mic"/></svg></span><span class="p-lang"><svg width="16" height="16"><use href="#i-globe"/></svg><b>DE</b></span><span class="p-btn p-hist"><svg width="14" height="14"><use href="#i-hist"/></svg></span><span class="p-btn"><svg width="14" height="14"><use href="#i-set"/></svg></span><span class="p-btn"><svg width="16" height="16"><use href="#i-more"/></svg></span></div>
 </div>
@@ -368,37 +405,43 @@ nav a{margin-left:12px}
 </article>
 
 <article class="tile s2">
-<h3>Sounds as feedback</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-sound"/></svg></span><h3>Sounds as feedback</h3>
+<p class="wann"><b>When</b>You are not looking at the screen right now.</p>
 <p>Short sounds signal start, stop, success and error, so you hear what is happening without looking. You turn each of the seven sounds on or off individually and set the volume yourself.</p>
 <p class="big" aria-hidden="true">7</p>
 </article>
 
 <article class="tile s2">
-<h3>Not in the clipboard history</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-stack"/></svg></span><h3>Not in the clipboard history</h3>
+<p class="wann"><b>When</b>You don’t want dictations to show up on other devices.</p>
 <p>By default, dictated text appears neither in the Windows clipboard history nor in the cloud clipboard. That way it does not end up on other devices. You can turn this off.</p>
 <p class="weil"><a href="story.html#wrong-place">Built because dictations were cluttering the Windows clipboard history.</a></p>
 <div class="combo keyrow"><kbd>Windows</kbd> + <kbd>V</kbd> shows no dictations</div>
 </article>
 
 <article class="tile s2">
-<h3>You decide how long the history stays</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-cal"/></svg></span><h3>You decide how long the history stays</h3>
+<p class="wann"><b>When</b>You want to decide yourself how long dictations are kept.</p>
 <p>At first start you choose whether the history stays only until you quit Diktiv, for 30 days or for 90 days. It is stored locally on your computer and does not travel to other computers with a roaming profile.</p>
 <div class="chips"><span>until you quit</span><span>30 days</span><span>90 days</span></div>
 </article>
 
 <article class="tile s2">
-<h3>Listen again</h3>
+<span class="pk"><svg aria-hidden="true"><use href="#pk-play"/></svg></span><h3>Listen again</h3>
+<p class="wann"><b>When</b>A word was misrecognised and you want to hear what you said.</p>
 <p>If you like, Diktiv keeps the original recordings. You can then listen to any dictation in the history again, for example when a word was misrecognised. The recordings stay on your computer. This is off by default.</p>
 </article>
 
-<article class="tile s2">
-<h3>Text snippets by trigger word</h3>
+<article class="tile s3">
+<span class="pk"><svg aria-hidden="true"><use href="#pk-snip"/></svg></span><h3>Text snippets by trigger word</h3>
+<p class="wann"><b>When</b>You often write the same sign-off or address.</p>
 <p>Save frequent texts once as a snippet. When you say the trigger word and the name while dictating, Diktiv inserts the snippet. This works in any dictation.</p>
 <p class="say">“Snippet sign-off”</p>
 </article>
 
-<article class="tile s2">
-<h3>Errors without dialog boxes</h3>
+<article class="tile s3">
+<span class="pk"><svg aria-hidden="true"><use href="#pk-alert"/></svg></span><h3>Errors without dialog boxes</h3>
+<p class="wann"><b>When</b>Something went wrong and you want to keep working undisturbed.</p>
 <p>If something goes wrong, the message appears right in the pill and no window pops up in front of your work. One click on Retry tries again.</p>
 <div class="combo keyrow"><kbd>Retry</kbd></div>
 </article>
