@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diktiv · Sprich einfach. Diktiv schreibt.</title>
+<link rel="icon" href="../site/favicon.svg" type="image/svg+xml">
+<style>
+:root{--bg:#fbf8f3;--bg2:#f3ede4;--card:#fff;--text:#1f1b17;--muted:#5b5249;--line:#e4dbcf;--accent:#0f7a5c;--accent-soft:#dff3ea;--accent-ink:#0b4f3c;--sun:#f3c96b;--sun-ink:#3b2c09;--focus:#b35c00;--shadow:0 10px 30px #3a2a1414}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1c1917;--bg2:#24201c;--card:#29231f;--text:#f5f1ea;--muted:#c2b9ae;--line:#433b34;--accent:#7fd3b5;--accent-soft:#1f3a31;--accent-ink:#bce7d8;--sun:#f3c96b;--sun-ink:#211b11;--focus:#ffd29a;--shadow:0 10px 30px #0006}}
+@media (prefers-color-scheme:dark){}:root[data-theme=dark] .primary{color:#0e2a21}
+:root[data-theme=dark]{--bg:#1c1917;--bg2:#24201c;--card:#29231f;--text:#f5f1ea;--muted:#c2b9ae;--line:#433b34;--accent:#7fd3b5;--accent-soft:#1f3a31;--accent-ink:#bce7d8;--sun:#f3c96b;--sun-ink:#211b11;--focus:#ffd29a;--shadow:0 10px 30px #0006}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 'Segoe UI',system-ui,sans-serif}
+h1,h2,h3,p{margin:0}p{color:var(--muted)}a{color:inherit;text-underline-offset:4px}
+a:focus-visible{outline:3px solid var(--focus);outline-offset:4px;border-radius:6px}
+.wrap{max-width:1140px;margin:auto;padding:0 28px}
+.ico{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.tile{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:16px;background:var(--accent-soft);color:var(--accent-ink)}
+header{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:22px;padding-bottom:22px}
+.brand{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:650;text-decoration:none}.brand img{width:32px;height:32px}
+.nav{display:flex;gap:22px;flex-wrap:wrap;font-size:15px}.nav a{text-decoration:none;color:var(--muted);padding:6px 0}.nav a:hover{color:var(--text)}
+.button{display:inline-flex;align-items:center;gap:10px;min-height:50px;padding:10px 22px;border-radius:12px;font-weight:600;text-decoration:none;border:1px solid var(--line)}
+.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .primary{color:#0e2a21}}
+.secondary{background:var(--card)}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:48px 0 64px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;background:var(--accent-soft);color:var(--accent-ink);font-size:14px;font-weight:600;padding:6px 14px;border-radius:99px;margin-bottom:22px}
+h1{font-size:clamp(40px,5vw,62px);line-height:1.06;letter-spacing:-1.8px;font-weight:700}h1 span{color:var(--accent)}
+.lead{font-size:20px;margin:22px 0 30px;max-width:500px}
+.actions{display:flex;gap:14px;flex-wrap:wrap}
+.facts{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:14px;color:var(--muted)}.facts span{display:flex;gap:7px;align-items:center}.facts .ico{width:18px;height:18px;color:var(--accent)}
+/* Bühne mit Mailfenster und Pille */
+.stage{background:var(--bg2);border:1px solid var(--line);border-radius:28px;padding:30px;position:relative}
+.win{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.win-bar{display:flex;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line)}.win-bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.win-body{padding:18px 20px 26px;font-size:15px;line-height:1.55}.win-body .to{color:var(--muted);font-size:13px;border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:12px}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-3px;margin-left:2px}
+.pill{position:absolute;right:26px;bottom:-22px;display:flex;align-items:center;gap:12px;background:#1f2421;color:#e9f5ef;border-radius:99px;padding:9px 16px 9px 10px;box-shadow:var(--shadow);font:600 14px 'Segoe UI',system-ui}
+.pill .mic{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#2f8f6c}.pill .ico{width:18px;height:18px}
+.wave{display:flex;gap:3px;align-items:center}.wave b{width:3px;border-radius:2px;background:#7fd3b5}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+.step{display:flex;gap:12px;align-items:center;font-size:16px}.step strong{display:block;color:var(--text);font-size:17px}.step small{color:var(--muted);font-size:14px}
+/* Versprechen */
+.promises{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:20px 0 70px}
+.promise{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px}
+.promise h3{font-size:21px;margin:16px 0 8px}
+section h2{font-size:clamp(30px,3.4vw,42px);letter-spacing:-1px;line-height:1.15}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:30px}.sec-head p{max-width:420px}
+/* Funktionskarten */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feature{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:12px}
+.feature h3{font-size:19px;line-height:1.3}
+.when,.gain{display:flex;gap:10px;font-size:15px;line-height:1.5}
+.when b,.gain b{flex:none;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:6px;height:fit-content;margin-top:2px}
+.when b{background:var(--bg2);color:var(--muted)}.gain b{background:var(--accent-soft);color:var(--accent-ink)}
+.gain span{color:var(--text)}.origin{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);font-size:14px;font-style:italic}.req{font-size:15px}
+.more{text-align:center;margin-top:30px}
+/* Gratis */
+.free{margin:80px 0;background:var(--accent-soft);border-radius:28px;padding:44px;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+.free p{margin-top:14px;color:var(--text)}
+.limits{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.limit{background:var(--card);border-radius:18px;padding:20px;text-align:center}.limit .ico{color:var(--accent);width:26px;height:26px}
+.limit strong{display:block;font-size:30px;line-height:1.1;margin-top:8px}.limit span{font-size:13px;color:var(--muted)}
+.faq{padding-bottom:60px}.faq h2{margin-bottom:20px}
+.faq details{border-bottom:1px solid var(--line);padding:16px 0}.faq summary{cursor:pointer;font-weight:600}.faq details p{padding-top:10px;max-width:760px}
+footer{border-top:1px solid var(--line);padding-top:24px;padding-bottom:34px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--muted)}footer div{display:flex;gap:18px;flex-wrap:wrap}
+@media(max-width:950px){.hero{grid-template-columns:1fr;gap:40px}.features{grid-template-columns:1fr 1fr}.promises{grid-template-columns:1fr}.free{grid-template-columns:1fr}.sec-head{flex-direction:column;align-items:start}}
+@media(max-width:600px){.wrap{padding:0 16px}.nav{gap:4px 16px;font-size:14px}header{flex-wrap:wrap}.features{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.stage{padding:16px}.pill{right:12px}.free{padding:24px}.limits{gap:8px}.limit{padding:14px 6px}.limit strong{font-size:24px}.actions .button{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-key" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M7 14h10"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></symbol>
+<symbol id="i-text" viewBox="0 0 24 24"><path d="M4 7h11M4 12h16M4 17h8"/><path d="M18 15v6"/></symbol>
+<symbol id="i-pc" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M9 20h6M12 16v4"/><rect x="9.5" y="9" width="5" height="4" rx="1"/><path d="M10.5 9V7.8a1.5 1.5 0 0 1 3 0V9"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
+<symbol id="i-free" viewBox="0 0 24 24"><path d="M3 12V5a2 2 0 0 1 2-2h7l9 9-9 9-9-9Z"/><circle cx="8" cy="8" r="1.5"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2Z"/><path d="M5 18a2 2 0 0 1 2-2h11M9 8h5"/></symbol>
+<symbol id="i-history" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6L4 8.6"/><path d="M4 4v4.6h4.6M12 8v4.5l3 2"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></symbol>
+<symbol id="i-term" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 10 3 2.5L7 15M12 15h5"/></symbol>
+<symbol id="i-click" viewBox="0 0 24 24"><path d="m9 9 11 4-4.5 1.5L14 19Z"/><path d="M9 3v2M4.5 4.5 6 6M3 9h2"/></symbol>
+<symbol id="i-chain" viewBox="0 0 24 24"><rect x="3" y="4" width="14" height="5" rx="2"/><rect x="7" y="15" width="14" height="5" rx="2"/><path d="M10 9v6"/></symbol>
+<symbol id="i-snip" viewBox="0 0 24 24"><path d="M4 6h10M4 10h7M4 14h5"/><path d="M14 13l6 0 0 7-6 0Z"/><path d="M17 13v-2.5a1.5 1.5 0 0 0-3 0"/></symbol>
+<symbol id="i-ss" viewBox="0 0 24 24"><path d="M10 7.5C9.3 6.6 8.3 6 7 6 5.3 6 4 7 4 8.3c0 3 6 2 6 5.2C10 15 8.6 16 7 16c-1.4 0-2.6-.7-3.2-1.8M20 7.5c-.7-.9-1.7-1.5-3-1.5-1.7 0-3 1-3 2.3 0 3 6 2 6 5.2 0 1.5-1.4 2.5-3 2.5-1.4 0-2.6-.7-3.2-1.8"/><path d="M4 20h16"/></symbol>
+<symbol id="i-user-off" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 13-6.2M3 3l18 18"/></symbol>
+<symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></symbol>
+<symbol id="i-stack" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M3 3l18 18"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9Z"/></symbol>
+</svg>
+
+<header class="wrap"><a class="brand" href="#"><img src="../site/favicon.svg" alt="">Diktiv</a>
+<nav class="nav" aria-label="Hauptnavigation"><a href="#">Funktionen</a><a href="#">Erste Schritte</a><a href="#">Entstehung</a><a href="#">Datenschutz</a><a href="#" lang="en">EN</a></nav></header>
+
+<main class="wrap">
+<section class="hero" aria-labelledby="t">
+<div>
+<span class="eyebrow"><svg class="ico" style="width:16px;height:16px"><use href="#i-free"/></svg>Gratis für Windows 10 und 11</span>
+<h1 id="t">Sprich einfach.<br><span>Diktiv schreibt.</span></h1>
+<p class="lead">Du weisst, was du sagen willst. Diktiv tippt es für dich ins Mail, ins Dokument oder in den Chat. Die Erkennung läuft auf deinem PC.</p>
+<div class="actions"><a class="button primary" href="#">Gratis im Microsoft Store</a><a class="button secondary" href="#">So funktioniert es</a></div>
+<div class="facts"><span><svg class="ico"><use href="#i-user-off"/></svg>Kein Konto</span><span><svg class="ico"><use href="#i-pc"/></svg>Bleibt auf deinem PC</span><span><svg class="ico"><use href="#i-free"/></svg>Kein Abo</span></div>
+</div>
+<div>
+<div class="stage" aria-hidden="true">
+<div class="win"><div class="win-bar"><i></i><i></i><i></i></div>
+<div class="win-body"><div class="to">An Frau Meier · Betreff Offerte</div>Guten Tag, Frau Meier. Vielen Dank für Ihre Offerte. Wir bestätigen den Termin vom Dienstag um 14 Uhr<span class="caret"></span></div></div>
+<div class="pill"><span class="mic"><svg class="ico"><use href="#i-mic"/></svg></span><span class="wave"><b style="height:8px"></b><b style="height:16px"></b><b style="height:11px"></b><b style="height:19px"></b><b style="height:9px"></b><b style="height:14px"></b></span>00:12</div>
+</div>
+<div class="steps">
+<div class="step"><span class="tile"><svg class="ico"><use href="#i-key"/></svg></span><span><strong>Taste halten</strong><small>oder aufs Mikrofon klicken</small></span></div>
+<div class="step"><span class="tile"><svg class="ico"><use href="#i-mic"/></svg></span><span><strong>Sprechen</strong><small>ganz normal</small></span></div>
+<div class="step"><span class="tile"><svg class="ico"><use href="#i-text"/></svg></span><span><strong>Loslassen</strong><small>der Text steht da</small></span></div>
+</div>
+</div>
+</section>
+
+<section class="promises" aria-label="Drei Versprechen">
+<div class="promise"><span class="tile"><svg class="ico"><use href="#i-pc"/></svg></span><h3>Deine Stimme bleibt bei dir</h3><p>Die Spracherkennung ist eingebaut. Deine Aufnahmen gehen an keinen Server. Diktieren klappt auch im Zug ohne Netz.</p></div>
+<div class="promise"><span class="tile"><svg class="ico"><use href="#i-target"/></svg></span><h3>Der Text landet am richtigen Ort</h3><p>Genau im Feld, in dem du angefangen hast. Auch wenn du zwischendurch ein anderes Fenster anklickst.</p></div>
+<div class="promise"><span class="tile"><svg class="ico"><use href="#i-free"/></svg></span><h3>Gratis und ohne Konto</h3><p>Kein Abo, keine Anmeldung, keine Telemetrie. Du installierst Diktiv und kannst gleich diktieren.</p></div>
+</section>
+
+<section aria-labelledby="f">
+<div class="sec-head"><h2 id="f">Wann dir Diktiv hilft</h2><p>Zu jeder Funktion steht, wann sie dir hilft und was du davon hast. Alles gehört zur Gratis-Version.</p></div>
+<div class="features">
+<article class="feature"><span class="tile"><svg class="ico"><use href="#i-click"/></svg></span><h3>Klicken statt Taste halten</h3><p class="when"><b>Wann</b>Deine Hand liegt sowieso auf der Maus.</p><p class="gain"><b>Vorteil</b><span>Ein Klick aufs Mikrofon, und Diktiv hört zu. Enter fügt den Text ein.</span></p></article>
+<article class="feature"><span class="tile"><svg class="ico"><use href="#i-book"/></svg></span><h3>Lexikon für deine Wörter</h3><p class="when"><b>Wann</b>Du diktierst Namen, Produkte oder Fachbegriffe.</p><p class="gain"><b>Vorteil</b><span>Einmal eintragen, damit Whisper sie richtig schreibt. So korrigierst du weniger nach.</span></p><p class="origin">Entstanden, weil Whisper den Namen des Entwicklers falsch schrieb.</p></article>
+<article class="feature"><span class="tile"><svg class="ico"><use href="#i-history"/></svg></span><h3>Verlauf mit Suche</h3><p class="when"><b>Wann</b>Du brauchst einen Text von vorhin nochmals.</p><p class="gain"><b>Vorteil</b><span>Doppelt antippen öffnet den Verlauf. Suchen, anklicken, und der Text ist wieder da, ohne ihn neu zu sprechen.</span></p></article>
+<article class="feature"><span class="tile"><svg class="ico"><use href="#i-note"/></svg></span><h3>Schnellnotiz</h3><p class="when"><b>Wann</b>Dir kommt mitten in der Arbeit eine Idee.</p><p class="gain"><b>Vorteil</b><span>Zweite Taste halten und den Gedanken aussprechen. Die Notiz liegt als Markdown-Datei in deinem Ordner.</span></p><p class="origin">Entstanden, weil dem Entwickler dauernd Ideen kommen, die er festhalten will.</p></article>
+<article class="feature"><span class="tile"><svg class="ico"><use href="#i-term"/></svg></span><h3>Auch im Terminal</h3><p class="when"><b>Wann</b>Du arbeitest in Windows Terminal, PuTTY oder einer Electron-App.</p><p class="gain"><b>Vorteil</b><span>Diktiv fügt so ein, wie das Programm es erwartet. Notfalls Zeichen für Zeichen.</span></p></article>
+<article class="feature"><span class="tile"><svg class="ico"><use href="#i-ss"/></svg></span><h3>Schweizer Rechtschreibung</h3><p class="when"><b>Wann</b>Du schreibst für die Schweiz.</p><p class="gain"><b>Vorteil</b><span>Diktiv schreibt ss statt ß. Du musst nichts von Hand ersetzen.</span></p></article>
+<article class="feature"><span class="tile"><svg class="ico"><use href="#i-snip"/></svg></span><h3>Textbausteine per Signalwort</h3><p class="when"><b>Wann</b>Du schreibst oft dieselbe Grussformel oder Adresse.</p><p class="gain"><b>Vorteil</b><span>Signalwort und Name sagen, und der ganze Baustein steht da.</span></p></article>
+<article class="feature"><span class="tile"><svg class="ico"><use href="#i-stack"/></svg></span><h3>Nicht im Zwischenablageverlauf</h3><p class="when"><b>Wann</b>Du willst nicht, dass Diktate auf anderen Geräten landen.</p><p class="gain"><b>Vorteil</b><span>Diktate tauchen nicht in Windows+V und nicht auf deinen anderen Geräten auf.</span></p><p class="origin">Entstanden, weil Diktate den Zwischenablageverlauf von Windows vollgestopft haben.</p></article>
+<article class="feature"><span class="tile"><svg class="ico"><use href="#i-globe"/></svg></span><h3>Diktieren in 100 Sprachen</h3><p class="when"><b>Wann</b>Du schreibst auch auf Englisch, Französisch oder Italienisch.</p><p class="gain"><b>Vorteil</b><span>An der Anzeige wechselst du die Sprache mit einem Klick. Auf Wunsch erkennt Whisper sie selbst.</span></p></article>
+</div>
+<div class="more"><a class="button secondary" href="#">Alle Funktionen ansehen</a></div>
+</section>
+
+<section class="free" aria-labelledby="g">
+<div><h2 id="g">Gratis. Mit klaren Grenzen.</h2><p>Gemacht für kurze Nachrichten, Antworten und Gedanken im Alltag. Du weisst vor der Installation, was drin ist.</p><p class="req">Du brauchst Windows 10 ab Version 1809 oder Windows 11 und ein Mikrofon. Eine Grafikkarte macht die Erkennung schneller, nötig ist sie nicht.</p></div>
+<div class="limits">
+<div class="limit"><svg class="ico"><use href="#i-timer"/></svg><strong>30 s</strong><span>pro Aufnahme</span></div>
+<div class="limit"><svg class="ico"><use href="#i-mic"/></svg><strong>60</strong><span>Aufnahmen pro Stunde</span></div>
+<div class="limit"><svg class="ico"><use href="#i-history"/></svg><strong>10</strong><span>Einträge im Verlauf</span></div>
+</div>
+</section>
+
+<section class="faq" aria-labelledby="q"><h2 id="q">Noch kurz gefragt</h2>
+<details open><summary>Brauche ich eine Internetverbindung?</summary><p>Zum Diktieren mit dem eingebauten deutschen Modell nicht. Internet brauchst du nur für die Installation und wenn du weitere Modelle dazulädst.</p></details>
+<details><summary>Wo kann ich meinen Text einfügen?</summary><p>In das Eingabefeld, in dem du arbeitest, etwa in Word, Outlook, im Browser oder im Terminal.</p></details>
+<details><summary>Ist der erkannte Text immer richtig?</summary><p>Spracherkennung macht Fehler. Lies den Text durch, bevor du ihn verwendest. Diktiv ist kein Medizinprodukt.</p></details>
+</section>
+</main>
+<footer class="wrap"><span>Diktiv · Michael Aebi · Niederurnen, Schweiz</span><div><a href="#">Kontakt</a><a href="#">Datenschutz</a><a href="#">Entstehung</a></div></footer>
+</body>
+</html>
