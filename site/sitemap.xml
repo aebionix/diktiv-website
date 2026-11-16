@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://diktiv.com/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://diktiv.com/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diktiv.com/index-en.html"/>
+  </url>
+  <url>
+    <loc>https://diktiv.com/index-en.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://diktiv.com/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diktiv.com/index-en.html"/>
+  </url>
+  <url>
+    <loc>https://diktiv.com/funktionen.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://diktiv.com/funktionen.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diktiv.com/features.html"/>
+  </url>
+  <url>
+    <loc>https://diktiv.com/features.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://diktiv.com/funktionen.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diktiv.com/features.html"/>
+  </url>
+  <url>
+    <loc>https://diktiv.com/entstehung.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://diktiv.com/entstehung.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diktiv.com/story.html"/>
+  </url>
+  <url>
+    <loc>https://diktiv.com/story.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://diktiv.com/entstehung.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diktiv.com/story.html"/>
+  </url>
+  <url>
+    <loc>https://diktiv.com/datenschutz.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://diktiv.com/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diktiv.com/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://diktiv.com/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://diktiv.com/datenschutz.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://diktiv.com/privacy.html"/>
+  </url>
+</urlset>
