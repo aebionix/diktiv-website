@@ -8,6 +8,11 @@
 <title>Diktiv · Sprich einfach. Diktiv schreibt.</title>
 <meta name="description" content="Sprechen statt tippen, in jedem Windows-Programm. Die Spracherkennung läuft auf deinem PC. Kein Konto, kein Abo. Gratis im Microsoft Store.">
 <link rel="canonical" href="https://diktiv.com/index.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Diktiv">
+<meta property="og:title" content="Diktiv · Sprich einfach. Diktiv schreibt."><meta property="og:description" content="Sprechen statt tippen, in jedem Windows-Programm. Die Spracherkennung läuft auf deinem PC. Kein Konto, kein Abo. Gratis im Microsoft Store.">
+<meta property="og:url" content="https://diktiv.com/index.html"><meta property="og:locale" content="de_CH">
+<meta property="og:image" content="https://diktiv.com/bilder/vorschau-de.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Diktiv, Sprich einfach. Diktiv schreibt. Mailfenster mit der Aufnahme-Anzeige.">
+<meta name="twitter:card" content="summary_large_image">
 <style>
 :root{--bg:#fbf8f3;--bg2:#f3ede4;--card:#fff;--text:#1f1b17;--muted:#5b5249;--line:#e4dbcf;--accent:#0f7a5c;--accent-soft:#dff3ea;--accent-ink:#0b4f3c;--sun:#f3c96b;--sun-ink:#3b2c09;--focus:#b35c00;--shadow:0 10px 30px #3a2a1414}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1c1917;--bg2:#24201c;--card:#29231f;--text:#f5f1ea;--muted:#c2b9ae;--line:#433b34;--accent:#7fd3b5;--accent-soft:#1f3a31;--accent-ink:#bce7d8;--sun:#f3c96b;--sun-ink:#211b11;--focus:#ffd29a;--shadow:0 10px 30px #0006}}
@@ -71,6 +76,45 @@ footer{border-top:1px solid var(--line);padding-top:24px;padding-bottom:34px;dis
 @media(max-width:950px){.hero{grid-template-columns:1fr;gap:40px}.features{grid-template-columns:1fr 1fr}.promises{grid-template-columns:1fr}.free{grid-template-columns:1fr}.sec-head{flex-direction:column;align-items:start}}
 @media(max-width:600px){.wrap{padding:0 16px}.nav{gap:4px 16px;font-size:14px}header{flex-wrap:wrap}.features{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.stage{padding:16px}.pill{right:12px}.free{padding:24px}.limits{gap:8px}.limit{padding:14px 6px}.limit strong{font-size:24px}.actions .button{width:100%;justify-content:center}}
 .skip{position:absolute;left:8px;top:8px;padding:10px 16px;background:var(--accent);color:#fff;border-radius:8px;transform:translateY(-200%)}.skip:focus{transform:none}.nav a[aria-current]{color:var(--text)}.button:hover{filter:brightness(1.06)}.story-teaser{display:flex;justify-content:space-between;align-items:center;gap:24px 40px;padding:0 0 70px;flex-wrap:wrap}.story-teaser p{max-width:640px;margin-top:10px}.free .req a{color:var(--accent-ink);font-weight:600}
+
+/* Bewegung (#58). Ohne Skript und bei «Bewegung reduzieren» bleibt alles still und sichtbar. */
+.pill .ok,.pill .plabel{display:none}
+.pill.done .ok{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#2f8f6c}
+.pill.done .mic,.pill.done .wave,.pill.done .ptime{display:none}.pill.done .plabel{display:inline}
+.pill.idle .wave b{transform:scaleY(.25)}
+.hero{position:relative}
+.stage::before{content:"";position:absolute;inset:-40px -30px auto auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--accent-soft),transparent 70%);z-index:-1}
+.stage{isolation:isolate}
+.feature,.promise,.limit{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+.feature:hover,.promise:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--accent)}
+.feature .tile,.promise .tile{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.feature:hover .tile,.promise:hover .tile{transform:scale(1.12) rotate(-6deg)}
+.step{transition:opacity .3s ease}
+@media (prefers-reduced-motion:no-preference){
+ .wave b{transform-origin:center;animation:wv .9s ease-in-out infinite}
+ .wave b:nth-child(2){animation-delay:-.15s}.wave b:nth-child(3){animation-delay:-.3s}.wave b:nth-child(4){animation-delay:-.45s}.wave b:nth-child(5){animation-delay:-.6s}.wave b:nth-child(6){animation-delay:-.75s}
+ .pill.idle .wave b,.pill.done .wave b{animation:none}
+ @keyframes wv{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1.15)}}
+ .pill .mic{animation:pulse 1.6s ease-out infinite}
+ .pill.idle .mic{animation:none}
+ @keyframes pulse{0%{box-shadow:0 0 0 0 #2f8f6c99}70%{box-shadow:0 0 0 10px #2f8f6c00}100%{box-shadow:0 0 0 0 #2f8f6c00}}
+ .pill.done .ok{animation:pop .4s cubic-bezier(.3,1.6,.5,1)}
+ @keyframes pop{from{transform:scale(.3)}to{transform:scale(1)}}
+ .caret{animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+ .stage::before{animation:drift 9s ease-in-out infinite alternate}
+ @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(-60px,50px) scale(1.25)}}
+ .js-anim .steps .step{opacity:.45}.js-anim .steps .step.on{opacity:1}
+ .js-anim .steps .step.on .tile{animation:pop .4s cubic-bezier(.3,1.6,.5,1)}
+ .js-anim .hero-in{opacity:0;transform:translateY(16px);animation:up .7s ease forwards}
+ @keyframes up{to{opacity:1;transform:none}}
+ .js-anim .reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+ .js-anim .reveal.seen{opacity:1;transform:none}
+ .js-anim .reveal .tile{transform:scale(.6) rotate(-12deg);transition:transform .5s cubic-bezier(.3,1.6,.5,1) .2s}
+ .js-anim .reveal.seen .tile{transform:none}
+ .js-anim .reveal.seen:hover .tile{transform:scale(1.12) rotate(-6deg)}
+ .primary{background-image:linear-gradient(110deg,transparent 35%,#ffffff40 50%,transparent 65%);background-size:250% 100%;background-position:120% 0;animation:shine 5s ease-in-out 2s infinite}
+ @keyframes shine{0%,70%{background-position:120% 0}100%{background-position:-120% 0}}
+}
 </style>
 </head>
 <body>
@@ -93,7 +137,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;padding-bottom:34px;dis
 <symbol id="i-user-off" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 13-6.2M3 3l18 18"/></symbol>
 <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></symbol>
 <symbol id="i-stack" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M3 3l18 18"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.5 5.5 3.5 9s-1 6.5-3.5 9c-2.5-2.5-3.5-5.5-3.5-9s1-6.5 3.5-9Z"/></symbol>
-</svg>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol></svg>
 <header class="wrap"><a class="brand" href="index.html"><img src="favicon.svg" width="32" height="32" alt="">Diktiv</a>
 <nav class="nav" aria-label="Hauptnavigation"><a href="funktionen.html">Funktionen</a><a href="entstehung.html">Entstehung</a><a href="datenschutz.html">Datenschutz</a><a href="index-en.html" lang="en" hreflang="en">EN</a></nav></header>
 
@@ -102,24 +146,24 @@ footer{border-top:1px solid var(--line);padding-top:24px;padding-bottom:34px;dis
 <div>
 <span class="eyebrow"><svg class="ico" style="width:16px;height:16px" aria-hidden="true"><use href="#i-free"/></svg>Gratis für Windows 10 und 11</span>
 <h1 id="t">Sprich einfach.<br><span>Diktiv schreibt.</span></h1>
-<p class="lead">Du weisst, was du sagen willst. Diktiv tippt es für dich ins Mail, ins Dokument oder in den Chat. Die Erkennung läuft auf deinem PC.</p>
+<p class="lead">Du weisst längst, was du schreiben willst. Also sag es einfach. Diktiv setzt den Text dort ein, wo dein Cursor gerade steht, und die Erkennung läuft dabei auf deinem eigenen PC.</p>
 <div class="actions"><a class="button primary" href="https://apps.microsoft.com/detail/9NGJQ6QNW9ZW?gl=CH">Gratis im Microsoft Store</a><a class="button secondary" href="funktionen.html">Alle Funktionen ansehen</a></div>
 <div class="facts"><span><svg class="ico" aria-hidden="true"><use href="#i-user-off"/></svg>Kein Konto</span><span><svg class="ico" aria-hidden="true"><use href="#i-pc"/></svg>Bleibt auf deinem PC</span><span><svg class="ico" aria-hidden="true"><use href="#i-free"/></svg>Kein Abo</span></div>
 </div>
 <div>
 <div class="stage" aria-hidden="true">
 <div class="win"><div class="win-bar"><i></i><i></i><i></i></div>
-<div class="win-body"><div class="to">An Frau Meier · Betreff Offerte</div>Guten Tag, Frau Meier. Vielen Dank für Ihre Offerte. Wir bestätigen den Termin vom Dienstag um 14 Uhr<span class="caret"></span></div></div>
-<div class="pill"><span class="mic"><svg class="ico" aria-hidden="true"><use href="#i-mic"/></svg></span><span class="wave"><b style="height:8px"></b><b style="height:16px"></b><b style="height:11px"></b><b style="height:19px"></b><b style="height:9px"></b><b style="height:14px"></b></span>00:12</div>
+<div class="win-body"><div class="to">An Frau Meier · Betreff Offerte</div><span class="typed" data-text="Guten Tag, Frau Meier. Vielen Dank für Ihre Offerte. Wir bestätigen den Termin vom Dienstag um 14 Uhr">Guten Tag, Frau Meier. Vielen Dank für Ihre Offerte. Wir bestätigen den Termin vom Dienstag um 14 Uhr</span><span class="caret"></span></div></div>
+<div class="pill"><span class="mic"><svg class="ico" aria-hidden="true"><use href="#i-mic"/></svg></span><span class="ok"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg></span><span class="wave"><b style="height:8px"></b><b style="height:16px"></b><b style="height:11px"></b><b style="height:19px"></b><b style="height:9px"></b><b style="height:14px"></b></span><span class="ptime">00:12</span><span class="plabel">Eingefügt</span></div>
 </div>
 <div class="steps" aria-label="So funktioniert Diktiv"><div class="step"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-key"/></svg></span><span><strong>Taste halten</strong><small>oder aufs Mikrofon klicken</small></span></div><div class="step"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-mic"/></svg></span><span><strong>Sprechen</strong><small>ganz normal</small></span></div><div class="step"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-text"/></svg></span><span><strong>Loslassen</strong><small>der Text steht da</small></span></div></div>
 </div>
 </section>
 
-<section class="promises" aria-label="Drei Versprechen"><div class="promise"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-pc"/></svg></span><h3>Deine Stimme bleibt bei dir</h3><p>Die Spracherkennung ist eingebaut. Deine Aufnahmen gehen an keinen Server. Diktieren klappt auch im Zug ohne Netz.</p></div><div class="promise"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg></span><h3>Der Text landet am richtigen Ort</h3><p>Genau im Feld, in dem du angefangen hast. Auch wenn du zwischendurch ein anderes Fenster anklickst.</p></div><div class="promise"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-free"/></svg></span><h3>Gratis und ohne Konto</h3><p>Kein Abo, keine Anmeldung, keine Telemetrie. Du installierst Diktiv und kannst gleich diktieren.</p></div></section>
+<section class="promises" aria-label="Drei Versprechen"><div class="promise"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-pc"/></svg></span><h3>Deine Stimme bleibt bei dir</h3><p>Die Spracherkennung ist eingebaut. Deine Aufnahmen gehen an keinen Server. Diktieren klappt auch im Zug ohne Netz.</p></div><div class="promise"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-target"/></svg></span><h3>Der Text landet am richtigen Ort</h3><p>Genau im Feld, in dem du angefangen hast. Auch wenn du zwischendurch ein anderes Fenster anklickst.</p></div><div class="promise"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-free"/></svg></span><h3>Gratis und ohne Konto</h3><p>Aus dem Store laden und lossprechen. Ein Konto brauchst du nicht, und Diktiv schickt keine Nutzungsdaten nach Hause.</p></div></section>
 
 <section aria-labelledby="f">
-<div class="sec-head"><h2 id="f">Wann dir Diktiv hilft</h2><p>Zu jeder Funktion steht, wann sie dir hilft und was du davon hast. Alles gehört zur Gratis-Version.</p></div>
+<div class="sec-head"><h2 id="f">Wann dir Diktiv hilft</h2><p>Kurz erklärt, in welcher Lage dir was hilft. Alles hier steckt in der Gratis-Version.</p></div>
 <div class="features">
 <article class="feature"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-click"/></svg></span><h3>Klicken statt Taste halten</h3><p class="when"><b>Wann</b>Deine Hand liegt sowieso auf der Maus.</p><p class="gain"><b>Vorteil</b><span>Ein Klick aufs Mikrofon, und Diktiv hört zu. Enter fügt den Text ein.</span></p></article>
 <article class="feature"><span class="tile"><svg class="ico" aria-hidden="true"><use href="#i-book"/></svg></span><h3>Lexikon für deine Wörter</h3><p class="when"><b>Wann</b>Du diktierst Namen, Produkte oder Fachbegriffe.</p><p class="gain"><b>Vorteil</b><span>Einmal eintragen, damit Whisper sie richtig schreibt. So korrigierst du weniger nach.</span></p><p class="origin">Entstanden, weil Whisper den Namen des Entwicklers falsch schrieb.</p></article>
@@ -135,7 +179,7 @@ footer{border-top:1px solid var(--line);padding-top:24px;padding-bottom:34px;dis
 </section>
 
 <section class="free" aria-labelledby="g">
-<div><h2 id="g">Gratis. Mit klaren Grenzen.</h2><p>Gemacht für kurze Nachrichten, Antworten und Gedanken im Alltag. Du weisst vor der Installation, was drin ist.</p><p class="req">Du brauchst Windows 10 ab Version 1809 oder Windows 11 und ein Mikrofon. Eine Grafikkarte macht die Erkennung schneller, nötig ist sie nicht.</p><p class="req"><a href="https://apps.microsoft.com/detail/9NGJQ6QNW9ZW?gl=CH">Gratis im Microsoft Store</a></p></div>
+<div><h2 id="g">Gratis. Mit klaren Grenzen.</h2><p>Gedacht für die kurzen Sachen im Alltag, eine schnelle Antwort oder eine Notiz zwischendurch. Was drin ist, weisst du schon vor der Installation.</p><p class="req">Du brauchst Windows 10 ab Version 1809 oder Windows 11 und ein Mikrofon. Eine Grafikkarte macht die Erkennung schneller, nötig ist sie nicht.</p><p class="req"><a href="https://apps.microsoft.com/detail/9NGJQ6QNW9ZW?gl=CH">Gratis im Microsoft Store</a></p></div>
 <div class="limits"><div class="limit"><svg class="ico" aria-hidden="true"><use href="#i-timer"/></svg><strong>30 s</strong><span>pro Aufnahme</span></div><div class="limit"><svg class="ico" aria-hidden="true"><use href="#i-mic"/></svg><strong>60</strong><span>Aufnahmen pro Stunde</span></div><div class="limit"><svg class="ico" aria-hidden="true"><use href="#i-history"/></svg><strong>10</strong><span>Einträge im Verlauf</span></div></div>
 </section>
 
@@ -146,5 +190,54 @@ footer{border-top:1px solid var(--line);padding-top:24px;padding-bottom:34px;dis
 </section>
 </main>
 <footer class="wrap"><span>Diktiv · Michael Aebi · Niederurnen, Schweiz</span><div><a href="mailto:support@diktiv.com">Kontakt</a><a href="funktionen.html">Funktionen</a><a href="entstehung.html">Entstehung</a><a href="datenschutz.html">Datenschutz</a></div></footer>
+<script>
+// Bewegung der Startseite (#58): Pille diktiert, Text erscheint, Karten blenden beim Scrollen ein.
+// Bei «Bewegung reduzieren» passiert nichts, die Seite bleibt im fertigen Zustand.
+(() => {
+  if (!matchMedia('(prefers-reduced-motion: no-preference)').matches || !('IntersectionObserver' in window)) return;
+  const root = document.documentElement; root.classList.add('js-anim');
+  const hero = document.querySelector('.hero');
+  [...hero.querySelectorAll('.eyebrow,h1,.lead,.actions,.facts')].forEach((el, i) => { el.classList.add('hero-in'); el.style.animationDelay = (i * 0.12) + 's'; });
+
+  // Einblenden beim Scrollen, gestaffelt
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { threshold: 0.15 });
+  document.querySelectorAll('.promise,.feature,.limit,.sec-head,.free>div:first-child,.story-teaser,.faq details').forEach(el => {
+    const sib = [...el.parentElement.children].indexOf(el) % 3;
+    el.classList.add('reveal'); el.style.transitionDelay = (sib * 0.09) + 's'; io.observe(el);
+  });
+
+  // Zahlen der Grenzen zählen hoch
+  const co = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; co.unobserve(e.target);
+    const el = e.target, end = parseInt(el.textContent, 10), suf = el.textContent.replace(/^\d+/, ''); let t0;
+    const step = t => { t0 ??= t; const k = Math.min(1, (t - t0) / 900); el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3))) + suf; if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }), { threshold: 0.6 });
+  document.querySelectorAll('.limit strong').forEach(el => co.observe(el));
+
+  // Pille: zuhören, Zeit läuft, loslassen, Text erscheint, Haken. Dann von vorn.
+  const typed = document.querySelector('.typed'), pill = document.querySelector('.pill'), time = document.querySelector('.ptime');
+  const steps = document.querySelectorAll('.steps .step');
+  if (!typed || !pill) return;
+  const text = typed.dataset.text, sleep = ms => new Promise(r => setTimeout(r, ms));
+  let visible = true;
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(pill.closest('.stage'));
+  const on = i => steps.forEach((s, j) => s.classList.toggle('on', j === i));
+  const waitVisible = async () => { while (!visible || document.hidden) await sleep(400); };
+  (async function loop() {
+    for (;;) {
+      await waitVisible();
+      typed.textContent = ''; pill.className = 'pill idle'; time.textContent = '00:00'; on(0);
+      await sleep(900);
+      pill.className = 'pill'; on(1);
+      for (let s = 1; s <= 4; s++) { await sleep(650); time.textContent = '00:0' + s; }
+      pill.className = 'pill idle'; on(2);
+      for (let i = 0; i < text.length; i++) { typed.textContent = text.slice(0, i + 1); await sleep(text[i] === ' ' ? 26 : 18); }
+      pill.className = 'pill done';
+      await sleep(3200);
+    }
+  })();
+})();
+</script>
 </body>
 </html>
